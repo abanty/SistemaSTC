@@ -71,7 +71,8 @@ Class Producto
 					INNER JOIN categoria c ON a.idcategoria = c.idcategoria
 					INNER JOIN marca m ON a.idmarca = m.idmarca
 					INNER JOIN unidadmedida um ON a.idunidadmedida = um.idunidadmedida
-					INNER JOIN tipoproducto tp ON a.idtipoproducto = tp.idtipoproducto";
+					INNER JOIN tipoproducto tp ON a.idtipoproducto = tp.idtipoproducto
+					ORDER BY a.idproducto DESC";
 		return ejecutarConsulta($sql);
 	}
 	//---------------------------------
@@ -90,7 +91,7 @@ Class Producto
 		return ejecutarConsulta($sql);
 	}
 
-//  MÉTODO PARA LISTAR ACTIVOS DE VENTA	
+//  MÉTODO PARA LISTAR ACTIVOS DE VENTA
 	public function listarActivosAlmacen($idalmacen)
 	{
 		$sql="SELECT pu.idproducto, pu.idalmacen as idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,

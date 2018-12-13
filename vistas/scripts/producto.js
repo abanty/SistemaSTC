@@ -3,6 +3,24 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 
+	$(document).ready(function(){
+		$(".dataTables_filter input").focus();
+	});
+
+	$(document).keypress(function(event) {
+			// event.preventDefault();
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if ($('#listadoregistros').is(":visible")) {
+				if (keycode == '13') {
+					mostrarform(true);
+				}
+			}else if($('#formulario').is(":visible")){
+				// if (keycode == '13') {
+				// 	$( "#btnGuardar" ).click();
+				// }
+			}
+	});
+
 	$("#stock").prop("disabled",true);
 
 	mostrarform(false);
@@ -44,7 +62,7 @@ function init(){
 
 } //FIN INIT
 
-//Función cargar img
+// TODO: FUNCION CARGAR IMAGENES
 function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -60,11 +78,12 @@ function readURL(input) {
         }
     }
 
-//Función limpiar
+
+// TODO: FUNCION LIMPIAR
 function limpiar()
 {
-	// $("#codigo").val("");
 	$("#nombre").val("");
+	$("#codigo").val("");
 	$("#stock").val("0");
 	$("#descripcion").val("");
 	$("#imagenmuestra").attr("src","../files/productos/defaultpro.png");
@@ -79,19 +98,26 @@ function limpiar()
 	$('#idunidadmedida').selectpicker('refresh');
 	$("#idtipoproducto").val("");
 	$('#idtipoproducto').selectpicker('refresh');
-
 }
 
+
+// TODO: FUNCION PARA MOSTRAR IMAGEN EN MODAL CON CLICK
 function mostrarclick(imagen){
 		$(".imagepreview").attr("src",imagen);
 		$('#imagemodal').modal('show');
 	}
 
-//Función mostrar formulario
+
+// TODO: FUNCION MOSTRAR EL FORMULARIO DE REGISTRO
 function mostrarform(flag)
 {
+	$(function() {
+      $("#nombre").focus();
+  });
+
 	limpiar();
 	if (flag){
+
 		$('#idcategoria').selectpicker('val', "");
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
@@ -106,20 +132,18 @@ function mostrarform(flag)
 	}
 }
 
-//Funcion cancelarform
+
+// TODO: FUNCION CANCELAR FORMULARIO
 function cancelarform()
 {
 	limpiar();
 	mostrarform(false);
-	$("#btnagregar").prop("disabled",false);
-	$("#btnagregar").show();
-	// CodProducto();
 }
 
-//Funcion listar
+
+// TODO: FUNCION LISTAR
 function listar()
 {
-	// CodProducto();
 	tabla=$('#tbllistado').dataTable(
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
@@ -129,8 +153,6 @@ function listar()
 					'copyHtml5',
 					'excelHtml5',
 					'pdf',
-
-
 			],
 	"ajax":
 			{
@@ -147,8 +169,8 @@ function listar()
 	}).DataTable();
 }
 
-//Funcion para guardar o editar
 
+// TODO: FUNCION PARA GUARDAR Y EDITAR
 function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activara la accion predeterminada del evento
@@ -170,30 +192,27 @@ function guardaryeditar(e)
 		'success'
 		);
 			mostrarform(false);
-			// listar();
-			tabla.ajax.reload();
+			// tabla.ajax.reload();
+			$('#tbllistado').DataTable().ajax.reload(null, false);
 		}
-
 	});
-	$("#btnagregar").show();
-	limpiar();
 }
 
+
+// TODO: FUNCION MOSTRAR PRODUCTOS
 function mostrar(idproducto)
 {
-
-	//$("#btnagregar").hide();
 	$.post("../ajax/producto.php?op=mostrar",{idproducto : idproducto}, function(data, status)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
 		$("#idcategoria").val(data.idcategoria);
 		$('#idcategoria').selectpicker('refresh');
-		$("#idmarca").val(data.idcategoria);
+		$("#idmarca").val(data.idmarca);
 		$('#idmarca').selectpicker('refresh');
-		$("#idunidadmedida").val(data.idcategoria);
+		$("#idunidadmedida").val(data.idunidadmedida);
 		$('#idunidadmedida').selectpicker('refresh');
-		$("#idtipoproducto").val(data.idcategoria);
+		$("#idtipoproducto").val(data.idtipoproducto);
 		$('#idtipoproducto').selectpicker('refresh');
 		$("#codigo").val(data.codigo);
 		$("#nombre").val(data.nombre);
@@ -210,14 +229,11 @@ function mostrar(idproducto)
 			$("#imagenmuestra").attr("src","../files/productos/"+data.imagen);
 			$("#imagenactual").val(data.imagen);
 		}
-
-
-
-
 	})
 }
 
-//Funcion para desactivar registros
+
+// TODO: FUNCION PARA DESACTIVAR PRODUCTOS
 function desactivar(idproducto)
 {
 	swal({
@@ -241,12 +257,12 @@ function desactivar(idproducto)
   		'success'
 		)
 			tabla.ajax.reload();
-
 		})
 	}).catch(swal.noop)
 }
 
-//Funcion para activar registros
+
+// TODO: FUNCION PARA ACTIVAR LOS PRODUCTOS
 function activar(idproducto)
 {
 	swal({
@@ -273,43 +289,5 @@ function activar(idproducto)
 		});
 	}).catch(swal.noop)
 }
-
-//Funcion para generar el codigo de producto
-
-
-// function CodProducto(){
-//
-// 	$.ajax({
-// 		url:'../modelos/CodProducto.php',
-// 		type:'get',
-// 		dataType:'json',
-// 		success:function(res){
-// 			if (res.respuesta3==true){
-// 				if(parseInt(res.mensaje3)<10){
-// 					$("#codigo").val("PR-00"+res.mensaje3);
-// 				}else if(parseInt(res.mensaje3)<1000){
-// 					$("#codigo").val("PR-0"+res.mensaje3);
-// 				}
-// 			}
-// 		}
-// 	});
-// }
-
-
-
-
-//Funcion para generar el codigo de barras
-// function generarbarcode()
-// {
-// 	codigo=$("#codigo").val();
-// 	JsBarcode("#barcode", codigo);
-// 	$("#print").show();
-// }
-
-//Funcion para imrpimir el codigo de barras
-// function imprimir()
-// {
-// 	$("#print").printArea();
-// }
 
 init();
