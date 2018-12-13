@@ -51,7 +51,9 @@ Class Categoria
 	//Implementar un metodo para listar los registros
 	public function listar()
 	{
-		$sql="SELECT * FROM categoria";
+		$sql="SELECT * FROM categoria
+		WHERE nombre not like '-'
+		ORDER BY idcategoria DESC";
 		return ejecutarConsulta($sql);
 	}
 
