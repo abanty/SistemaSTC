@@ -1,0 +1,45 @@
+/* FORZAR MOVIMIENTO DE ETIQUETA BUTTON DATATABLES A FLOAT DERECHO */
+.dataTables_wrapper .dt-buttons {
+  float:right;
+  padding-bottom: 10px;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+    border-top-color: #00a65a !important;
+}
+
+/* Temporal SOLUCION ALINEAR DIV BUTTON CON DIV INPUT FORM*/
+/* .dataTables_wrapper {
+    clear: none !important;
+    padding-bottom: 10px;
+} */
+
+/* Estilo para seleccion de filas datatable por forzamiento */
+table.dataTable tbody tr.selected {
+  background-color: #f3e4ce !important;
+}
+/* Estilo para seleccion de filas datatable por Hover  */
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+    background-color: #f3e4ce !important;
+}
+#buttons {
+  background-color: none;
+}
+
+.jconfirm .jconfirm-box.jconfirm-type-personal {
+    border-top: solid 7px #00a65a;
+    -webkit-animation-name: type-personañ;
+    animation-name: type-personal;
+}
+.jconfirm .jconfirm-box.jconfirm-type-personal .jconfirm-title-c .jconfirm-icon-c {
+    color: #00a65a!important;
+}
+
+.jconfirm .jconfirm-box.jconfirm-type-yellow {
+    border-top: solid 7px #f0ad4e;
+    -webkit-animation-name: type-yellow;
+    animation-name: type-yellow;
+}
+.jconfirm .jconfirm-box.jconfirm-type-yellow .jconfirm-title-c .jconfirm-icon-c {
+    color: #f0ad4e!important;
+}
