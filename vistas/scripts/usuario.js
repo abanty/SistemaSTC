@@ -158,7 +158,7 @@ function desactivar(idusuario)
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/usuario.php?op=desactivar", {idusuario : idusuario}, function(e){
@@ -187,7 +187,7 @@ function activar(idusuario)
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/usuario.php?op=activar", {idusuario : idusuario}, function(e){

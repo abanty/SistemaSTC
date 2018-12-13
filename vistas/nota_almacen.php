@@ -114,8 +114,6 @@ if ($_SESSION['ventas']==1)
                     </div>
                     <!-- /.user-block -->
                     <div class="box-tools">
-                      <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read">
-                        <i class="fa fa-circle-o"></i></button>
                       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                       </button>
                       <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
@@ -127,7 +125,6 @@ if ($_SESSION['ventas']==1)
                     <img class="img-responsive pad" id="imagen_producto" src="" alt="Photo">
 
                   <center> <p>Imagen Producto</p></center>
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Imprime</button>
                     <!-- <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button> -->
                     <!-- <span class="pull-right text-muted">127 likes - 3 comments</span> -->
                   </div>

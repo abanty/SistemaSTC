@@ -238,7 +238,7 @@ function anular(idtransferencia)
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/venta.php?op=anular", {idtransferencia : idtransferencia}, function(e){

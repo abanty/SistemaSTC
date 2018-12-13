@@ -195,7 +195,7 @@ function anular(idingreso){
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/ingreso.php?op=anular", {idingreso : idingreso}, function(e){
@@ -240,7 +240,7 @@ function marcarImpuesto()
 
 
 	  	var cantidad=1;
-	   
+
 	    if (idproducto!="")
 	    {
 	    	var subtotal;

@@ -250,7 +250,7 @@ function anular(idventa)
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/venta.php?op=anular", {idventa : idventa}, function(e){

@@ -53,7 +53,7 @@ if (strlen(session_id()) < 1)
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>STC</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b style="text-shadow: -2px 2px 3px #6b6b6b;">SISTEMA CONTROL</b></span>
+          <span class="logo-lg"><b>Sistema</b> Control</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">

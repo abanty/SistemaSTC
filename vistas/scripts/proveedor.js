@@ -57,7 +57,7 @@ function listar()
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [
-		          
+
 		        ],
 		"ajax":
 				{
@@ -138,7 +138,7 @@ function eliminar(idpersona)
 	  showCancelButton: true,
 	  confirmButtonColor: '#00c0ef',
 	  cancelButtonColor: '#d33',
-	  confirmButtonText: 'Deacuerdo',
+	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function (e) {
 		$.post("../ajax/persona.php?op=eliminar", {idpersona : idpersona}, function(e){
