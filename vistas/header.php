@@ -14,7 +14,7 @@ if (strlen(session_id()) < 1)
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="../public/css/font-awesome.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/fonts/font-awesome.min.css">
     <!-- TEMA DE LA PLANTILLA -->
     <link rel="stylesheet" href="../public/css/AdminLTE.min.css">
     <!-- SKINS ADMIN TLE PARA CARGAR. -->
@@ -27,7 +27,7 @@ if (strlen(session_id()) < 1)
     <link rel="apple-touch-icon" href="../public/img/icon7-e1491341523797.ico">
     <link rel="shortcut icon" href="../public/img/favicon.ico">
     <!-- FUENTES DE GOOGLE -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" type="text/css" href="../public/fonts/fuentesgoogle.css">
     <!-- LIBRERIA PARA CREAR EDITOR TEXTO EN TEXTAREA -->
     <link rel="stylesheet" href="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- LIBRERIAS ALERTAS: JQUERY CONFIRM -->
@@ -40,8 +40,8 @@ if (strlen(session_id()) < 1)
     <!-- DATATABLES-->
     <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.0.4/css/rowGroup.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/datatables/select.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css">
 
   </head>
 

@@ -37,7 +37,7 @@
 <!-- FastClick -->
 <script type="text/javascript" src="../public/fastclick/lib/fastclick.js"></script>
 <!--  Jquery Alert Dinamic JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<script src="../public/js/jquery-confirm.min.js"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!-- <script>
@@ -46,15 +46,10 @@ $.widget.bridge('uibutton', $.ui.button);
 
 <!--     DATATABLES -->
 <script type="text/javascript" src="../public/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="../public/datatables/dataTables.select.min.js"></script>
 <script type="text/javascript" src="../public/datatables/datatables.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <!-- <script type="text/javascript" src="../public/jquery-ui/jquery-ui.min.js"></script> -->
 <!-- <script src = "../public/js/jquery-ui.min.js"> </script> -->
-
-
-
-
-
    </body>
 </html>

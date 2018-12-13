@@ -53,7 +53,9 @@ Class Marca
 	//MÉTODO PARA MOSTRAR LOS DATOS DE UN REGISTRO A MODIFICAR
 	public function listar()
 	{
-		$sql="SELECT * FROM marca";
+		$sql="SELECT * FROM marca
+		WHERE nombre not like '-'
+		ORDER BY idmarca DESC";
 		return ejecutarConsulta($sql);
 	}
 
