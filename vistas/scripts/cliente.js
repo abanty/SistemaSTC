@@ -1,17 +1,43 @@
 var tabla;
 
-//Función que se ejecuta al inicio
+// TODO: FUNCION QUE SE EJECUTA AL INICIO
 function init(){
+
+
+		$(document).ready(function(){
+			$(".dataTables_filter input").focus();
+		});
+
+
+		$(document).keypress(function(event) {
+				// event.preventDefault();
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if ($('#listadoregistros').is(":visible")) {
+					if (keycode == '13') {
+						mostrarform(true);
+					}
+				}else if($('#formulario').is(":visible")){
+
+				}
+		});
+
+
 	mostrarform(false);
+
+
 	listar();
+
 
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);
 	})
+
+
 }
 
-//Función limpiar
+
+// TODO: FUNCION LIMPIAR
 function limpiar()
 {
 	$("#nombre").val("");
@@ -22,10 +48,16 @@ function limpiar()
 	$("#idpersona").val("");
 }
 
-//Función mostrar formulario
+
+// TODO: FUNCION MOSTRAR FORMULARIO
 function mostrarform(flag)
 {
 	limpiar();
+
+	$(function() {
+			$("#nombre").focus();
+	});
+	
 	if (flag)
 	{
 		$("#listadoregistros").hide();
@@ -57,7 +89,7 @@ function listar()
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [
-		        
+
 		        ],
 		"ajax":
 				{
