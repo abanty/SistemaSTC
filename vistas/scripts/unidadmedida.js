@@ -87,7 +87,7 @@ function listarunidadmedidas() {
       },
     "bDestroy": true,
     "iDisplayLength": 7, //Paginación
-      "order": [[ 3, "desc" ]] //Ordenar (columna,orden)
+      "order": [[ 0, "desc" ]] //Ordenar (columna,orden)
   }).DataTable();
 
   var buttons = new $.fn.dataTable.Buttons(tabla, {

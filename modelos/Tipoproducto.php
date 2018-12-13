@@ -53,7 +53,9 @@ Class Tipoproducto
 //MÉTODO PARA MOSTRAR LOS DATOS DE UN REGISTRO A MODIFICAR
 	public function listar()
 	{
-		$sql="SELECT * FROM tipoproducto";
+		$sql="SELECT * FROM tipoproducto
+		WHERE nombre not like '-'
+		ORDER BY idtipoproducto DESC";
 		return ejecutarConsulta($sql);
 	}
 

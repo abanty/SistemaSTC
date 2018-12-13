@@ -54,7 +54,9 @@ Class Unidadmedida
 //MÉTODO PARA LISTAR LAS UNIDAD DE MEDIDA
 	public function listar()
 	{
-		$sql="SELECT * FROM unidadmedida";
+		$sql="SELECT * FROM unidadmedida
+		WHERE nombre not like '-'
+		ORDER BY idunidadmedida DESC";
 		return ejecutarConsulta($sql);
 	}
 
