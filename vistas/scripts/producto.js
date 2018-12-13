@@ -113,13 +113,13 @@ function cancelarform()
 	mostrarform(false);
 	$("#btnagregar").prop("disabled",false);
 	$("#btnagregar").show();
-	CodProducto();
+	// CodProducto();
 }
 
 //Funcion listar
 function listar()
 {
-	CodProducto();
+	// CodProducto();
 	tabla=$('#tbllistado').dataTable(
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
@@ -277,23 +277,23 @@ function activar(idproducto)
 //Funcion para generar el codigo de producto
 
 
-function CodProducto(){
-
-	$.ajax({
-		url:'../modelos/CodProducto.php',
-		type:'get',
-		dataType:'json',
-		success:function(res){
-			if (res.respuesta3==true){
-				if(parseInt(res.mensaje3)<10){
-					$("#codigo").val("PR-00"+res.mensaje3);
-				}else if(parseInt(res.mensaje3)<1000){
-					$("#codigo").val("PR-0"+res.mensaje3);
-				}
-			}
-		}
-	});
-}
+// function CodProducto(){
+//
+// 	$.ajax({
+// 		url:'../modelos/CodProducto.php',
+// 		type:'get',
+// 		dataType:'json',
+// 		success:function(res){
+// 			if (res.respuesta3==true){
+// 				if(parseInt(res.mensaje3)<10){
+// 					$("#codigo").val("PR-00"+res.mensaje3);
+// 				}else if(parseInt(res.mensaje3)<1000){
+// 					$("#codigo").val("PR-0"+res.mensaje3);
+// 				}
+// 			}
+// 		}
+// 	});
+// }
 
 
 
