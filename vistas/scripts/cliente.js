@@ -57,7 +57,7 @@ function mostrarform(flag)
 	$(function() {
 			$("#nombre").focus();
 	});
-	
+
 	if (flag)
 	{
 		$("#listadoregistros").hide();
@@ -73,14 +73,16 @@ function mostrarform(flag)
 	}
 }
 
-//Función cancelarform
+
+// TODO: FUNCION CANCELAR
 function cancelarform()
 {
 	limpiar();
 	mostrarform(false);
 }
 
-//Función Listar
+
+// TODO: FUNCION LISTAR CLIENTES
 function listar()
 {
 	tabla=$('#tbllistado').dataTable(
@@ -105,8 +107,9 @@ function listar()
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 }
-//Función para guardar o editar
 
+
+// TODO: FUNCION GUARDAR Y EDITAR
 function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activara la accion predeterminada del evento
@@ -132,10 +135,10 @@ function guardaryeditar(e)
 		}
 
 	});
-	$("#btnagregar").show();
-	limpiar();
 }
 
+
+// TODO: FUNCION MOSTRAR
 function mostrar(idpersona)
 {
 	$.post("../ajax/persona.php?op=mostrar",{idpersona : idpersona}, function(data, status)
@@ -151,24 +154,23 @@ function mostrar(idpersona)
 		$("#telefono").val(data.telefono);
 		$("#email").val(data.email);
  		$("#idpersona").val(data.idpersona);
-
-
  	})
 }
 
-//Función para eliminar registros
+
+// TODO: FUNCION ELIMINAR
 function eliminar(idpersona)
 {
 	swal({
 	  title: '¿Está seguro de eliminar el cliente?',
 	  //text: "You won't be able to revert this!",
 	  //type: 'question',
-		imageUrl: 'http://img.freepik.com/vector-gratis/trabajador-con-dudas_1012-193.jpg?size=338&ext=jpg',
+		imageUrl: '../public/img/swal-duda.jpg',
 		imageWidth: 250,
 		imageHeight: 250,
 		animation: false,
 	  showCancelButton: true,
-	  confirmButtonColor: '#00c0ef',
+	  confirmButtonColor: '#f39c12',
 	  cancelButtonColor: '#d33',
 	  confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'

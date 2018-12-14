@@ -5,16 +5,8 @@
         <strong>Copyright &copy; 2017 <a href="www.facebook.com">EliteSystems</a>.</strong> All rights reserved.
     </footer>
 
-<!-- Libreria Instantclick para aumentar velocidad de las paginas -->
-<script src="../public/instantclick/js/instantclick.min.js" data-no-instant></script>
-<!-- Librerias Alertas: BOOTBOX ALERT -->
-<script type="text/javascript" src="../public/js/bootbox.min.js"></script>
 <!-- Librerias Alertas: SWEETALERT 2 -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
-<script type="text/javascript" src="../public/js/sweetalert2.all.min.js"></script>
 <script type="text/javascript" src="../public/js/sweetalert2.js"></script>
-
-
 <!-- jQuery 2.1.4 -->
 <!-- <script type="text/javascript"  src="../public/js/jquery-3.1.1.min.js"></script> -->
 <!-- jQuery 3 -->

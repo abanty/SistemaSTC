@@ -68,7 +68,7 @@ if ($_SESSION['ventas']==1)
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Número Documento:</label>
-                            <input type="text" class="form-control" name="num_documento" id="num_documento" maxlength="20" placeholder="Documento">
+                            <input type="text" class="form-control" name="num_documento" id="num_documento" maxlength="20" placeholder="Documento" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Dirección:</label>
@@ -82,7 +82,7 @@ if ($_SESSION['ventas']==1)
                             <label>Email:</label>
                             <input type="email" class="form-control" name="email" id="email" maxlength="50" placeholder="Email">
                           </div>
-                            
+
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-warning" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 

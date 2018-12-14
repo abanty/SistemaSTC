@@ -49,7 +49,7 @@ Class Persona
 	//Implementar un método para listar los registros
 	public function listarc()
 	{
-		$sql="SELECT * FROM persona WHERE nombre='Publico General'";//MODIFICAR ESTA SENTENCIA - EN CASO SEA UTILIZADO POR EL CLIENTE POSTERIORMENTE
+		$sql="SELECT * FROM persona WHERE tipo_persona='Cliente'";//MODIFICAR ESTA SENTENCIA - EN CASO SEA UTILIZADO POR EL CLIENTE POSTERIORMENTE
 		return ejecutarConsulta($sql);
 	}
 }

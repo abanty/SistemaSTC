@@ -14,34 +14,27 @@ if (strlen(session_id()) < 1)
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="../public/css/font-awesome.css">
-    <link rel="stylesheet" href="../public/fonts/font-awesome.min.css">
     <!-- TEMA DE LA PLANTILLA -->
     <link rel="stylesheet" href="../public/css/AdminLTE.min.css">
     <!-- SKINS ADMIN TLE PARA CARGAR. -->
     <link rel="stylesheet" href="../public/css/_all-skins.min.css">
-    <!-- HOJA DE ESTILO DEL LOGIN PAGE -->
-    <link rel="stylesheet" href="../public/css/estilo.css">
-    <!-- HOJA DE ESTILO PERSONALIZADO EXTRAS -->
-    <link rel="stylesheet" href="../public/css/estilospersonalizados.css">
     <!-- FAVICON Y APPLE TOUCH ICON -->
     <link rel="apple-touch-icon" href="../public/img/icon7-e1491341523797.ico">
     <link rel="shortcut icon" href="../public/img/favicon.ico">
-    <!-- FUENTES DE GOOGLE -->
-    <link rel="stylesheet" type="text/css" href="../public/fonts/fuentesgoogle.css">
-    <!-- LIBRERIA PARA CREAR EDITOR TEXTO EN TEXTAREA -->
-    <link rel="stylesheet" href="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- LIBRERIAS ALERTAS: JQUERY CONFIRM -->
     <link rel="stylesheet" href="../public/jqueryalert/css/jquery-confirm.min.css">
+    <!-- HOJA DE ESTILO PERSONALIZADO EXTRAS -->
+    <link rel="stylesheet" href="../public/css/estilospersonalizados.css">
     <!-- LIBRERIAS ALERTAS: SWEETALERT 2 -->
     <link rel="stylesheet" type="text/css" href="../public/css/sweetalert2.css">
     <!-- LIBRERIA DE BOOSTRAP PARA COMBOBOX (SeleckPicker) -->
     <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
 
     <!-- DATATABLES-->
-    <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css"> -->
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../public/datatables/select.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css"> -->
 
   </head>
 
