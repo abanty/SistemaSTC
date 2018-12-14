@@ -77,7 +77,6 @@ function limpiar(){
 
 // TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag){
-	limpiar();
 	if (flag)
 	{
 		$(document).ready(function(){
@@ -185,6 +184,7 @@ function guardaryeditar(e){
 			listar();
 		}
 	});
+	limpiar();
 }
 
 
