@@ -267,94 +267,204 @@ function marcarImpuesto()
     }
   }
 
-	function agregarDetalle(idproducto,producto)
-	  {
-	  	var cantidad=0;
-	    var precio_compra=1;
-	    var precio_venta=1;
-			var importe=0;
-			var ganancia=0;
-			var ganancianeta=0;
 
+	function agregarDetalle(idproducto,producto)
+	{
+
+			var idproducto_ubicacion ="";
+	  	var cantidad=1;
+			var valor1=100;
+			var valor2=100;
+	    var precio_compra=0;
+	    var precio_venta=0;
+			var ganancia = 0;
+			var ganancianeta = 0;
+				var importe=0;
 	    if (idproducto!="")
 	    {
-	    	var subtotal=cantidad*precio_compra;
+	    	var subtotal;
+
 	    	var fila='<tr class="filas" id="fila'+cont+'">'+
 	    	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-	    	'<td><input type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
-	    	'<td><input type="number" style="width:7em;" name="cantidad[]" value="'+cantidad+'"></td>'+
-				'<td><input type="number" style="width:7em;" name="importe[]" id="importe" value="'+importe+'"></td>'+
-	    	'<td><input type="number" style="width:7em;" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
-	    	'<td><input type="number" style="width:7em;" name="precio_venta[]" value="'+precio_venta+'"></td>'+
-				'<td><input type="number" style="width:7em;" name="ganancia[]" id="ganancia" value="'+ganancia+'"></td>'+
-				'<td><input type="number" style="width:7em;" name="ganancianeta[]" id="ganancianeta" value="'+ganancianeta+'"></td>'+
-	    	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-	    	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
-	    	'</tr>';
+	    	'<td><input class="form-control" type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
+	    	'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="'+cantidad+'" required=""></td>'+
+				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onkeyup="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="'+importe+'"></span></td>'+
+				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="'+precio_compra+'"></span></td>'+
+	    	// '<td><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaganancia()" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></td>'+
+				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step="0.01" min="0.00" max="10000.00" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></span></td>'+
+				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" max="100" accuracy="2" min="0" id="inputRRPDiscount" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left;"></span></td>'+
+				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
+	    	'<td style="width: 10%;"><center><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></center></td>'+
+      	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
+				'<td id="p_none"><input  type="hidden" name="valor1[]" value="'+valor1+'"></td>'+
+				'<td id="p_none"><input  type="hidden" name="valor2[]" value="'+valor2+'"></td>'+
+				'</tr>';
 	    	cont++;
 	    	detalles=detalles+1;
+				$(function () {
+				$(document).on('click', 'input[type=number]', function () {
+								this.select();
+						});
+				});
 	    	$('#detalles').append(fila);
 	    	modificarSubototales();
+
 	    }
 	    else
 	    {
 	    	alert("Error al ingresar el detalle, revisar los datos del producto");
 	    }
+	 }
+
+	 /*---------------------------------------------------*
+ 	|FUNCION PARA LIMPIAR CAMPOS DETALLE VENTA AL INICIAR|
+ 	.---------------------------------------------------*/
+ 	function onBlur(el) {
+ 	    if (el.value == '') {
+ 	        el.value = el.defaultValue;
+ 	    }
+ 	}
+ 	function onFocus(el) {
+ 	    if (el.value == el.defaultValue) {
+ 	        el.value = '';
+ 	    }
+ 	}
+
+	 /*---------------------------------------------------*
+	 |FUNCION PARA VALIDAR EL MAXIMO DE IN INPUT MAXLENGTH|
+	 .---------------------------------------------------*/
+	 function validaLength(id)
+	  {
+	    if (id.value.length > id.maxLength)
+	      id.value = id.value.slice(0, id.maxLength)
 	  }
 
+		//FUNCION PARA CALCULAR IMPORTE
+		function calculaimporte(){
+
+			calculaganancia();
+
+			var cantx = document.getElementsByName("cantidad[]");
+			var precx = document.getElementsByName("precio_compra[]");
+ 			var impox = document.getElementsByName("importe[]");
+			var subx = document.getElementsByName("subtotal");
+			for (var i = 0; i <cantx.length; i++) {
+	 		 var inpCx=cantx[i];
+	 		 var inpPx=precx[i];
+			 var inpIx=impox[i];
+			 var inpSx=subx[i];
+
+	 		inpIx.value= parseFloat(Math.round((inpCx.value * inpPx.value) * 100) / 100).toFixed(2);
+
+			inpSx.value= inpCx.value * inpPx.value;
+		  document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpSx.value * 100) / 100).toFixed(2);
+	 	 }
+		 			calcularTotales();
+		}
+
+
+		//FUNCION PARA CALCULAR GANANCIA
+		function calculaganancia(){
+			var g_cant = document.getElementsByName("cantidad[]");
+			var g_prec = document.getElementsByName("precio_compra[]");
+			var g_prev = document.getElementsByName("precio_venta[]");
+ 			var g_gan = document.getElementsByName("gananciaporcentaje[]");
+			var g_gann = document.getElementsByName("ganancianeta[]");
+			var g_sub = document.getElementsByName("subtotal");
+			var g_val1 = document.getElementsByName("valor1[]");
+			var g_val2 = document.getElementsByName("valor2[]");
+
+			for (var i = 0; i <g_prev.length; i++) {
+	 		 var inpCant=g_cant[i];
+	 		 var inpPrec=g_prec[i];
+			 var inpPrev=g_prev[i];
+			 var inpGan=g_gan[i];
+			 var inpGann=g_gann[i];
+			 var inpSub=g_sub[i];
+			 var inpVal1=g_val1[i];
+			 var inpVal2=g_val2[i];
+
+					if(parseFloat(inpPrev.value) < parseFloat(inpPrec.value)) {
+								inpPrev.value = 0;
+								inpGann.value = 0;
+								inpGan.value = 0;
+					}else {
+						inpGann.value = parseFloat(Math.round((inpPrev.value - inpPrec.value) * 100) / 100).toFixed(2);
+					}
+
+					if (inpPrev.value > 0 && inpPrec.value > 0) {
+							inpGan.value	=  parseFloat(Math.round(((inpPrev.value*inpVal1.value/inpPrec.value)-inpVal2.value) * 100) / 100).toFixed(2);
+					}
+		 	 }
+		 			// calcularTotales();
+		}
+
+
+		//FUNCION PARA CALCULAR COMPRA UNITARIA
+		function calculacompraunitaria(){
+
+				// calculaganancia();
+
+			var cantxy = document.getElementsByName("cantidad[]");
+			var precxy = document.getElementsByName("precio_compra[]");
+ 			var impoxy = document.getElementsByName("importe[]");
+			var subxy = document.getElementsByName("subtotal");
+			for (var i = 0; i <cantxy.length; i++) {
+
+		 	  var inpCxy=cantxy[i];
+		  	var inpPxy=precxy[i];
+		 	  var inpIxy=impoxy[i];
+		 	  var inpSxy=subxy[i];
+
+			  inpPxy.value = parseFloat(Math.round((inpIxy.value / inpCxy.value) * 100) / 100).toFixed(2);
+
+				inpSxy.value = inpCxy.value * inpPxy.value;
+				document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpSxy.value * 100) / 100).toFixed(2);
+	 	 }
+		 				calcularTotales();
+		}
+
+
+				//FUNCION PARA CALCULAR COMPRA UNITARIA
+				function calculaganancianeta(){
+						calculaganancia();
+					var v_gan = document.getElementsByName("gananciaporcentaje[]");
+					var v_gann = document.getElementsByName("ganancianeta[]");
+		 			var v_pv = document.getElementsByName("precio_venta[]");
+					var v_pc = document.getElementsByName("precio_compra[]");
+					var v_val1 = document.getElementsByName("valor1[]");
+					var v_val2 = document.getElementsByName("valor2[]");
+
+					for (var i = 0; i <v_pv.length; i++) {}
+				}
+
+
 		//FUNCION PARA MODIFICAR SUBTOTALES
-
-		function divideIfNotZero(numerator, denominator) {
-			  if (denominator === 0 || isNaN(denominator)) {
-			        return 0;
-			  }
-			  else {
-			        return numerator / denominator;
-			  }
-			}
-
 		  function modificarSubototales()
 		  {
-		  	var cant = document.getElementsByName("cantidad[]");
-		    var prec = document.getElementsByName("precio_compra[]");
-		    var sub = document.getElementsByName("subtotal");
+					// calculacompraunitaria();
+					calculaimporte();
+					// calculaganancia();
 
-					var impo = document.getElementsByName("importe[]");
-				  var prev = document.getElementsByName("precio_venta[]");
-					var gan = document.getElementsByName("ganancia[]");
-				  var gann = document.getElementsByName("ganancianeta[]");
+		  	var cant = document.getElementsByName("cantidad[]");
+		    var precc = document.getElementsByName("precio_compra[]");
+				var precv = document.getElementsByName("precio_venta[]");
+		    var sub = document.getElementsByName("subtotal");
+				var imp = document.getElementsByName("importe[]");
+				var gan = document.getElementsByName("gananciaporcentaje[]");
+				var gannet = document.getElementsByName("ganancianeta[]");
+
 
 		    for (var i = 0; i <cant.length; i++) {
 		    	var inpC=cant[i];
-		    	var inpP=prec[i];
+		    	var inpPc=precc[i];
 		    	var inpS=sub[i];
 
-					var inpIm=impo[i];
-					var inpPv=prev[i];
-					var inpG=gan[i];
-					var inpGn=gann[i];
-
-			 		var conten = divideIfNotZero(inpPv.value, inpP.value);
-
-		    	inpS.value=inpC.value * inpP.value;
-
-					inpG.value=(conten*100)-100;
-
-					if (inpG.value<0) {
-							inpG.value=0;
-					}
-
-					inpGn.value=inpPv.value - inpP.value;
-					inpIm.value = inpS.value;
-
-					
-
-		    	document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
+		  		inpS.value=inpC.value * inpPc.value;
+		    	document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpS.value * 100) / 100).toFixed(2);
 		    }
 		    calcularTotales();
-
 		  }
-
 
 
 

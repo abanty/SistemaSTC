@@ -127,7 +127,7 @@ if ($_SESSION['compras']==1)
                                         <th>Opciones</th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
-                                        <th>Importe Total</th>
+                                        <th>Importe Lote</th>
                                         <th>Precio Compra (u)</th>
                                         <th>Precio Venta (u)</th>
                                         <th>Ganancia %</th>

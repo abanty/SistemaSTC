@@ -231,3 +231,9 @@ left: 5px;
 img#imagen_producto {
     margin: 0 auto;
 }
+
+input[type=number]::selection {
+    background: #90909087;
+    color: black;
+    text-shadow: 1px 1px #fff;
+}
