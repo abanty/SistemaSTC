@@ -3,20 +3,31 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 
+	$(document).ready(function(){
+		$(".dataTables_filter input").focus();
+	});
+
+
+	$(document).keypress(function(event) {
+			// event.preventDefault();
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if ($('#listadoregistros').is(":visible")) {
+				if (keycode == '13') {
+					mostrarform(true);
+				}
+			}else if($('#formulario').is(":visible")){
+				if (keycode == '32') {
+				$( "#btnAgregarArt" ).click();
+				}
+			}
+	});
+
+
 	mostrarform(false);
+
+
 	listar();
-	// autocompletejquery();
 
-	$(document).ready(function() {
-
-			$('input.global_filter').on( 'keyup click', function () {
-					filterGlobal();
-			} );
-
-			$('input.column_filter').on( 'keyup click', function () {
-					filterColumn( $(this).parents('div').attr('data-column') );
-			} );
-	} );
 
 	$("#formulario").on("submit",function(e)
 	{
@@ -25,97 +36,28 @@ function init(){
 	});
 
 
-	//Cargamos los items al select proveedor
 	$.post("../ajax/ingreso.php?op=selectProveedor", function(r){
 	            $("#idproveedor").html(r);
 	            $('#idproveedor').selectpicker('refresh');
 	});
 
-	//Cargamos los items al select Almacen
+
 	$.post("../ajax/ingreso.php?op=selectAlmacen", function(r){
 							$("#idalmacen").html(r);
 							$('#idalmacen').selectpicker('refresh');
 	});
 
-}
 
-function refresh_auto(event){
-
-event.preventDefault();
-		$('#autocomplete').val('');
-		$('#autocomplete').focus();
 }
 
 
-//
-// function autocompletejquery()
-// {
-//
-//  // Single Select
-//  $( "#autocomplete" ).autocomplete({
-//
-//   source: function( request, response ) {
-//    // Fetch data
-//    $.ajax({
-//     url: "../ajax/ingreso.php?op=select_producto_autocompletev2",
-//     type: 'post',
-//     dataType: "json",
-//     data: {
-//
-//      search: request.term
-//     },
-//     success: function( data ) {
-//      response( data );
-//     }
-//    });
-//   },
-//   select: function (event, ui) {
-//    // Set selection
-//    $('#autocomplete').val(ui.item.nombreproductojson); // display the selected text
-// 	 var idproducto = ui.item.idproductojson;
-// 	 var producto = ui.item.nombreproductojson;
-// 	 var cantidad=1;
-// 	 var precio_compra=1;
-// 	 var precio_venta=1;
-//
-// 	 if (idproducto!="")
-// 	 {
-// 		 var subtotal=cantidad*precio_compra;
-// 		 var fila='<tr class="filas" id="fila'+cont+'">'+
-// 		 '<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-// 		 '<td><input type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
-// 		 '<td><input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-// 		 '<td><input type="number" step=".01" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
-// 		 '<td><input type="number" step=".01" name="precio_venta[]" value="'+precio_venta+'"></td>'+
-// 		 '<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-// 		 '<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
-// 		 '</tr>';
-// 		 cont++;
-// 		 detalles=detalles+1;
-// 		 $('#detalles').append(fila);
-// 		 modificarSubototales();
-// 	 }
-// 	 else
-// 	 {
-// 		 alert("Error al ingresar el detalle, revisar los datos del producto");
-// 	 }
-//
-//
-//    return false;
-//   }
-//  });
-//
-// }
-
-//Función limpiar
+// TODO: FUNCION PARA LIMPIAR
 function limpiar(){
-
 	$("#idproveedor").val("");
 	$("#idingreso").val("");
 	$("#serie_comprobante").val("");
 	$("#num_comprobante").val("");
 	// $("#impuesto").val("0");
-
 	$("#total_compra").val("");
 	$(".filas").remove();
 	$("#total").html("0");
@@ -132,7 +74,8 @@ function limpiar(){
 	$("#tipo_comprobante").selectpicker('refresh');
 }
 
-//Función mostrar formulario
+
+// TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag){
 	limpiar();
 	if (flag)
@@ -161,27 +104,22 @@ function mostrarform(flag){
 	}
 }
 
-//Funcion cancelarform
+
+// TODO: FUNCION PARA CANCELAR FORMULARIO
 function cancelarform(){
 	limpiar();
 	mostrarform(false);
-	// $("#btnagregar").prop("disabled",false);
-	// $("#btnagregar").show();
 }
 
-//Funcion listar
+
+// TODO: FUNCION LISTAR INGRESOS
 function listar(){
 	tabla=$('#tbllistado').dataTable(
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
 				"aServerSide": true, //Paginacion y filtrado realizados por el servidor
 				dom: 'Bfrtip',         //Definimos los elementos del control de tabla
-				buttons: [
-						'copyHtml5',
-						'excelHtml5',
-						'csvHtml5',
-						'pdf'
-			],
+				buttons: ['copyHtml5','excelHtml5','csvHtml5','pdf','print'],
 	"ajax":
 			{
 				url: '../ajax/ingreso.php?op=listar',
@@ -195,21 +133,16 @@ function listar(){
 		"iDisplayLength": 5, //Paginación
 	    "order": [[ 0, "desc" ]] //Ordenar (columna,orden)
 	}).DataTable();
-	$("#tbllistado_filter input").focus();
 }
 
-//Función ListarProductos
+// TODO: FUNCION PARA LISTAR PRODUCTOS A SER REPUESTOS  EN UN ALMACEN - INGRESOS
 function listarProductos(){
 	tabla=$('#tblproductos').dataTable(
 	{
-
-
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	   "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Brtip',//Definimos los elementos del control de tabla
-	    buttons: [
-
-		        ],
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    buttons: [],
 		"ajax":
 				{
 					url: '../ajax/ingreso.php?op=listarProductos',
@@ -219,37 +152,28 @@ function listarProductos(){
 						console.log(e.responseText);
 					}
 				},
-
-			// 	"scrollY":        "430px",
-			// "scrollCollapse": true,
-			// "paging":         false
 		"bDestroy": true,
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 
 	$('#myModal').on('shown.bs.modal', function () {
-		$('#filter_global input').focus();
-		$('#filter_global input').val("");
-		$('#filter_col3 input').val("");
-		$('#filter_col5 input').val("");
+		$('.dataTables_filter input').focus();
+		tabla.search('').columns().search('').draw();
 	});
 }
 
-//Funcion para guardar o editar
 
+// TODO: FUNCION PARA GUARDAR Y EDITAR
 function guardaryeditar(e){
 	e.preventDefault(); //No se activara la accion predeterminada del evento
-	//$("#btnGuardar").prop("disabled",true);
 	var formData = new FormData($("#formulario")[0]);
-
 	$.ajax({
 		url: "../ajax/ingreso.php?op=guardaryeditar",
 		type: "POST",
 		data: formData,
 		contentType: false,
 		processData: false,
-
 		success: function(datos)
 		{
 			swal(
@@ -260,15 +184,12 @@ function guardaryeditar(e){
 			mostrarform(false);
 			listar();
 		}
-
 	});
-	// $("#btnagregar").show();
-	limpiar();
 }
 
-function mostrar(idingreso){
 
-	//$("#btnagregar").hide();
+// TODO: FUNCION PARA MOSTRAR INGRESOS
+function mostrar(idingreso){
 	$.post("../ajax/ingreso.php?op=mostrar",{idingreso : idingreso}, function(data, status)
 	{
 		data = JSON.parse(data);
@@ -295,7 +216,8 @@ function mostrar(idingreso){
 	});
 }
 
-//Funcion para desactivar registros
+
+// TODO: FUNCION PARA ANULAR INGRESOS
 function anular(idingreso){
 	swal({
 	  title: '¿Está seguro de anular el ingreso?',
@@ -345,195 +267,94 @@ function marcarImpuesto()
     }
   }
 
-
 	function agregarDetalle(idproducto,producto)
-	{
+	  {
+	  	var cantidad=0;
+	    var precio_compra=1;
+	    var precio_venta=1;
+			var importe=0;
+			var ganancia=0;
+			var ganancianeta=0;
 
-			var idproducto_ubicacion ="";
-	  	var cantidad=1;
-			var valor1=100;
-			var valor2=100;
-	    var precio_compra=0.00;
-	    var precio_venta=0.00;
-			var ganancia = 0;
-			var ganancianeta = 1;
-				var importe=0;
 	    if (idproducto!="")
 	    {
-	    	var subtotal;
-
+	    	var subtotal=cantidad*precio_compra;
 	    	var fila='<tr class="filas" id="fila'+cont+'">'+
 	    	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-	    	'<td><input class="form-control" type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
-	    	'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="'+cantidad+'" required=""></td>'+
-				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onkeyup="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="'+importe+'"></span></td>'+
-				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="'+precio_compra+'"></span></td>'+
-	    	// '<td><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaganancia()" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></td>'+
-				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step="0.01" min="0.00" max="10000.00" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></span></td>'+
-				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" accuracy="2" min="0" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left;"></span></td>'+
-				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
-	    	'<td style="width: 10%;"><center><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></center></td>'+
-      	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
-				'<td id="p_none"><input  type="hidden" name="valor1[]" value="'+valor1+'"></td>'+
-				'<td id="p_none"><input  type="hidden" name="valor2[]" value="'+valor2+'"></td>'+
-				'</tr>';
+	    	'<td><input type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
+	    	'<td><input type="number" style="width:7em;" name="cantidad[]" value="'+cantidad+'"></td>'+
+				'<td><input type="number" style="width:7em;" name="importe[]" id="importe" value="'+importe+'"></td>'+
+	    	'<td><input type="number" style="width:7em;" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
+	    	'<td><input type="number" style="width:7em;" name="precio_venta[]" value="'+precio_venta+'"></td>'+
+				'<td><input type="number" style="width:7em;" name="ganancia[]" id="ganancia" value="'+ganancia+'"></td>'+
+				'<td><input type="number" style="width:7em;" name="ganancianeta[]" id="ganancianeta" value="'+ganancianeta+'"></td>'+
+	    	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
+	    	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
+	    	'</tr>';
 	    	cont++;
 	    	detalles=detalles+1;
-
 	    	$('#detalles').append(fila);
 	    	modificarSubototales();
-
 	    }
 	    else
 	    {
 	    	alert("Error al ingresar el detalle, revisar los datos del producto");
 	    }
-	 }
-
-	 /*---------------------------------------------------*
- 	|FUNCION PARA LIMPIAR CAMPOS DETALLE VENTA AL INICIAR|
- 	.---------------------------------------------------*/
- 	function onBlur(el) {
- 	    if (el.value == '') {
- 	        el.value = el.defaultValue;
- 	    }
- 	}
- 	function onFocus(el) {
- 	    if (el.value == el.defaultValue) {
- 	        el.value = '';
- 	    }
- 	}
-
-	 /*---------------------------------------------------*
-	 |FUNCION PARA VALIDAR EL MAXIMO DE IN INPUT MAXLENGTH|
-	 .---------------------------------------------------*/
-	 function validaLength(id)
-	  {
-	    if (id.value.length > id.maxLength)
-	      id.value = id.value.slice(0, id.maxLength)
 	  }
 
-		//FUNCION PARA CALCULAR IMPORTE
-		function calculaimporte(){
-
-			// calculaganancia();
-
-			var cantx = document.getElementsByName("cantidad[]");
-			var precx = document.getElementsByName("precio_compra[]");
- 			var impox = document.getElementsByName("importe[]");
-			var subx = document.getElementsByName("subtotal");
-			for (var i = 0; i <cantx.length; i++) {
-	 		 var inpCx=cantx[i];
-	 		 var inpPx=precx[i];
-			 var inpIx=impox[i];
-			 var inpSx=subx[i];
-
-	 		inpIx.value= parseFloat(Math.round((inpCx.value * inpPx.value) * 100) / 100).toFixed(2);
-
-			inpSx.value= inpCx.value * inpPx.value;
-		  document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpSx.value * 100) / 100).toFixed(2);
-	 	 }
-		 			calcularTotales();
-		}
-
-		//FUNCION PARA CALCULAR GANANCIA
-		function calculaganancia(){
-			var g_cant = document.getElementsByName("cantidad[]");
-			var g_prec = document.getElementsByName("precio_compra[]");
-			var g_prev = document.getElementsByName("precio_venta[]");
- 			var g_gan = document.getElementsByName("gananciaporcentaje[]");
-			var g_gann = document.getElementsByName("ganancianeta[]");
-			var g_sub = document.getElementsByName("subtotal");
-
-			var g_val1 = document.getElementsByName("valor1[]");
-			var g_val2 = document.getElementsByName("valor2[]");
-			for (var i = 0; i <g_cant.length; i++) {
-	 		 var inpCant=g_cant[i];
-	 		 var inpPrec=g_prec[i];
-			 var inpPrev=g_prev[i];
-			 var inpGan=g_gan[i];
-			 var inpGann=g_gann[i];
-			 var inpSub=g_sub[i];
-
-			 var inpVal1=g_val1[i];
-			 var inpVal2=g_val2[i];
-
-
-// parseFloat(Math.round((() * 100) / 100).toFixed(2)
-
-			// (inpPrev.value*100/inpPrec.value)-100;
-			inpGann.value = inpPrev.value - inpPrec.value;
-
-			// if (inpGan.value < 0 ) {
-			// 	inpGan.style.color="#CC0000";
-			// 	inpGan.style.fontWeight="bold";
-			// 	inpGann.style.color="#CC0000";
-			// 	inpGann.style.fontWeight="bold";
-			//
-			// 	return false;
-			// }else {
-			// 	inpGan.style.color="#337ab7";
-			// 	inpGan.style.fontWeight="bold";
-			// 	inpGann.style.color="#337ab7";
-			// 	inpGann.style.fontWeight="bold";
-			// }
-inpGan.value	= (inpPrev.value*inpVal1.value/inpPrec.value)-inpVal2.value;
-// alert(inpGan.value);
-	 	 }
-		 			// calcularTotales();
-		}
-
-		//FUNCION PARA CALCULAR COMPRA UNITARIA
-		function calculacompraunitaria(){
-
-				// calculaganancia();
-
-			var cantxy = document.getElementsByName("cantidad[]");
-			var precxy = document.getElementsByName("precio_compra[]");
- 			var impoxy = document.getElementsByName("importe[]");
-			var subxy = document.getElementsByName("subtotal");
-			for (var i = 0; i <cantxy.length; i++) {
-
-		 	  var inpCxy=cantxy[i];
-		  	var inpPxy=precxy[i];
-		 	  var inpIxy=impoxy[i];
-		 	  var inpSxy=subxy[i];
-
-			  inpPxy.value = parseFloat(Math.round((inpIxy.value / inpCxy.value) * 100) / 100).toFixed(2);
-
-				inpSxy.value = inpCxy.value * inpPxy.value;
-				document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpSxy.value * 100) / 100).toFixed(2);
-	 	 }
-		 				calcularTotales();
-		}
-
-
 		//FUNCION PARA MODIFICAR SUBTOTALES
+
+		function divideIfNotZero(numerator, denominator) {
+			  if (denominator === 0 || isNaN(denominator)) {
+			        return 0;
+			  }
+			  else {
+			        return numerator / denominator;
+			  }
+			}
+
 		  function modificarSubototales()
 		  {
-					// calculacompraunitaria();
-					calculaimporte();
-					// calculaganancia();
-
 		  	var cant = document.getElementsByName("cantidad[]");
-		    var precc = document.getElementsByName("precio_compra[]");
-				var precv = document.getElementsByName("precio_venta[]");
+		    var prec = document.getElementsByName("precio_compra[]");
 		    var sub = document.getElementsByName("subtotal");
-				var imp = document.getElementsByName("importe[]");
-				var gan = document.getElementsByName("gananciaporcentaje[]");
-				var gannet = document.getElementsByName("ganancianeta[]");
 
+					var impo = document.getElementsByName("importe[]");
+				  var prev = document.getElementsByName("precio_venta[]");
+					var gan = document.getElementsByName("ganancia[]");
+				  var gann = document.getElementsByName("ganancianeta[]");
 
 		    for (var i = 0; i <cant.length; i++) {
 		    	var inpC=cant[i];
-		    	var inpPc=precc[i];
+		    	var inpP=prec[i];
 		    	var inpS=sub[i];
 
-		  		inpS.value=inpC.value * inpPc.value;
-		    	document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpS.value * 100) / 100).toFixed(2);
+					var inpIm=impo[i];
+					var inpPv=prev[i];
+					var inpG=gan[i];
+					var inpGn=gann[i];
+
+			 		var conten = divideIfNotZero(inpPv.value, inpP.value);
+
+		    	inpS.value=inpC.value * inpP.value;
+
+					inpG.value=(conten*100)-100;
+
+					if (inpG.value<0) {
+							inpG.value=0;
+					}
+
+					inpGn.value=inpPv.value - inpP.value;
+					inpIm.value = inpS.value;
+
+					
+
+		    	document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
 		    }
 		    calcularTotales();
+
 		  }
+
 
 
 

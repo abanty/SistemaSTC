@@ -34,6 +34,8 @@ if (strlen(session_id()) < 1)
     <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css"> -->
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../public/datatables/select.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+
     <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css"> -->
 
   </head>

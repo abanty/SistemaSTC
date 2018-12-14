@@ -120,32 +120,9 @@ if ($_SESSION['compras']==1)
                             </a>
                           </div>
 
-                        <!-- <div class="form-group col-md-4 col-md-offset-0">
-                                <div id="content">
-                                      <label for="key">Busqueda sensitiva de productos: </label>
-                                      <div class="input-group stylish-input-group">
-                                        <span id="refresh_autocomplete" class="input-group-addon">
-                                            <button type="button" onclick="refresh_auto(event);" data-toggle="tooltip" data-placement="bottom" title="Actualizar">
-
-                                                <span class="fa fa-refresh"></span>
-                                            </button>
-                                        </span>
-                                          <input class="search_query form-control" type="text" id="autocomplete" autocomplete="off" placeholder="Buscar Producto...">
-                                          <span class="input-group-addon">
-                                            <a style="color:white;" data-toggle="modal" href="#myModal">
-                                              <button data-toggle="tooltip" data-placement="right" title="Buscar Productos similares">
-                                                  <span class="fa fa-search"></span> Similares
-                                              </button>
-                                              </a>
-                                          </span>
-                                      </div>
-                                  
-                                </div>
-                          </div> -->
-<!-- <div id="suggestions"></div> -->
                           <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                               <div class="box-body table-responsive no-padding">
-                                <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+                                <table id="detalles" class="table table-bordered">
                                   <thead style="background-color:#222d3287; color:white;">
                                         <th>Opciones</th>
                                         <th>Producto</th>
@@ -208,7 +185,7 @@ if ($_SESSION['compras']==1)
             <h4 class="modal-title">Seleccione un Producto</h4>
           </div>
           <div class="modal-body">
-            <table id="tblproductos" class="table table-striped table-bordered table-condensed table-hover">
+            <table id="tblproductos" class="table table-striped table-bordered table-condensed table-hover" style="width:100%;">
               <thead>
                 <th>Opciones</th>
                 <th>Codigo</th>

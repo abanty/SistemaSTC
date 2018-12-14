@@ -23,7 +23,7 @@
 <!-- Bootstrap Select BOX -->
 <script type="text/javascript" src="../public/bootstrap-select/js/bootstrap-select.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script type="text/javascript" src="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- <script type="text/javascript" src="../public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
 <!-- Slimscroll -->
 <script type="text/javascript" src="../public/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -39,6 +39,7 @@ $.widget.bridge('uibutton', $.ui.button);
 <!--     DATATABLES -->
 <script type="text/javascript" src="../public/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../public/datatables/dataTables.select.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="../public/datatables/datatables.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <!-- <script type="text/javascript" src="../public/jquery-ui/jquery-ui.min.js"></script> -->
