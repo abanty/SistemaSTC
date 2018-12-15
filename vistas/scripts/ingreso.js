@@ -354,6 +354,7 @@ function marcarImpuesto()
   }
 
 
+// COMENTARIO PARA COMPROBAR EL PUSHEO....
 	function agregarDetalle(idproducto,producto)
 	{
 
