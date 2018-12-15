@@ -228,7 +228,7 @@ if (strlen(session_id()) < 1)
             }
             ?>
   <!-- <li><a href="cliente.php"><i class="fa fa-circle-o"></i> Clientes</a></li> -->
-
+<!-- EL DOG ES UN PERRO  -->
 
             <?php
             if($_SESSION['accesos']==1)
