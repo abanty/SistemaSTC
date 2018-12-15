@@ -253,8 +253,7 @@ function desactivar(idcategoria) {
                 $.post("../ajax/categoria.php?op=desactivar", {
                   idcategoria: idcategoria
                 }, function(e) {
-                  $('#tbllistado').DataTable().ajax.reload(null, false);
-                  $('#tbllistado').DataTable().ajax.reload(null, false);
+                  $('#tbllistado').DataTable().ajax.reload(null, false);              
                   $.notify.defaults({ className: "error" });
                   $.notify.defaults({ autoHideDelay: 5000 });
                   $.notify.defaults({ style: 'bootstrap' });
