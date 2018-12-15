@@ -89,10 +89,8 @@ function listar()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [
-
-		        ],
+			dom: 'Bfrtip',         //Definimos los elementos del control de tabla
+			 buttons: ['copyHtml5','excelHtml5','csvHtml5','pdf','print'],
 		"ajax":
 				{
 					url: '../ajax/persona.php?op=listarc',
@@ -163,8 +161,6 @@ function eliminar(idpersona)
 {
 	swal({
 	  title: '¿Está seguro de eliminar el cliente?',
-	  //text: "You won't be able to revert this!",
-	  //type: 'question',
 		imageUrl: '../public/img/swal-duda.jpg',
 		imageWidth: 250,
 		imageHeight: 250,

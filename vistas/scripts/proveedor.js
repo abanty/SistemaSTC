@@ -89,9 +89,7 @@ function listar()
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [
-
-		        ],
+	   	buttons: ['copyHtml5','excelHtml5','csvHtml5','pdf','print'],
 		"ajax":
 				{
 					url: '../ajax/persona.php?op=listarp',
@@ -160,8 +158,8 @@ function eliminar(idpersona)
 {
 	swal({
 	  title: '¿Está seguro de eliminar el cliente?',
-		imageUrl: 'http://img.freepik.com/vector-gratis/trabajador-con-dudas_1012-193.jpg?size=338&ext=jpg',
-		imageWidth: 250,
+		imageUrl: '../public/img/swal-duda.jpg',
+	 	imageWidth: 250,
 		imageHeight: 250,
 		animation: false,
 	  showCancelButton: true,
