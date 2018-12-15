@@ -157,7 +157,7 @@ if ($_SESSION['ventas']==1)
 
 
 
-  <div class="modal fade" id="modal-default" style="display: none;">
+  <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header" style="background: #00a65a; color: white;">
