@@ -168,9 +168,10 @@ if (strlen(session_id()) < 1)
                     <ul class="treeview-menu">
                       <li><a href="ingreso.php"><i class="fa fa-balance-scale"></i> Reponer Stock</a></li>
                       <li><a href="almacen_general.php"><i class="fa fa-institution"></i>Almacen General</a></li>
+                      <li><a href="punto_venta.php"><i class="fa fa-institution"></i>Almacen P Venta</a></li>
                       <li><a href="transferencia.php"><i class="fa fa-exchange"></i>Traspaso</a></li>
                       <li><a href="nota_almacen.php"><i class="fa fa-file-o"></i>Notas de Almacen</a></li>
-                      <li><a href="transferencia.php"><i class="fa fa-info"></i>Inventario Inicial</a></li>
+
 
                     </ul>
                   </li>';
@@ -218,16 +219,11 @@ if (strlen(session_id()) < 1)
             if($_SESSION['ventas']==1)
             {
               echo '<li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-shopping-cart"></i>
-                      <span>Salidas</span>
-                       <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li><a href="punto_venta.php"><i class="fa fa-circle-o"></i>Punto de Venta</a></li>
-                      <li><a href="venta.php"><i class="fa fa-circle-o"></i>Realizar Ventas</a></li>
+                    <a href="venta.php">
+                      <i class="fa fa-shopping-cart" style="color:#3d9970;"></i>
+                      <span class="label bg-olive" style="font-size: 12.5px;">Realizar Venta</span>
 
-                    </ul>
+                    </a>
                   </li>';
             }
             ?>
