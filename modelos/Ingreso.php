@@ -72,12 +72,12 @@ Class Ingreso
 	//Implementar un metodo para listar los registros
 	public function listar()
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,
+		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
     u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,
     i.total_compra,i.impuesto,i.estado
-    FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u
-    ON i.idusuario=u.idusuario
-		ORDER BY i.idingreso desc";
+    FROM ingreso i INNER JOIN detalle_ingreso di ON i.idingreso = di.idingreso INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u
+    ON i.idusuario=u.idusuario INNER JOIN almacen al ON al.idalmacen = di.idalmacen
+    GROUP BY i.idingreso desc";
 		return ejecutarConsulta($sql);
 	}
 

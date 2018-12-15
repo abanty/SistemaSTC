@@ -50,6 +50,7 @@ if ($_SESSION['compras']==1)
                             <th>Documento</th>
                             <th>Numero</th>
                             <th>Total Compra</th>
+                            <th>Almacen Destino</th>
                             <th>Estado</th>
                           </thead>
                           <tbody>
@@ -61,6 +62,7 @@ if ($_SESSION['compras']==1)
                             <th>Usuario</th>
                             <th>Documento</th>
                             <th>Numero</th>
+                            <th>Almacen Destino</th>
                             <th>Total Compra</th>
                             <th>Estado</th>
                           </tfoot>
@@ -77,10 +79,13 @@ if ($_SESSION['compras']==1)
                             </select>
                           </div>
 
-                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                          <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <label>Colocar producto en:</label>
-                            <select id="idalmacen" name="idalmacen" class="form-control selectpicker" data-live-search="true" required>
-                            </select>
+                            <div id="container_date" style="display: flex;">
+                              <button id="" type="button" onclick="openproductoalmacen()" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vista previa de productos en los Almaneces - Seleccionar !"><span class="fa fa-eye"></span></button>
+                              <select id="idalmacen" name="idalmacen" class="form-control selectpicker" data-live-search="true" title="Selecciona un Almacen" required>
+                              </select>
+                            </div>
                           </div>
 
                            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -113,6 +118,7 @@ if ($_SESSION['compras']==1)
                             <label>Impuesto:</label>
                             <input type="text" class="form-control" name="impuesto" id="impuesto" >
                           </div>
+
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
                             <a data-toggle="modal" href="#myModal">
@@ -155,7 +161,7 @@ if ($_SESSION['compras']==1)
 
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="btn btn-info" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+                            <button class="btn btn-personal" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 
                             <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i>Cancelar</button>
                           </div>
@@ -210,6 +216,50 @@ if ($_SESSION['compras']==1)
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" style="width: 1030px;">
+        <div class="modal-content">
+          <div class="modal-header" style="background:#5c6367; color:white;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title"><i class="fa fa-list"></i>&nbsp;Lista de Productos por Almacen o Punto</h3>
+          </div>
+          <div class="modal-body">
+            <table style="width:99% !important;"id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover">
+              <thead>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Categoria</th>
+                <th>Talla</th>
+                <th>Stock</th>
+                <th>Precio Venta</th>
+                <th>Precio Compra</th>
+                <th>Imagen</th>
+              </thead>
+              <tbody>
+              </tbody>
+              <tfoot>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Categoria</th>
+                <th>Talla</th>
+                <th>Stock</th>
+                <th>Precio Venta</th>
+                <th>Precio Compra</th>
+                <th>Imagen</th>
+              </tfoot>
+            </table>
+          </div>
+          <div class="modal-footer" style="background:#dadce0; color:white;">
+            <button type="button" class="btn btn-default"  data-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>

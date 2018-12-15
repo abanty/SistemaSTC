@@ -5,6 +5,7 @@ function init(){
 
 	$(document).ready(function(){
 		$(".dataTables_filter input").focus();
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 
 
@@ -62,21 +63,37 @@ function limpiar(){
 	$(".filas").remove();
 	$("#total").html("0");
 
+
+}
+
+function var_extras(){
 	//Obtenemos la fecha actual
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#fecha_hora').val(today);
-
+  $('#fecha_hora').val(today);
     //Marcamos el primer tipo_documento
-    $("#tipo_comprobante").val("Boleta");
+  $("#tipo_comprobante").val("Otros");
 	$("#tipo_comprobante").selectpicker('refresh');
+
+}
+
+// TODO: FUNCION PARA ABRIR MODAL CON LISTA DE PRODUCTO POR Almacen
+function openproductoalmacen(){
+	var key =   $( "#idalmacen option:selected").val();
+	if (key == "") {
+		alert('Selecciona un Almacen');
+	}else {
+		listarProductos_x_almacen(key);
+		$('#myModal2').modal('show');
+	}
 }
 
 
 // TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag){
+	var_extras();
 	if (flag)
 	{
 		$(document).ready(function(){
@@ -162,6 +179,44 @@ function listarProductos(){
 	});
 }
 
+
+// TODO: FUNCION PARA LISTAR PRODUCTOS DE UN ALMACEN
+function listarProductos_x_almacen(idalmacen){
+	tabla=$('#tblproductos2').dataTable(
+	{
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	   "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    buttons:
+			[
+				{
+						extend: 'pdfHtml5',
+						text: 'Reportes en archivo PDF',
+						download: 'open'
+				},
+			],
+		"ajax":
+				{
+					url: '../ajax/ingreso.php?op=listarproductosalmacenes',
+					type : "get",
+					data: {
+						idalmacen: idalmacen,
+					},
+					dataType : "json",
+					error: function(e){
+						console.log(e.responseText);
+					}
+				},
+		"bDestroy": true,
+		"iDisplayLength": 5,//Paginación
+	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	}).DataTable();
+
+	$('#myModal2').on('shown.bs.modal', function () {
+		$('.dataTables_filter input').focus();
+		tabla.search('').columns().search('').draw();
+	});
+}
 
 // TODO: FUNCION PARA GUARDAR Y EDITAR
 function guardaryeditar(e){
@@ -292,7 +347,7 @@ function marcarImpuesto()
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="'+precio_compra+'"></span></td>'+
 	    	// '<td><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaganancia()" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></td>'+
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step="0.01" min="0.00" max="10000.00" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></span></td>'+
-				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" max="100" accuracy="2" min="0" id="inputRRPDiscount" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left;"></span></td>'+
+				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" max="100" accuracy="2" min="0" id="inputRRPDiscount" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left; width: 4em;"></span></td>'+
 				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
 	    	'<td style="width: 10%;"><center><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></center></td>'+
       	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+

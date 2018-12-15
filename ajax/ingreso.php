@@ -7,7 +7,6 @@ require_once "../modelos/Ingreso.php";
 $ingreso=new Ingreso();
 
 $idingreso=isset($_POST["idingreso"])? limpiarCadena($_POST["idingreso"]):"";
-// $idalmacen=isset($_POST["idalmacen"])? limpiarCadena($_POST["idalmacen"]):"";
 $idproveedor=isset($_POST["idproveedor"])? limpiarCadena($_POST["idproveedor"]):"";
 $idusuario=$_SESSION["idusuario"];
 $tipo_comprobante=isset($_POST["tipo_comprobante"])? limpiarCadena($_POST["tipo_comprobante"]):"";
@@ -16,6 +15,8 @@ $num_comprobante=isset($_POST["num_comprobante"])? limpiarCadena($_POST["num_com
 $fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 $impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
 $total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"]):"";
+
+$idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
@@ -95,7 +96,8 @@ switch ($_GET["op"]){
 				"4"=>$reg->tipo_comprobante,
         "5"=>$reg->serie_comprobante.'-'.$reg->num_comprobante,
         "6"=>$reg->total_compra,
-				"7"=>($reg->estado=='Aceptado')?'<span class="label bg-olive">Activado</span>' :  '<span class="label bg-red">Desactivado</span>'
+        "7"=>$reg->almacen,
+				"8"=>($reg->estado=='Aceptado')?'<span class="label bg-olive">Activado</span>' :  '<span class="label bg-red">Desactivado</span>'
 				);
 		}
 		$results = array(
@@ -183,7 +185,7 @@ switch ($_GET["op"]){
             "3"=>$reg->descripcion,
             "4"=>$reg->categoria,
             "5"=>'<span style="color:#337ab7; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
-            "6"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"            
+            "6"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
             );
         }
         $results = array(
@@ -193,6 +195,35 @@ switch ($_GET["op"]){
           "aaData"=>$data);
         echo json_encode($results);
     break;
+
+
+    # CASE PARA LISTAR LOS PRODUCTOS EN LOS DIVERSOS ALMACENES
+      	case 'listarproductosalmacenes':
+      		require_once "../modelos/Producto.php";
+      		$producto=new Producto();
+      		$rspta=$producto->listarActivosAlmacen($idalmacen);
+       		$data= Array();
+       		while ($reg=$rspta->fetch_object()){
+       			$data[]=array(
+            "0"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
+            "1"=>$reg->producto,
+            "2"=>$reg->descripcion,
+            "3"=>'<span class="label bg-olive">'.$reg->categoria.'</span>',
+            "4"=>'<span style="color:#f39c12; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
+       	 	  "5"=>($reg->stock=='0')?'<span style="color:#fb1c00; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>':
+            '<span style="color:#000000; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>',
+       		  "6"=>'<span style="color:#17609e; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_venta.'</span>',
+            "7"=>'<span style="color:#bd0000; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_compra.'</span>',
+       		  "8"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
+       			);
+       		}
+       		$results = array(
+       			"sEcho"=>1, //Información para el datatables
+       			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+       			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+       			"aaData"=>$data);
+       		echo json_encode($results);
+      	break;
 
 }
 ?>

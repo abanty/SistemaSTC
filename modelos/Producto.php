@@ -98,7 +98,10 @@ Class Producto
 		p.descripcion as descripcion,ca.nombre as categoria, u.abreviatura as abreviatura, p.codigo as codigo,p.idcategoria,p.idmarca,p.idunidadmedida,al.nombre as almacen,
 		(SELECT precio_venta FROM detalle_ingreso
 		WHERE idproducto=pu.idproducto
-		order by iddetalle_ingreso desc limit 0,1) as precio_venta
+		order by iddetalle_ingreso desc limit 0,1) as precio_venta,
+		(SELECT precio_compra FROM detalle_ingreso
+		WHERE idproducto=pu.idproducto
+		order by iddetalle_ingreso desc limit 0,1) as precio_compra
 		FROM producto_ubicacion pu
 		INNER JOIN almacen al ON pu.idalmacen = al.idalmacen
 		INNER JOIN producto p ON p.idproducto = pu.idproducto
