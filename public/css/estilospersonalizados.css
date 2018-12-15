@@ -107,20 +107,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 	display: block !important;
 }
 
-.input-holder {
-  border: 1px solid #cccccc;
-  display: inline-block;
-  padding: 5px;
-}
-.input-holder > input {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  outline:none;
-}
-.input-holder:after {
-  content: '%';
-}
 
 .input-symbol-euro {
 		position: relative;
@@ -135,6 +121,18 @@ content: "S/";
 left: 5px;
 }
 
+.input-symbol-porcent {
+    position: relative;
+}
+.input-symbol-porcent input {
+    padding-right: 30px;
+}
+.input-symbol-porcent:after {
+  position: absolute;
+  bottom: 6.5px;
+  content: "%";
+  left: 100px;
+}
 #cantidad{
 	/* height: 40px;
 	margin-top: 10px; */
