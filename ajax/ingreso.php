@@ -154,7 +154,7 @@ switch ($_GET["op"]){
 
 		while ($reg = $rspta->fetch_object())
 				{
-				echo '<option value=' . $reg->idpersona . '>' . $reg->nombre . '</option>';
+				echo '<option data-icon="fa fa-bank" value=' . $reg->idpersona . '>' . $reg->nombre . '</option>';
 				}
 	break;
 
@@ -166,7 +166,7 @@ switch ($_GET["op"]){
 
     while ($reg = $rspta->fetch_object())
         {
-        echo '<option value=' . $reg->idalmacen . '>' . $reg->nombre . '</option>';
+        echo '<option data-icon="fa fa-map-marker" value=' . $reg->idalmacen . '>' . $reg->nombre . '</option>';
         }
   break;
 

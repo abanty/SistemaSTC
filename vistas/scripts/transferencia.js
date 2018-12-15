@@ -3,6 +3,27 @@ var tabla;
 // TODO:  FUNCION INICIO
 function init(){
 
+	$(document).ready(function(){
+		$(".dataTables_filter input").focus();
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
+
+	$(document).keypress(function(event) {
+			// event.preventDefault();
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if ($('#listadoregistros').is(":visible")) {
+				if (keycode == '13') {
+					mostrarform(true);
+				}
+			}else if($('#formulario').is(":visible")){
+				if (keycode == '32') {
+				// $( "#btnAgregarArt" ).click();
+				openproductofilter();
+				}
+			}
+	});
+
 	mostrarform(false);
 
   $('#origen').change(function() {
@@ -54,12 +75,18 @@ function limpiar()
 
 	$(".filas").remove();
 	$("#total").html("0");
+
+}
+
+
+// TODO: FUNCION FECHA APARTE
+function fechanow(){
 	//Obtenemos la fecha actual
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#fecha_hora').val(today);
+		$('#fecha_hora').val(today);
 }
 
 
@@ -79,7 +106,10 @@ function openproductofilter()
 // TODO:   FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag)
 {
-	limpiar();
+	// $(function() {
+  //     $("show.bs.select #origen").focus();
+  // });
+	fechanow();
 	if (flag)
 	{
 			$("#listadoregistros").hide();
@@ -112,7 +142,8 @@ function listarTraspasoProducto()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    dom: 'Bfrtip',
+			//Definimos los elementos del control de tabla
 	    buttons: [
 		            // 'copyHtml5',
 		            // 'excelHtml5',
@@ -132,6 +163,28 @@ function listarTraspasoProducto()
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
+
+	var buttons = new $.fn.dataTable.Buttons(tabla, {
+    buttons: [
+      {
+          extend: 'excelHtml5',
+          text: 'Reportes EXCEL',
+					className: "btn btn-sm btn-success",
+					init: function( api, node, config) {
+						 $(node).removeClass('btn-default')
+					}
+      },
+      {
+          extend: 'pdfHtml5',
+          text: 'Reportes PDF',
+					className:  "btn btn-sm btn-warning",
+					init: function( api, node, config) {
+						 $(node).removeClass('btn-default')
+					}
+      },
+   ]
+}).container().appendTo($('#buttons'));
+
 }
 
 
