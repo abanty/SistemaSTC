@@ -214,6 +214,7 @@ function mostrar(idunidadmedida) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: ' REGISTRAR:'+' <span style="font-size:16px;"> Unidad de Medida (*)</span>',
       content: '' +

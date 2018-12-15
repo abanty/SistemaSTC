@@ -197,6 +197,7 @@ function mostrar(idtipoproducto) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: 'REGISTRAR:',
       content: '' +

@@ -197,6 +197,7 @@ function mostrar(idmarca) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: ' REGISTRA UNA MARCA',
       content: '' +
