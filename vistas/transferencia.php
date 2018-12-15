@@ -75,13 +75,12 @@ if ($_SESSION['ventas']==1)
               </div>
               <div class="" style="text-align:center;">
                 <ul class="nav nav-stacked">
-                  <li><a style="text-align:left;" href="#">Total Traspasos <span class="pull-right badge bg-blue">31</span></a></li>
                   <h4 class="">Reportes</h4>
-                  <li><a><button class="btn btn-warning"> Reportes en Excel</button></a></li>
-                  <li><a><button class="btn btn-success"> Reportes en PDF</button></a></li>
+                  <div id="buttons" style="display: inline-block;"></div>
                   <br>
                 </ul>
               </div>
+              <br>
             </div>
             <!-- /.widget-user -->
           </div>

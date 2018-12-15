@@ -36,23 +36,6 @@ tabla.ajax.reload();
 
 }
 
-/*---------------------------*
-| Funcion mostrar formulario |
-.---------------------------*/
-function mostrarform(flag) {
-
-  // limpiar();
-  if (flag) {
-    $("#formularioregistros").show();
-    $("#table_container").hide();
-    $("#btnGuardar").prop("disabled", false);
-    $("#btnagregar").hide();
-  } else {
-    $("#table_container").show();
-    $("#formularioregistros").hide();
-    $("#btnagregar").show();
-  }
-}
 
 /*---------------------------------*
 | Funcion listar registros activos |
@@ -200,6 +183,7 @@ function mostrar(idcategoria) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: ' REGISTRAR CATEGORIA',
       content: '' +

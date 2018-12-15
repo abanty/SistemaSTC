@@ -165,7 +165,7 @@ function listar()
 			},
 		"bDestroy": true,
 		"iDisplayLength": 7, //Paginación
-	    "order": [[ 0, "asc" ]] //Ordenar (columna,orden)
+	    "order": [[ 8, "asc" ]] //Ordenar (columna,orden)
 	}).DataTable();
 }
 

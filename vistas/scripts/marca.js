@@ -87,7 +87,7 @@ function listarmarcas() {
       },
     "bDestroy": true,
     "iDisplayLength": 7, //Paginación
-      "order": [[ 0, "desc" ]] //Ordenar (columna,orden)
+      "order": [[ 4, "asc" ]] //Ordenar (columna,orden)
   }).DataTable();
 
   var buttons = new $.fn.dataTable.Buttons(tabla, {
@@ -197,6 +197,7 @@ function mostrar(idmarca) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: ' REGISTRA UNA MARCA',
       content: '' +
@@ -266,8 +267,8 @@ function desactivar(idmarca) {
                 $.post("../ajax/marca.php?op=desactivar", {
                   idmarca: idmarca
                 }, function(e) {
-                  $('#tbllistado').DataTable().ajax.reload(null, false);
-                  $('#tbllistado').DataTable().ajax.reload(null, false);
+                  $('#tbllistado').DataTable().ajax.reload();
+                  // tabla.order( [ 4, 'asc' ] ).draw();
                   $.notify.defaults({ className: "error" });
                   $.notify.defaults({ autoHideDelay: 5000 });
                   $.notify.defaults({ style: 'bootstrap' });
@@ -288,6 +289,8 @@ function desactivar(idmarca) {
         },
       }
   });
+  // tabla.order( [ 1, 'asc' ] ).draw();
+// tabla.ajax.reload();
 }
 
 /*-------------------------------*

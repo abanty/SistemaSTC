@@ -87,7 +87,7 @@ function listarunidadmedidas() {
       },
     "bDestroy": true,
     "iDisplayLength": 7, //Paginación
-      "order": [[ 0, "desc" ]] //Ordenar (columna,orden)
+      "order": [[ 5, "asc" ]] //Ordenar (columna,orden)
   }).DataTable();
 
   var buttons = new $.fn.dataTable.Buttons(tabla, {
@@ -214,6 +214,7 @@ function mostrar(idunidadmedida) {
 function editreg_form(){
 
   $.confirm({
+      backgroundDismiss: true,
       icon: 'fa fa-pencil-square-o',
       title: ' REGISTRAR:'+' <span style="font-size:16px;"> Unidad de Medida (*)</span>',
       content: '' +

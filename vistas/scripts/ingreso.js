@@ -3,20 +3,32 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 
+	$(document).ready(function(){
+		$(".dataTables_filter input").focus();
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
+
+	$(document).keypress(function(event) {
+			// event.preventDefault();
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if ($('#listadoregistros').is(":visible")) {
+				if (keycode == '13') {
+					mostrarform(true);
+				}
+			}else if($('#formulario').is(":visible")){
+				if (keycode == '32') {
+				$( "#btnAgregarArt" ).click();
+				}
+			}
+	});
+
+
 	mostrarform(false);
+
+
 	listar();
-	// autocompletejquery();
 
-	$(document).ready(function() {
-
-			$('input.global_filter').on( 'keyup click', function () {
-					filterGlobal();
-			} );
-
-			$('input.column_filter').on( 'keyup click', function () {
-					filterColumn( $(this).parents('div').attr('data-column') );
-			} );
-	} );
 
 	$("#formulario").on("submit",function(e)
 	{
@@ -25,116 +37,63 @@ function init(){
 	});
 
 
-	//Cargamos los items al select proveedor
 	$.post("../ajax/ingreso.php?op=selectProveedor", function(r){
 	            $("#idproveedor").html(r);
 	            $('#idproveedor').selectpicker('refresh');
 	});
 
-	//Cargamos los items al select Almacen
+
 	$.post("../ajax/ingreso.php?op=selectAlmacen", function(r){
 							$("#idalmacen").html(r);
 							$('#idalmacen').selectpicker('refresh');
 	});
 
-}
 
-function refresh_auto(event){
-
-event.preventDefault();
-		$('#autocomplete').val('');
-		$('#autocomplete').focus();
 }
 
 
-//
-// function autocompletejquery()
-// {
-//
-//  // Single Select
-//  $( "#autocomplete" ).autocomplete({
-//
-//   source: function( request, response ) {
-//    // Fetch data
-//    $.ajax({
-//     url: "../ajax/ingreso.php?op=select_producto_autocompletev2",
-//     type: 'post',
-//     dataType: "json",
-//     data: {
-//
-//      search: request.term
-//     },
-//     success: function( data ) {
-//      response( data );
-//     }
-//    });
-//   },
-//   select: function (event, ui) {
-//    // Set selection
-//    $('#autocomplete').val(ui.item.nombreproductojson); // display the selected text
-// 	 var idproducto = ui.item.idproductojson;
-// 	 var producto = ui.item.nombreproductojson;
-// 	 var cantidad=1;
-// 	 var precio_compra=1;
-// 	 var precio_venta=1;
-//
-// 	 if (idproducto!="")
-// 	 {
-// 		 var subtotal=cantidad*precio_compra;
-// 		 var fila='<tr class="filas" id="fila'+cont+'">'+
-// 		 '<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-// 		 '<td><input type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td>'+
-// 		 '<td><input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-// 		 '<td><input type="number" step=".01" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
-// 		 '<td><input type="number" step=".01" name="precio_venta[]" value="'+precio_venta+'"></td>'+
-// 		 '<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-// 		 '<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
-// 		 '</tr>';
-// 		 cont++;
-// 		 detalles=detalles+1;
-// 		 $('#detalles').append(fila);
-// 		 modificarSubototales();
-// 	 }
-// 	 else
-// 	 {
-// 		 alert("Error al ingresar el detalle, revisar los datos del producto");
-// 	 }
-//
-//
-//    return false;
-//   }
-//  });
-//
-// }
-
-//Función limpiar
+// TODO: FUNCION PARA LIMPIAR
 function limpiar(){
-
 	$("#idproveedor").val("");
 	$("#idingreso").val("");
 	$("#serie_comprobante").val("");
 	$("#num_comprobante").val("");
 	// $("#impuesto").val("0");
-
 	$("#total_compra").val("");
 	$(".filas").remove();
 	$("#total").html("0");
 
+
+}
+
+function var_extras(){
 	//Obtenemos la fecha actual
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#fecha_hora').val(today);
-
+  $('#fecha_hora').val(today);
     //Marcamos el primer tipo_documento
-    $("#tipo_comprobante").val("Boleta");
+  $("#tipo_comprobante").val("Otros");
 	$("#tipo_comprobante").selectpicker('refresh');
+
 }
 
-//Función mostrar formulario
+// TODO: FUNCION PARA ABRIR MODAL CON LISTA DE PRODUCTO POR Almacen
+function openproductoalmacen(){
+	var key =   $( "#idalmacen option:selected").val();
+	if (key == "") {
+		alert('Selecciona un Almacen');
+	}else {
+		listarProductos_x_almacen(key);
+		$('#myModal2').modal('show');
+	}
+}
+
+
+// TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag){
-	limpiar();
+	var_extras();
 	if (flag)
 	{
 		$(document).ready(function(){
@@ -161,27 +120,22 @@ function mostrarform(flag){
 	}
 }
 
-//Funcion cancelarform
+
+// TODO: FUNCION PARA CANCELAR FORMULARIO
 function cancelarform(){
 	limpiar();
 	mostrarform(false);
-	// $("#btnagregar").prop("disabled",false);
-	// $("#btnagregar").show();
 }
 
-//Funcion listar
+
+// TODO: FUNCION LISTAR INGRESOS
 function listar(){
 	tabla=$('#tbllistado').dataTable(
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
 				"aServerSide": true, //Paginacion y filtrado realizados por el servidor
 				dom: 'Bfrtip',         //Definimos los elementos del control de tabla
-				buttons: [
-						'copyHtml5',
-						'excelHtml5',
-						'csvHtml5',
-						'pdf'
-			],
+				buttons: ['copyHtml5','excelHtml5','csvHtml5','pdf','print'],
 	"ajax":
 			{
 				url: '../ajax/ingreso.php?op=listar',
@@ -195,21 +149,16 @@ function listar(){
 		"iDisplayLength": 5, //Paginación
 	    "order": [[ 0, "desc" ]] //Ordenar (columna,orden)
 	}).DataTable();
-	$("#tbllistado_filter input").focus();
 }
 
-//Función ListarProductos
+// TODO: FUNCION PARA LISTAR PRODUCTOS A SER REPUESTOS  EN UN ALMACEN - INGRESOS
 function listarProductos(){
 	tabla=$('#tblproductos').dataTable(
 	{
-
-
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	   "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Brtip',//Definimos los elementos del control de tabla
-	    buttons: [
-
-		        ],
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    buttons: [],
 		"ajax":
 				{
 					url: '../ajax/ingreso.php?op=listarProductos',
@@ -219,37 +168,66 @@ function listarProductos(){
 						console.log(e.responseText);
 					}
 				},
-
-			// 	"scrollY":        "430px",
-			// "scrollCollapse": true,
-			// "paging":         false
 		"bDestroy": true,
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 
 	$('#myModal').on('shown.bs.modal', function () {
-		$('#filter_global input').focus();
-		$('#filter_global input').val("");
-		$('#filter_col3 input').val("");
-		$('#filter_col5 input').val("");
+		$('.dataTables_filter input').focus();
+		tabla.search('').columns().search('').draw();
 	});
 }
 
-//Funcion para guardar o editar
 
+// TODO: FUNCION PARA LISTAR PRODUCTOS DE UN ALMACEN
+function listarProductos_x_almacen(idalmacen){
+	tabla=$('#tblproductos2').dataTable(
+	{
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	   "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+	    buttons:
+			[
+				{
+						extend: 'pdfHtml5',
+						text: 'Reportes en archivo PDF',
+						download: 'open'
+				},
+			],
+		"ajax":
+				{
+					url: '../ajax/ingreso.php?op=listarproductosalmacenes',
+					type : "get",
+					data: {
+						idalmacen: idalmacen,
+					},
+					dataType : "json",
+					error: function(e){
+						console.log(e.responseText);
+					}
+				},
+		"bDestroy": true,
+		"iDisplayLength": 5,//Paginación
+	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	}).DataTable();
+
+	$('#myModal2').on('shown.bs.modal', function () {
+		$('.dataTables_filter input').focus();
+		tabla.search('').columns().search('').draw();
+	});
+}
+
+// TODO: FUNCION PARA GUARDAR Y EDITAR
 function guardaryeditar(e){
 	e.preventDefault(); //No se activara la accion predeterminada del evento
-	//$("#btnGuardar").prop("disabled",true);
 	var formData = new FormData($("#formulario")[0]);
-
 	$.ajax({
 		url: "../ajax/ingreso.php?op=guardaryeditar",
 		type: "POST",
 		data: formData,
 		contentType: false,
 		processData: false,
-
 		success: function(datos)
 		{
 			swal(
@@ -260,15 +238,13 @@ function guardaryeditar(e){
 			mostrarform(false);
 			listar();
 		}
-
 	});
-	// $("#btnagregar").show();
 	limpiar();
 }
 
-function mostrar(idingreso){
 
-	//$("#btnagregar").hide();
+// TODO: FUNCION PARA MOSTRAR INGRESOS
+function mostrar(idingreso){
 	$.post("../ajax/ingreso.php?op=mostrar",{idingreso : idingreso}, function(data, status)
 	{
 		data = JSON.parse(data);
@@ -295,7 +271,8 @@ function mostrar(idingreso){
 	});
 }
 
-//Funcion para desactivar registros
+
+// TODO: FUNCION PARA ANULAR INGRESOS
 function anular(idingreso){
 	swal({
 	  title: '¿Está seguro de anular el ingreso?',
@@ -353,10 +330,10 @@ function marcarImpuesto()
 	  	var cantidad=1;
 			var valor1=100;
 			var valor2=100;
-	    var precio_compra=0.00;
-	    var precio_venta=0.00;
+	    var precio_compra=0;
+	    var precio_venta=0;
 			var ganancia = 0;
-			var ganancianeta = 1;
+			var ganancianeta = 0;
 				var importe=0;
 	    if (idproducto!="")
 	    {
@@ -370,7 +347,7 @@ function marcarImpuesto()
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="'+precio_compra+'"></span></td>'+
 	    	// '<td><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaganancia()" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></td>'+
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step="0.01" min="0.00" max="10000.00" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></span></td>'+
-				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" accuracy="2" min="0" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left;"></span></td>'+
+				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" max="100" accuracy="2" min="0" id="inputRRPDiscount" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left; width: 4em;"></span></td>'+
 				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
 	    	'<td style="width: 10%;"><center><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></center></td>'+
       	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
@@ -379,7 +356,11 @@ function marcarImpuesto()
 				'</tr>';
 	    	cont++;
 	    	detalles=detalles+1;
-
+				$(function () {
+				$(document).on('click', 'input[type=number]', function () {
+								this.select();
+						});
+				});
 	    	$('#detalles').append(fila);
 	    	modificarSubototales();
 
@@ -416,7 +397,7 @@ function marcarImpuesto()
 		//FUNCION PARA CALCULAR IMPORTE
 		function calculaimporte(){
 
-			// calculaganancia();
+			calculaganancia();
 
 			var cantx = document.getElementsByName("cantidad[]");
 			var precx = document.getElementsByName("precio_compra[]");
@@ -436,6 +417,7 @@ function marcarImpuesto()
 		 			calcularTotales();
 		}
 
+
 		//FUNCION PARA CALCULAR GANANCIA
 		function calculaganancia(){
 			var g_cant = document.getElementsByName("cantidad[]");
@@ -444,44 +426,34 @@ function marcarImpuesto()
  			var g_gan = document.getElementsByName("gananciaporcentaje[]");
 			var g_gann = document.getElementsByName("ganancianeta[]");
 			var g_sub = document.getElementsByName("subtotal");
-
 			var g_val1 = document.getElementsByName("valor1[]");
 			var g_val2 = document.getElementsByName("valor2[]");
-			for (var i = 0; i <g_cant.length; i++) {
+
+			for (var i = 0; i <g_prev.length; i++) {
 	 		 var inpCant=g_cant[i];
 	 		 var inpPrec=g_prec[i];
 			 var inpPrev=g_prev[i];
 			 var inpGan=g_gan[i];
 			 var inpGann=g_gann[i];
 			 var inpSub=g_sub[i];
-
 			 var inpVal1=g_val1[i];
 			 var inpVal2=g_val2[i];
 
+					if(parseFloat(inpPrev.value) < parseFloat(inpPrec.value)) {
+								inpPrev.value = 0;
+								inpGann.value = 0;
+								inpGan.value = 0;
+					}else {
+						inpGann.value = parseFloat(Math.round((inpPrev.value - inpPrec.value) * 100) / 100).toFixed(2);
+					}
 
-// parseFloat(Math.round((() * 100) / 100).toFixed(2)
-
-			// (inpPrev.value*100/inpPrec.value)-100;
-			inpGann.value = inpPrev.value - inpPrec.value;
-
-			// if (inpGan.value < 0 ) {
-			// 	inpGan.style.color="#CC0000";
-			// 	inpGan.style.fontWeight="bold";
-			// 	inpGann.style.color="#CC0000";
-			// 	inpGann.style.fontWeight="bold";
-			//
-			// 	return false;
-			// }else {
-			// 	inpGan.style.color="#337ab7";
-			// 	inpGan.style.fontWeight="bold";
-			// 	inpGann.style.color="#337ab7";
-			// 	inpGann.style.fontWeight="bold";
-			// }
-inpGan.value	= (inpPrev.value*inpVal1.value/inpPrec.value)-inpVal2.value;
-// alert(inpGan.value);
-	 	 }
+					if (inpPrev.value > 0 && inpPrec.value > 0) {
+							inpGan.value	=  parseFloat(Math.round(((inpPrev.value*inpVal1.value/inpPrec.value)-inpVal2.value) * 100) / 100).toFixed(2);
+					}
+		 	 }
 		 			// calcularTotales();
 		}
+
 
 		//FUNCION PARA CALCULAR COMPRA UNITARIA
 		function calculacompraunitaria(){
@@ -506,6 +478,20 @@ inpGan.value	= (inpPrev.value*inpVal1.value/inpPrec.value)-inpVal2.value;
 	 	 }
 		 				calcularTotales();
 		}
+
+
+				//FUNCION PARA CALCULAR COMPRA UNITARIA
+				function calculaganancianeta(){
+						calculaganancia();
+					var v_gan = document.getElementsByName("gananciaporcentaje[]");
+					var v_gann = document.getElementsByName("ganancianeta[]");
+		 			var v_pv = document.getElementsByName("precio_venta[]");
+					var v_pc = document.getElementsByName("precio_compra[]");
+					var v_val1 = document.getElementsByName("valor1[]");
+					var v_val2 = document.getElementsByName("valor2[]");
+
+					for (var i = 0; i <v_pv.length; i++) {}
+				}
 
 
 		//FUNCION PARA MODIFICAR SUBTOTALES
