@@ -1,6 +1,6 @@
 var tabla;
 
-//Función que se ejecuta al inicio
+// TODO: FUNCION QUE SE EJECUTA AL INICIO
 function init(){
 
 	$(document).ready(function(){
@@ -50,6 +50,36 @@ function init(){
 
 
 }
+//FIN FUNCION init
+
+
+// TODO: FUNCION FECHA Y HORA
+function fechanow()
+{
+  //Obtenemos la fecha actual y hora actualvar time = new Date().getTime();
+  var now = new Date();
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+  var hour = ("0" + now.getHours()).slice(-2);
+  var minute = ("0" + now.getMinutes()).slice(-2);
+  var second = ("0" + now.getSeconds()).slice(-2);
+  var today = now.getFullYear() + "-" + (month) + "-" + (day) + 'T' + (hour) + ':' + (minute);
+  minute = checkTime(minute);
+  // second = checkTime(second);
+  t = setTimeout(fechanow, 500)
+  // +':'+(second)  + ':' + (second)
+  $("#fecha_hora").val(today);
+}
+
+
+// TODO: FUNCION CONTADOR FECHA GET 0
+function checkTime(i)
+{
+  if (i < 10) {
+    i = "0" + i
+  };
+  return i;
+}
 
 
 // TODO: FUNCION PARA LIMPIAR
@@ -68,11 +98,11 @@ function limpiar(){
 
 function var_extras(){
 	//Obtenemos la fecha actual
-	var now = new Date();
-	var day = ("0" + now.getDate()).slice(-2);
-	var month = ("0" + (now.getMonth() + 1)).slice(-2);
-	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-  $('#fecha_hora').val(today);
+	// var now = new Date();
+	// var day = ("0" + now.getDate()).slice(-2);
+	// var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	// var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+  // $('#fecha_hora').val(today);
     //Marcamos el primer tipo_documento
   $("#tipo_comprobante").val("Otros");
 	$("#tipo_comprobante").selectpicker('refresh');
@@ -94,6 +124,7 @@ function openproductoalmacen(){
 // TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag){
 	var_extras();
+	fechanow();
 	if (flag)
 	{
 		$(document).ready(function(){
@@ -347,8 +378,8 @@ function marcarImpuesto()
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="'+precio_compra+'"></span></td>'+
 	    	// '<td><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaganancia()" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></td>'+
 				'<td><span class="input-symbol-euro"><input class="form-control" type="number" step="0.01" min="0.00" max="10000.00" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="'+precio_venta+'"></span></td>'+
-				'<td><span class="valuePadding input-holder"><input type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" max="100" accuracy="2" min="0" id="inputRRPDiscount" name="gananciaporcentaje[]" value="'+ganancia+'" style="text-align:left; width: 4em;"></span></td>'+
-				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
+				'<td><span class="input-symbol-porcent"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="1000" name="gananciaporcentaje[]" value="'+ganancia+'"></span></td>'+
+				'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="0" max="100000" name="ganancianeta[]" value="'+ganancianeta+'"></span></td>'+
 	    	'<td style="width: 10%;"><center><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></center></td>'+
       	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
 				'<td id="p_none"><input  type="hidden" name="valor1[]" value="'+valor1+'"></td>'+
