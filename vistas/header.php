@@ -2,6 +2,7 @@
 if (strlen(session_id()) < 1)
   session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -39,7 +40,6 @@ if (strlen(session_id()) < 1)
     <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css"> -->
 
   </head>
-
   <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
@@ -121,6 +121,7 @@ if (strlen(session_id()) < 1)
             <?php
             if($_SESSION['inventarios']==1)
             {
+
               echo '<li class="treeview">
                   <a href="#">
                     <i class="fa fa-fw fa-th"></i>
@@ -128,16 +129,16 @@ if (strlen(session_id()) < 1)
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                   <ul class="treeview-menu">
-
                     <li><a href="categoria.php"><i class="fa fa-fw fa-cube"></i>Gestionar Categorías</a></li>
-                      <li><a href="marca.php"><i class="fa fa-star"></i>Gestionar Marca</a></li>
-                        <li><a href="unidadmedida.php"><i class="fa fa-hourglass-start"></i>Gestionar Und. Medida</a></li>
-                          <li><a href="producto.php"><i class="fa fa-cart-arrow-down"></i>Gestionar Productos</a></li>
-                             <li><a href="tipoproducto.php"><i class="fa fa-fw fa-exclamation"></i>Gestionar Tipo Productos</a></li>
+                    <li><a href="marca.php"><i class="fa fa-star"></i>Gestionar Marca</a></li>
+                    <li><a href="unidadmedida.php"><i class="fa fa-hourglass-start"></i>Gestionar Und. Medida</a></li>
+                    <li><a href="producto.php"><i class="fa fa-cart-arrow-down"></i>Gestionar Productos</a></li>
+                    <li><a href="tipoproducto.php"><i class="fa fa-fw fa-exclamation"></i>Gestionar Tipo Productos</a></li>
                   </ul>
                 </li>';
             }
             ?>
+
 
             <?php
 

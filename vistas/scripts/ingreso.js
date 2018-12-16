@@ -402,6 +402,26 @@ function validaLength(id) {
 }
 
 
+function decimalAdjust(type, value, exp) {
+	// Si el exp no está definido o es cero...
+	if (typeof exp === 'undefined' || +exp === 0) {
+		return Math[type](value);
+	}
+	value = +value;
+	exp = +exp;
+	// Si el valor no es un número o el exp no es un entero...
+	if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+		return NaN;
+	}
+	// Shift
+	value = value.toString().split('e');
+	value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+	// Shift back
+	value = value.toString().split('e');
+	return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+}
+
+
 // TODO: FUNCION PARA CALCULAR IMPORTE
 function calculaimporte() {
 
@@ -416,8 +436,18 @@ function calculaimporte() {
 		var inpPx = precx[i];
 		var inpIx = impox[i];
 
+		// Decimal round
+			if (!Math.round10) {
+				Math.round10 = function(value, exp) {
+					return decimalAdjust('round', value, exp);
+				};
+			}
 
-		inpIx.value = parseFloat(Math.round((inpCx.value * inpPx.value) * 100) / 100).toFixed(2);
+		//Calculo de operacion para SUBTOTAL
+		inpIx.value=Math.round10((inpCx.value * inpPx.value), -1);
+
+
+		// parseFloat(Math.round((inpCx.value * inpPx.value) * 100) / 100).toFixed(2);
 
 
 	}
@@ -436,18 +466,14 @@ function calculacompraunitaria() {
 	var cantxy = document.getElementsByName("cantidad[]");
 	var precxy = document.getElementsByName("precio_compra[]");
 	var impoxy = document.getElementsByName("importe[]");
-	// var subxy = document.getElementsByName("subtotal");
 	for (var i = 0; i < cantxy.length; i++) {
 
 		var inpCxy = cantxy[i];
 		var inpPxy = precxy[i];
 		var inpIxy = impoxy[i];
-		// var inpSxy = subxy[i];
 
 		inpPxy.value = parseFloat(Math.round((inpIxy.value / inpCxy.value) * 100) / 100).toFixed(2);
 
-		// inpSxy.value = inpCxy.value * inpPxy.value;
-		// document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpSxy.value * 100) / 100).toFixed(2);
 	}
 
 	calcularTotalesImporte();
@@ -473,7 +499,6 @@ function calculaganancia() {
 		var inpPrev = g_prev[i];
 		var inpGan = g_gan[i];
 		var inpGann = g_gann[i];
-		// var inpSub = g_sub[i];
 		var inpVal1 = g_val1[i];
 		var inpVal2 = g_val2[i];
 
@@ -495,24 +520,10 @@ function calculaganancia() {
 }
 
 
-// TODO: FUNCION PARA CALCULAR COMPRA UNITARIA - EN DESARROLLO .... OJO!
-// function calculaganancianeta() {
-// 	calculaganancia();
-// 	var v_gan = document.getElementsByName("gananciaporcentaje[]");
-// 	var v_gann = document.getElementsByName("ganancianeta[]");
-// 	var v_pv = document.getElementsByName("precio_venta[]");
-// 	var v_pc = document.getElementsByName("precio_compra[]");
-// 	var v_val1 = document.getElementsByName("valor1[]");
-// 	var v_val2 = document.getElementsByName("valor2[]");
-//
-// 	for (var i = 0; i < v_pv.length; i++) {}
-// }
-
-
 // TODO: FUNCION PARA MODIFICAR SUBTOTALES
 function modificarSubototales() {
-	// calculacompraunitaria();
-	// calculaimporte();
+	calculacompraunitaria();
+	calculaimporte();
 	calculaganancia();
 
 		// inpS.value = inpC.value * inpPc.value;
