@@ -14,7 +14,9 @@ $serie_comprobante=isset($_POST["serie_comprobante"])? limpiarCadena($_POST["ser
 $num_comprobante=isset($_POST["num_comprobante"])? limpiarCadena($_POST["num_comprobante"]):"";
 $fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 $impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
-$total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"]):"";
+$total_compra=isset($_POST["total_importe"])? limpiarCadena($_POST["total_importe"]):"";
+$total_venta_sugerido=isset($_POST["total_venta_estimada"])? limpiarCadena($_POST["total_venta_estimada"]):"";
+$total_beneficio=isset($_POST["total_beneficio"])? limpiarCadena($_POST["total_beneficio"]):"";
 
 $idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
 
@@ -22,7 +24,7 @@ switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idingreso)){
 			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,
-      $num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idalmacen"],$_POST["idproducto"],$_POST["cantidad"],$_POST["importe"],$_POST["precio_compra"],$_POST["precio_venta"],$_POST["gananciaporcentaje"],$_POST["ganancianeta"]);
+      $num_comprobante,$fecha_hora,$impuesto,$total_compra,$total_venta_sugerido,$total_beneficio,$_POST["idalmacen"],$_POST["idproducto"],$_POST["cantidad"],$_POST["importe"],$_POST["precio_compra"],$_POST["precio_venta"],$_POST["gananciaporcentaje"],$_POST["ganancianeta"]);
 			echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos del ingreso";
 		}
 		else {
@@ -71,12 +73,13 @@ switch ($_GET["op"]){
                                       <th>TOTAL</th>
                                       <th></th>
                                       <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
                                       <th><h4 id="total">S/.'.$total.'</h4><input type="hidden" name="total_compra" id="total_compra"></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+
                                   </tfoot>';
     break;
 

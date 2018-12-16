@@ -11,9 +11,9 @@ Class Ingreso
 	}
 
 	//Implementamos un metodo para inserta registros
-	public function insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$idalmacen,$idproducto,$cantidad,$importe,$precio_compra,$precio_venta,$ganancia,$ganancianeta)
+	public function insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$total_venta_sugerido,$total_beneficio,$idalmacen,$idproducto,$cantidad,$importe,$precio_compra,$precio_venta,$ganancia,$ganancianeta)
 	{
-		$sql="INSERT INTO ingreso (idproveedor,idusuario,tipo_comprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_compra,estado)
+		$sql="INSERT INTO ingreso (idproveedor,idusuario,tipo_comprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_compra,total_venta_sugerido,total_beneficio,estado)
   VALUES ('$idproveedor','$idusuario','$tipo_comprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_compra','Aceptado')";
 		// return ejecutarConsulta($sql);
 		$idingresonew=ejecutarConsulta_retornarID($sql);

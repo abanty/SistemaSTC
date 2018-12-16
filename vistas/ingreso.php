@@ -131,6 +131,7 @@ if ($_SESSION['compras']==1)
                                 <table id="detalles" class="table table-bordered">
                                   <thead style="background-color:#222d3287; color:white;">
                                         <th>Opciones</th>
+                                        <th>Codigo</th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Importe Lote</th>
@@ -138,19 +139,20 @@ if ($_SESSION['compras']==1)
                                         <th>Precio Venta (u)</th>
                                         <th>Ganancia %</th>
                                         <th>Ganancia Neta</th>
-                                        <th>Subtotal</th>
+
                                     </thead>
 
                                     <tfoot>
+                                        <th id="total_estilo">TOTALES</th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th><h4 class="total_style" id="total_imp">S/. 0.00</h4><input type="hidden" name="total_importe" id="total_importe"></th>
                                         <th></th>
+                                        <th><h4 class="total_style" id="total_v">S/. 0.00</h4><input type="hidden" name="total_venta_estimada" id="total_venta_estimada"></th>
                                         <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th id="total_estilo">TOTAL</th>
-                                        <th><h4 id="total">S/. 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th>
+                                        <th><h4 class="total_style" id="total_ben">S/. 0.00</h4><input type="hidden" name="total_beneficio" id="total_beneficio"></th>
+
                                     </tfoot>
                                     <tbody>
                                   <!-- AQUI IRA EL CUERPO DE DATATABLE -->

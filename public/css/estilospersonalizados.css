@@ -146,15 +146,15 @@ left: 5px;
 
 #total_estilo{
 	/* padding: 22.5px 20px 10px 10px; */
-	font-size: 24.5px;
+    font-size: 16px;
 }
 
-#total{
-	text-align: center;
-	border-top: 2px dashed #f39c12;
-	/* width: 150px;*/
-	color: #f39c12;
-	text-shadow: 1px 2px 3px #7d7d37;
+.total_style{
+  text-align: center;
+  border-top: 2px solid #222d324a;
+  /* width: 150px; */
+  color: #222d32;
+  text-shadow: 1px 2px 3px #b1b1b1;
 }
 
 #p_none{
