@@ -15,19 +15,15 @@ if ($_SESSION['ventas']==1)
 {
 
 ?>
-
-
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-
       <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
             <div class="row">
               <div class="col-md-12">
-                  <div class="box">
+                  <div class="box box-success">
                     <div class="box-header with-border">
-
                           <button class="btn btn-warning" id="btnagregar" onclick="mostrarform(true)" autofocus="autofocus"><i class="fa fa-plus"></i> Realizar Venta</button>
                     </div>
                     <!-- /.box-header -->
@@ -83,10 +79,10 @@ if ($_SESSION['ventas']==1)
                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <label>Tipo Comprobante(*):</label>
                             <select name="tipo_comprobante" id="tipo_comprobante" class="form-control selectpicker" required="">
-                               <option value="Boleta">Boleta</option>
-                               <option value="Factura">Factura</option>
-                               <option value="Ticket">Ticket</option>
-                               <option value="Otro">Otro</option>
+                              <option data-icon="fa fa-file-archive-o" value="Boleta">Boleta</option>
+                              <option data-icon="fa fa-clipboard" value="Factura">Factura</option>
+                              <option data-icon="fa fa-files-o" value="Ticket">Ticket</option>
+                              <option data-icon="fa fa-file-text-o" value="Informacion de Salida">Otros</option>
                             </select>
                           </div>
 
@@ -104,7 +100,7 @@ if ($_SESSION['ventas']==1)
 
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Número:</label>
-                            <input type="number" class="form-control" name="num_comprobante" id="nfacturas" maxlength="15" placeholder="Número" required="">
+                            <input type="number" class="form-control" name="num_comprobante" id="nfacturas" maxlength="15" placeholder="Número">
                             <!-- <span id="nfacturas"></span> -->
                           </div>
 
@@ -131,8 +127,8 @@ if ($_SESSION['ventas']==1)
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th id="TOT" style="padding-top: 23.4px;    font-size: 20px;">TOTAL</th>
-                                    <th style="width: 90.7px"><h3 id="total">S/. 0.00</h3><input type="hidden" name="total_venta" id="total_venta"></th>
+                                    <th id="TOT">TOTAL:</th>
+                                    <th style="width: 90.7px"><h3 class="total_style_venta" id="total">S/. 0.00</h3><input type="hidden" name="total_venta" id="total_venta"></th>
                                 </tfoot>
                                 <tbody>
 
@@ -141,7 +137,7 @@ if ($_SESSION['ventas']==1)
                           </div>
                             </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                      <button class="btn btn-info" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+                                      <button class="btn btn-personal" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
                                       <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i>Cancelar</button>
                                 </div>
                         </form>

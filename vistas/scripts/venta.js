@@ -39,7 +39,7 @@ function limpiar()
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
     $('#fecha_hora').val(today);
     //Marcamos el primer tipo_documento
-  $("#tipo_comprobante").val("Ticket");
+  $("#tipo_comprobante").val("Informacion de Salida");
 	$("#tipo_comprobante").selectpicker('refresh');
 }
 
@@ -68,20 +68,6 @@ function mostrarform(flag)
 	limpiar();
 	if (flag)
 	{
-			numFactura();
-			numSerieFac();
-			$(document).keydown(function(event) {
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-				if (keycode == '107') {
-						$('#myModal').modal('show');
-				}
-			});
-			$(document).keydown(function(event) {
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-				if (keycode == '46'){
-						$('#elim').click();
-				}
-			});
 			$('#idcliente').val('Publico General');
 			$("#idcliente").selectpicker('refresh');
 			$("#listadoregistros").hide();
@@ -121,15 +107,10 @@ function listar()
 {
 	tabla=$('#tbllistado').dataTable(
 	{
-		"aProcessing": true,//Activamos el procesamiento del datatables
-	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
-	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [
-		            // 'copyHtml5',
-		            // 'excelHtml5',
-		            // 'csvHtml5',
-		            // 'pdf'
-		        ],
+		"aProcessing": true,
+	    "aServerSide": true,
+	    dom: 'Bfrtip',
+			buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdf', 'print'],
 		"ajax":
 				{
 					url: '../ajax/venta.php?op=listar',
@@ -140,8 +121,8 @@ function listar()
 					}
 				},
 		"bDestroy": true,
-		"iDisplayLength": 5,//Paginación
-	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+		"iDisplayLength": 5,
+	    "order": [[ 0, "desc" ]]
 	}).DataTable();
 }
 
@@ -201,10 +182,8 @@ function guardaryeditar(e)
 	limpiar();
 }
 
-																		//**********************
-																		//FUNCION PARA MOSTRAR |
-																		//*********************
 
+// TODO: FUNCION PARA MOSTRAR LOS REGISTROS
 function mostrar(idventa)
 {
 	$.post("../ajax/venta.php?op=mostrar",{idventa : idventa}, function(data, status)
@@ -233,10 +212,8 @@ function mostrar(idventa)
 	});
 }
 
-																	//******************************
-																	//FUNCION PARA ANULAR REGISTROS|
-																	//*****************************
 
+// TODO: FUNCION PARA ANULAR REGISTROS
 function anular(idventa)
 {
 	swal({
@@ -267,11 +244,7 @@ listar();
 }
 
 
-
-																		//*********************************************************************************
-																		//Declaración de variables necesarias para trabajar con las compras y sus detalles|
-																		//*********************************************************************************
-
+// TODO: DECLARACION DE VARIABLES PARA EL DETALLE VENTA
 var impuesto=18;
 var cont=0;
 var detalles=0;
@@ -292,53 +265,95 @@ function marcarImpuesto()
     }
   }
 
-																				//******************************************
-																				//FUNCION PARA AGREGAR DETALLE DE PRODUCTOS|
-																				//*****************************************
 
-function agregarDetalle(idproducto,producto,precio_venta,idalmacen)
-  {
-				swal({
-				  title: 'Ingresa Cantidad:',
-				  input: 'number',
-				  inputPlaceholder: ''
-				}).then(function (number) {
+	// TODO: FUNCION PARA AGREGAR DETALLE DE PRODUCTOS
+	// var contains = [];
+	function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalmacen) {
 
-					var cantidad=number;
-					var descuento=0;
+		// Array.prototype.contains = function ( needle ) {
+		// 	 for (i in this) {
+		// 			 if (this[i] == needle) return true;
+		// 	 }
+		// 	 return false;
+		//  }
 
-		 if (idproducto!="")
-		 {
-			 var subtotal=cantidad*precio_venta;
-			 var fila='<tr class="filas" id="fila'+cont+'">'+
-			 '<td><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-			 '<td><input type="hidden" name="idproducto[]" value="'+idproducto+'" required="">'+producto+'</td>'+
-			 '<td style><input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'" required=""></td>'+
-			 '<td><input type="number" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+'" required=""></td>'+
-			 '<td><input type="number" name="descuento[]" value="'+descuento+'" required=""></td>'+
-			 '<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-			 '<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>'+
-			  '<td><input type="hidden" name="idalmacen[]" value="'+idalmacen+'" required=""></td>'+
-			 '</tr>';
-			 cont++;
-			 detalles=detalles+1;
-			 $('#detalles').append(fila);
-			 modificarSubototales();
+		 // if (contains.contains(idproducto)) {
+		 //
+			// 		 swal({
+			// 				 type: 'warning',
+			// 				 title: 'Este Producto ya fue Ingresado',
+			// 				 text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
+			// 		 }).catch(swal.noop);
+		 //
+		 //  }else{
+					if (stock != 0) {
+						swal({
+							title: 'Ingresa Cantidad:',
+							input: 'number',
+							inputPlaceholder: ''
+						}).then(function(number) {
 
-		 }
-		 else
-		 {
-			 alert("Error al ingresar el detalle, revisar los datos del producto");
-		 }
+							var cantidad = number;
+							var descuento = 0;
+							if ((Number(cantidad) > 0) && (Number(cantidad) != "")) {
+								if ((idproducto != "") && (Number(stock) >= Number(cantidad))) {
+									var subtotal = cantidad * precio_venta;
+									var fila = '<tr class="filas" id="fila' + cont + '">' +
+										'<td style="text-align:center;"><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
+										'<td><input type="hidden" name="idproducto[]" value="' + idproducto + '" required="">' + producto + '</td>' +
+										'<td style><input type="number" class="form-control" name="cantidad[]" id="cantidad[]" value="' + cantidad + '" required=""></td>' +
+										'<td><input type="number" class="form-control" name="precio_venta[]" id="precio_venta[]" value="' + precio_venta + '" required=""></td>' +
+										'<td><input type="number" class="form-control" name="descuento[]" value="' + descuento + '" required=""></td>' +
+										'<td><span name="subtotal" id="subtotal' + cont + '">' + subtotal + '</span></td>' +
+										'<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
+										'<td><input type="hidden" name="idalmacen[]" value="' + idalmacen + '" required=""></td>' +
+										'</tr>';
+									cont++;
+									detalles = detalles + 1;
+									$('#detalles').append(fila);
 
-				})
-  }
+									// var pro= [idproducto];
+									// for (var i = 0; i <pro.length; i++) {
+									// 	 valores=pro[i];
+									// }
+									// contains.push(valores);
 
-																//**********************************
-																//FUNCION PARA MODIFICAR SUBTOTALES|
-																//*********************************
+									$(function() {
+										$(document).on('click', 'input[type=number]', function() {
+											this.select();
+										});
+									});
 
-  function modificarSubototales()
+									modificarSubototales();
+
+								} else {
+									swal({
+										type: 'error',
+										title: 'Oops...',
+										text: 'Stock Superado',
+									}).catch(swal.noop);
+								}
+							} else {
+								swal({
+									type: 'error',
+									title: 'Oops...',
+									text: 'Ingresa una cantidad correcta! ',
+								}).catch(swal.noop);
+							}
+						}).catch(swal.noop);
+					} else {
+						swal({
+							type: 'error',
+							title: 'Oops...',
+							text: 'Insuficiente Stock disponible',
+						}).catch(swal.noop);
+					}
+  		// }
+   }
+
+
+	// TODO: FUNCION PARA MODIFICAR SUBTOTALES|
+	  function modificarSubototales()
   {
   	var cant = document.getElementsByName("cantidad[]");
     var prec = document.getElementsByName("precio_venta[]");
@@ -352,16 +367,14 @@ function agregarDetalle(idproducto,producto,precio_venta,idalmacen)
     	var inpS=sub[i];
 
     	inpS.value=(inpC.value * inpP.value)-inpD.value;
-    	document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
+			document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpS.value * 100) / 100).toFixed(2);
     }
     calcularTotales();
 
   }
 
-																//******************************
-																//FUNCION PARA CALCULAR TOTALES|
-																//*****************************
 
+	// TODO: FUNCION PARA CALCULAR TOTALES
   function calcularTotales(){
   	var sub = document.getElementsByName("subtotal");
   	var total = 0.0;
@@ -369,34 +382,19 @@ function agregarDetalle(idproducto,producto,precio_venta,idalmacen)
   	for (var i = 0; i <sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
 	}
+	total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
 	$("#total").html("S/. " + total);
     $("#total_venta").val(total);
     evaluar();
   }
 
 
-													//******************************************
-													//FUNCION PARA EVALUAR REGISTRO DE DETALLES|
-													//*****************************************
-
-function tecla(){
-$(document).keyup(function(event) {
-var keycode = (event.keyCode ? event.keyCode : event.which);
-	if (keycode == '32'){
-		if (detalles>0) {
-$('#btnGuardar').click();
-    }
-
-   }
- });
-}
-
-	// TODO: 	FUNCION PARA EVALUAR REGISTRO DE DETALLES
+// TODO: 	FUNCION PARA EVALUAR REGISTRO DE DETALLES
 function evaluar(){
+
   	if (detalles>0)
     {
       $("#btnGuardar").show();
-			tecla();
     }
     else
     {
@@ -407,8 +405,19 @@ function evaluar(){
 
 
 // TODO: FUNCION PARA ELIMINAR DETALLE
-function eliminarDetalle(indice){
+function eliminarDetalle(indice, idproducto){
+		// alert(idproducto);
   	$("#fila" + indice).remove();
+
+		// Array.prototype.compacta = function(){
+		// 	for(var i = 0; i < this.length; i++){
+		// 		if(this[i] === idproducto){
+		// 				this.splice(i , 1);
+		// 		}
+		// 	}
+		// }
+		// contains.compacta();
+
   	calcularTotales();
   	detalles=detalles-1;
   	evaluar()
@@ -452,6 +461,7 @@ function numSerieFac(){
 	});
 }
 
+//FUNCION SIN USO TEMPORALMENTE
 
 // TODO: FUNCION  O METODOS PARA ARREGLAR EL TABINDEX DEL MODAL
 function fixBootstrapModal() {
@@ -471,7 +481,6 @@ function restoreBootstrapModal() {
   modalNode.setAttribute('tabindex', '-1');
   modalNode.classList.remove('js-swal-fixed');
 }
-
 
 
 init();
