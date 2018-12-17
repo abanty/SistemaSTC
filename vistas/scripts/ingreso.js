@@ -298,12 +298,12 @@ function mostrar(idingreso) {
 function anular(idingreso) {
 	swal({
 		title: '¿Está seguro de anular el ingreso?',
-		imageUrl: 'http://img.freepik.com/vector-gratis/trabajador-con-dudas_1012-193.jpg?size=338&ext=jpg',
+		imageUrl: '../public/img/swal-duda.jpg',
 		imageWidth: 250,
 		imageHeight: 250,
 		animation: false,
 		showCancelButton: true,
-		confirmButtonColor: '#00c0ef',
+		confirmButtonColor: '#f39c12',
 		cancelButtonColor: '#d33',
 		confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
