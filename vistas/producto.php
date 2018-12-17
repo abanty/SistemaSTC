@@ -14,6 +14,7 @@ require 'header.php';
 if ($_SESSION['inventarios']==1)
 {
 ?>
+
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">

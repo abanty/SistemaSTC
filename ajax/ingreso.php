@@ -14,7 +14,9 @@ $serie_comprobante=isset($_POST["serie_comprobante"])? limpiarCadena($_POST["ser
 $num_comprobante=isset($_POST["num_comprobante"])? limpiarCadena($_POST["num_comprobante"]):"";
 $fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 $impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
-$total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"]):"";
+$total_compra=isset($_POST["total_importe"])? limpiarCadena($_POST["total_importe"]):"";
+$total_venta_sugerido=isset($_POST["total_venta_estimada"])? limpiarCadena($_POST["total_venta_estimada"]):"";
+$total_beneficio=isset($_POST["total_beneficio"])? limpiarCadena($_POST["total_beneficio"]):"";
 
 $idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
 
@@ -22,7 +24,9 @@ switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idingreso)){
 			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,
-      $num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idalmacen"],$_POST["idproducto"],$_POST["cantidad"],$_POST["importe"],$_POST["precio_compra"],$_POST["precio_venta"],$_POST["gananciaporcentaje"],$_POST["ganancianeta"]);
+      $num_comprobante,$fecha_hora,$impuesto,$total_compra,$total_venta_sugerido,$total_beneficio,$_POST["idalmacen"],
+      $_POST["idproducto"],$_POST["cantidad"],$_POST["importe"],$_POST["precio_compra"],$_POST["precio_venta"],
+      $_POST["gananciaporcentaje"],$_POST["ganancianeta"]);
 			echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos del ingreso";
 		}
 		else {
@@ -48,6 +52,7 @@ switch ($_GET["op"]){
       $total=0;
       echo '<thead style="background-color:#222d3287; color:white;">
                                       <th>Opciones</th>
+                                      <th>Codigo</th>
                                       <th>Producto</th>
                                       <th>Cantidad</th>
                                       <th>Importe Total</th>
@@ -55,29 +60,33 @@ switch ($_GET["op"]){
                                       <th>Precio Venta (u)</th>
                                       <th>Ganancia %</th>
                                       <th>Ganancia Neta</th>
-                                      <th>Subtotal</th>
+
                                   </thead>';
 
 
 
-
+// <td>'.$reg->precio_compra*$reg->cantidad.'</td> $total+($reg->precio_compra*$reg->cantidad);
 
       while ($reg = $rspta->fetch_object())
           {
-            echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->importe.'</td><td>'.$reg->precio_compra.'</td><td>'.$reg->precio_venta.'</td><td>'.$reg->gananciaporcentaje.'</td><td>'.$reg->ganancianeta.'</td><td>'.$reg->precio_compra*$reg->cantidad.'</td></tr>';
-            $total=$total+($reg->precio_compra*$reg->cantidad);
+            echo '<tr class="filas"><td><i class="fa fa-check" aria-hidden="true"></i></td><td id="codinp">'.$reg->codigo.'</td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.' und</td><td>S/.'.$reg->importe.'</td><td>S/.'.$reg->precio_compra.'</td><td>S/.'.$reg->precio_venta.'</td><td>'.$reg->gananciaporcentaje.'%</td><td>S/.'.$reg->ganancianeta.'</td></tr>';
+            $total= $reg->total_compra;
+            $total_pv = $reg->total_venta_sugerido;
+            $total_ben = $reg->total_beneficio;
+
           }
       echo '<tfoot>
-                                      <th>TOTAL</th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
-                                      <th><h4 id="total">S/.'.$total.'</h4><input type="hidden" name="total_compra" id="total_compra"></th>
-                                  </tfoot>';
+                <th>TOTAL</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><h4 class="total_style" id="total_imp">S/.'.$total.'</h4><input type="hidden" name="total_importe" id="total_importe"></th>
+                <th></th>
+                <th><h4 class="total_style" id="total_v">S/.'.$total_pv.'</h4><input type="hidden" name="total_venta_estimada" id="total_venta_estimada"></th>
+                <th></th>
+                <th><h4 class="total_style" id="total_ben">S/.'.$total_ben.'</h4><input type="hidden" name="total_beneficio" id="total_beneficio"></th>
+                <th></th>
+            </tfoot>';
     break;
 
     case 'listar':
@@ -179,7 +188,7 @@ switch ($_GET["op"]){
         while ($reg=$rspta->fetch_object()){
           	// $imagentest=(empty($reg->imagen))?"<img src='../files/productos/defaultpro.png' height='55px' width='65px'>":'<img src="../files/productos/'.$reg->imagen.'" height="55px" width="70px" onclick="mostrarclick(this.src)">';
           $data[]=array(
-            "0"=>'<button class="btn btn-info" onclick="agregarDetalle('.$reg->idproducto.',\''.limpiarCadena($reg->nombre).'\')"><span class="fa fa-plus"></span></button>',
+            "0"=>'<button class="btn btn-personal" onclick="agregarDetalle('.$reg->idproducto.',\''.limpiarCadena($reg->nombre).'\',\''.$reg->codigo.'\')"><span class="fa fa-plus"></span></button>',
             "1"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
             "2"=>$reg->nombre,
             "3"=>$reg->descripcion,
