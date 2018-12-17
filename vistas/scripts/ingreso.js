@@ -158,6 +158,11 @@ function listar() {
 		"aServerSide": true,
 		dom: 'Bfrtip',
 		buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdf', 'print'],
+		columnDefs: [
+
+					 { width: 70, targets: 1 }
+			 ],
+		fixedColumns: true,
 		"ajax": {
 			url: '../ajax/ingreso.php?op=listar',
 			type: "get",
@@ -166,6 +171,7 @@ function listar() {
 				console.log(e.responseText);
 			}
 		},
+		"autoWidth": true,
 		"bDestroy": true,
 		"iDisplayLength": 5,
 		"order": [
