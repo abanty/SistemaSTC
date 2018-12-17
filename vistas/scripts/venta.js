@@ -26,8 +26,8 @@ function limpiar()
 {
 	$("#idcliente").val("");
 	$("#idventa").val("");
-	// $("#serie_comprobante").val("");
-	// $("#num_comprobante").val("");
+	$("#serie_comprobante").val("");
+	$("#num_comprobante").val("");
 	$("#impuesto").val("0");
 	$("#total_venta").val("");
 	$(".filas").remove();
@@ -266,27 +266,7 @@ listar();
 	})
 }
 
-																	//*******************************************************
-																	//FUNCION  O METODOS PARA ARREGLAR EL TABINDEX DEL MODAL|
-																	//*******************************************************
 
-
-function fixBootstrapModal() {
-  var modalNode = document.querySelector('.modal[tabindex="-1"]');
-  if (!modalNode) return;
-
-  modalNode.removeAttribute('tabindex');
-  modalNode.classList.add('js-swal-fixed');
-}
-
-
-function restoreBootstrapModal() {
-  var modalNode = document.querySelector('.modal.js-swal-fixed');
-  if (!modalNode) return;
-
-  modalNode.setAttribute('tabindex', '-1');
-  modalNode.classList.remove('js-swal-fixed');
-}
 
 																		//*********************************************************************************
 																		//Declaración de variables necesarias para trabajar con las compras y sus detalles|
@@ -318,9 +298,6 @@ function marcarImpuesto()
 
 function agregarDetalle(idproducto,producto,precio_venta,idalmacen)
   {
-
-		fixBootstrapModal();
-
 				swal({
 				  title: 'Ingresa Cantidad:',
 				  input: 'number',
@@ -414,88 +391,31 @@ $('#btnGuardar').click();
  });
 }
 
-																//******************************************
-																//FUNCION PARA EVALUAR REGISTRO DE DETALLES|
-																//*****************************************
-
-  function evaluar(){
+	// TODO: 	FUNCION PARA EVALUAR REGISTRO DE DETALLES
+function evaluar(){
   	if (detalles>0)
     {
       $("#btnGuardar").show();
 			tecla();
-
     }
     else
     {
       $("#btnGuardar").hide();
       cont=0;
     }
-  }
+}
 
-																//******************************
-																//FUNCION PARA ELIMINAR DETALLE|
-																//*****************************
 
-  function eliminarDetalle(indice){
+// TODO: FUNCION PARA ELIMINAR DETALLE
+function eliminarDetalle(indice){
   	$("#fila" + indice).remove();
   	calcularTotales();
   	detalles=detalles-1;
   	evaluar()
-  }
-
-
-	//*****************************************
-	//FUNCION CONTROLAR KEY AGREGAR CANTIDAD |
-	//***************************************
-
-		function addpro(){
-
-		$(document).keyup(function(event) {
-
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-				if (keycode == '45') {
-					if($('.modal').hasClass('in')){
-						$('#adddetalle').click();
-				}
-			}
-		});
-
 }
 
 
-
-
-														//***************************
-														//FUNCION PARA FILTRAR todo |
-														//**************************
-
-
-function filterGlobal () {
-$('#tblproductos2').DataTable().search(
-$('#global_filter').val(),
-$('#global_regex').prop('checked'),
-$('#global_smart').prop('checked')
-).draw();
-}
-
-
-														//******************************
-														//FUNCION PARA FILTRAR COLUMNAS|
-														//*****************************
-
-
-function filterColumn ( i ) {
-$('#tblproductos2').DataTable().column( i ).search(
-$('#col'+i+'_filter').val(),
-$('#col'+i+'_regex').prop('checked'),
-$('#col'+i+'_smart').prop('checked')
-).draw();
-}
-
-																//************************************
-																//FUNCION PARA FACTURACION NUMERACION|
-																//**********************************
-
+// TODO: FUNCION PARA FACTURACION NUMERACION
 function numFactura(){
 	$.ajax({
 		url:'../modelos/NumFactura.php',
@@ -513,11 +433,8 @@ function numFactura(){
 	});
 }
 
-														//******************************************
-														//FUNCION PARA FACTURACION NUMERACION SERIE|
-														//****************************************
 
-
+// TODO: FUNCION PARA FACTURACION NUMERACION SERIE
 function numSerieFac(){
 	$.ajax({
 		url:'../modelos/NumSerie.php',
@@ -534,5 +451,27 @@ function numSerieFac(){
 		}
 	});
 }
+
+
+// TODO: FUNCION  O METODOS PARA ARREGLAR EL TABINDEX DEL MODAL
+function fixBootstrapModal() {
+  var modalNode = document.querySelector('.modal[tabindex="-1"]');
+  if (!modalNode) return;
+
+  modalNode.removeAttribute('tabindex');
+  modalNode.classList.add('js-swal-fixed');
+}
+
+
+// TODO: FUNCION  O METODOS PARA ARREGLAR EL TABINDEX DEL MODAL
+function restoreBootstrapModal() {
+  var modalNode = document.querySelector('.modal.js-swal-fixed');
+  if (!modalNode) return;
+
+  modalNode.setAttribute('tabindex', '-1');
+  modalNode.classList.remove('js-swal-fixed');
+}
+
+
 
 init();

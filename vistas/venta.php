@@ -156,7 +156,7 @@ if ($_SESSION['ventas']==1)
   <!--Fin-Contenido-->
 
 
-
+<!-- PEQUEÑO MODAL PARA SELECCIONAR ALMACENES -->
   <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
@@ -179,12 +179,12 @@ if ($_SESSION['ventas']==1)
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-          </div>
+  </div>
 
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog" style="width: 1030px;">
       <div class="modal-content">
         <div class="modal-header">
