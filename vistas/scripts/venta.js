@@ -301,9 +301,9 @@ function marcarImpuesto()
 									var fila = '<tr class="filas" id="fila' + cont + '">' +
 										'<td style="text-align:center;"><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
 										'<td><input type="hidden" name="idproducto[]" value="' + idproducto + '" required="">' + producto + '</td>' +
-										'<td style><input type="number" class="form-control" name="cantidad[]" id="cantidad[]" value="' + cantidad + '" required=""></td>' +
-										'<td><input type="number" class="form-control" name="precio_venta[]" id="precio_venta[]" value="' + precio_venta + '" required=""></td>' +
-										'<td><input type="number" class="form-control" name="descuento[]" value="' + descuento + '" required=""></td>' +
+										'<td style><input type="number" class="form-control"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="' + cantidad + '" required=""></td>' +
+										'<td><input type="number" class="form-control" name="precio_venta[]"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" id="precio_venta[]" value="' + precio_venta + '" required=""></td>' +
+										'<td><input type="number" class="form-control" name="descuento[]" onchange="modificarSubototales()" onkeyup="modificarSubototales()" value="' + descuento + '" required=""></td>' +
 										'<td><span name="subtotal" id="subtotal' + cont + '">' + subtotal + '</span></td>' +
 										'<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
 										'<td><input type="hidden" name="idalmacen[]" value="' + idalmacen + '" required=""></td>' +

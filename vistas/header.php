@@ -180,39 +180,9 @@ if (strlen(session_id()) < 1)
             ?>
   <!-- <li><a href="transferencia.php"><i class="fa fa-cog"></i>Ajuste de inventario</a></li>
     <li><a href="transferencia.php"><i class="fa fa-info"></i>Kardex de Productos</a></li> -->
-            <?php
-            if($_SESSION['compras']==1)
-            {
-              echo '<li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-clone"></i>
-                      <span>Reportes Almacen</span>
-                       <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li><a href="ingreso.php"><i class="fa fa-fw fa-slack"></i>Reporte de Stock General</a></li>
-                      <li><a href="ingreso.php"><i class="fa fa-fw fa-slack"></i>Reporte de Stock Valorizado</a></li>
-                    </ul>
-                  </li>';
-            }
-            ?>
 
-            <?php
-            if($_SESSION['compras']==1)
-            {
-              echo '<li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-fw fa-search"></i>
-                      <span>Consultas Almacen</span>
-                       <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li><a href="ingreso.php"><i class="fa fa-fw fa-navicon"></i>Reporte de Stock General</a></li>
-                      <li><a href="ingreso.php"><i class="fa fa-fw fa-navicon"></i>Reporte de Stock Valorizado</a></li>
-                    </ul>
-                  </li>';
-            }
-            ?>
+
+
   <!-- <li><a href="proveedor.php"><i class="fa fa-circle-o"></i> Proveedores</a></li> -->
 
 
@@ -256,19 +226,38 @@ if (strlen(session_id()) < 1)
             {
               echo '<li class="treeview">
                   <a href="#">
-                    <i class="fa fa-clone"></i> <span>Generar Reportes</span>
+                    <i class="fa fa-fw fa-search"></i> <span>Realizar Consultas</span>
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                    <ul class="treeview-menu">
                     <li><a href="comprasfecha.php"><i class="fa fa-circle-o"></i> Consulta Ingresos</a></li>
                     <li><a href="ventasfechacliente.php"><i class="fa fa-circle-o"></i> Consulta Ventas</a></li>
-                      <li><a target="_blank" href="../reportes/rptarticulos.php"><i class="fa fa-circle-o"></i> Consulta Productos</a></li>
+
                   </ul>
                 </li>'
               ;
             }
             ?>
 
+            <?php
+            if($_SESSION['compras']==1)
+            {
+              echo '<li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-clone"></i>
+                      <span>Reportes Generales</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li><a target="_blank" href="../reportes/rptarticulos.php"><i class="fa fa-circle-o"></i> Consulta Productos</a></li>
+                      <li><a href="ingreso.php"><i class="fa fa-fw fa-slack"></i>Reporte de Stock General</a></li>
+                      <li><a href="ingreso.php"><i class="fa fa-fw fa-slack"></i>Reporte de Stock Valorizado</a></li>
+                    </ul>
+                  </li>';
+            }
+            ?>
+
+  <!-- <li><a target="_blank" href="../reportes/rptarticulos.php"><i class="fa fa-circle-o"></i> Consulta Productos</a></li> -->
 
             <!-- ESTA SECCION NO IRA -->
 
