@@ -139,10 +139,11 @@ if ($_SESSION['compras']==1)
                                         <th>Precio Venta (u)</th>
                                         <th>Ganancia %</th>
                                         <th>Ganancia Neta</th>
-
                                     </thead>
-
-                                    <tfoot>
+                                    <tbody>
+                                  <!-- AQUI IRA EL CUERPO DE DATATABLE -->
+                                    </tbody>
+                                    <tfoot style="background:#efefef;">
                                         <th id="total_estilo">TOTALES</th>
                                         <th></th>
                                         <th></th>
@@ -152,11 +153,7 @@ if ($_SESSION['compras']==1)
                                         <th><h4 class="total_style" id="total_v">S/. 0.00</h4><input type="hidden" name="total_venta_estimada" id="total_venta_estimada"></th>
                                         <th></th>
                                         <th><h4 class="total_style" id="total_ben">S/. 0.00</h4><input type="hidden" name="total_beneficio" id="total_beneficio"></th>
-
                                     </tfoot>
-                                    <tbody>
-                                  <!-- AQUI IRA EL CUERPO DE DATATABLE -->
-                                    </tbody>
                                 </table>
                               </div>
                           </div>
@@ -164,7 +161,6 @@ if ($_SESSION['compras']==1)
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-personal" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
-
                             <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i>Cancelar</button>
                           </div>
 
