@@ -349,47 +349,74 @@ function marcarImpuesto() {
 
 
 // TODO: FUNCION AGREGAR DETALLE DE UN MODAL - LISTA DE PRODUCTOS A REPONER
+var contains = [];
 function agregarDetalle(idproducto, producto, codigo) {
 
-	var idproducto_ubicacion = "";
-	var cantidad = 1;
-	var valor1 = 100;
-	var valor2 = 100;
-	var precio_compra = 0;
-	var precio_venta = 0;
-	var ganancia = 0;
-	var ganancianeta = 0;
-	var importe = 0;
-	if (idproducto != "") {
-		var subtotal;
+	Array.prototype.contains = function ( needle ) {
+		 for (i in this) {
+				 if (this[i] == needle) return true;
+		 }
+		 return false;
+	 }
 
-		var fila = '<tr class="filas" id="fila' + cont + '">' +
-			'<td style="text-align:center;"><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
-			'<td id="codinp"><input class="form-control" type="hidden">' + codigo + '</td>' +
-			'<td><input class="form-control" type="hidden" name="idproducto[]" value="' + idproducto + '">' + producto + '</td>' +
-			'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
-			'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="' + importe + '"></span></td>' +
-			'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="' + precio_compra + '"></span></td>' +
-			'<td><span class="input-symbol-euro"><input class="form-control" type="number" onchange="modificarSubototales()" step=".01" min="0.00" max="10000" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="' + precio_venta + '"></span></td>' +
-			'<td><span class="input-symbol-porcent"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="1000" name="gananciaporcentaje[]" value="' + ganancia + '"  readonly></span></td>' +
-			'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="0" max="100000" name="ganancianeta[]" value="' + ganancianeta + '"></span></td>' +
-			'<td><button type="button" onclick="calculaimporte()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
-			'<td id="p_none"><input  type="hidden" name="valor1[]" value="' + valor1 + '"></td>' +
-			'<td id="p_none"><input  type="hidden" name="valor2[]" value="' + valor2 + '"></td>' +
-			'</tr>';
-		cont++;
-		detalles = detalles + 1;
-		$(function() {
-			$(document).on('click', 'input[type=number]', function() {
-				this.select();
-			});
-		});
-		$('#detalles').append(fila);
-		modificarSubototales();
+	 if (contains.contains(idproducto)) {
 
-	} else {
-		alert("Error al ingresar el detalle, revisar los datos del producto");
-	}
+		 		 swal({
+						 type: 'warning',
+						 title: 'Este Producto ya fue Ingresado',
+						 text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
+				 }).catch(swal.noop);
+
+		 }else{
+			 		var idproducto_ubicacion = "";
+			 		var cantidad = 1;
+			 		var valor1 = 100;
+			 		var valor2 = 100;
+			 		var precio_compra = 0;
+			 		var precio_venta = 0;
+			 		var ganancia = 0;
+			 		var ganancianeta = 0;
+			 		var importe = 0;
+			 		if (idproducto != "") {
+				 		var subtotal;
+
+				 		var fila = '<tr class="filas" id="fila' + cont + '">' +
+				 		'<td style="text-align:center;"><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
+				 		'<td id="codinp"><input class="form-control" type="hidden">' + codigo + '</td>' +
+				 		'<td><input class="form-control" type="hidden" name="idproducto[]" value="' + idproducto + '">' + producto + '</td>' +
+				 		'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
+				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="' + importe + '"></span></td>' +
+				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="' + precio_compra + '"></span></td>' +
+				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" onchange="modificarSubototales()" step=".01" min="0.00" max="10000" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="' + precio_venta + '"></span></td>' +
+				 		'<td><span class="input-symbol-porcent"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="1000" name="gananciaporcentaje[]" value="' + ganancia + '"  readonly></span></td>' +
+				 		'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="0" max="100000" name="ganancianeta[]" value="' + ganancianeta + '"></span></td>' +
+				 		'<td><button type="button" onclick="calculaimporte()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
+				 		'<td id="p_none"><input  type="hidden" name="valor1[]" value="' + valor1 + '"></td>' +
+				 		'<td id="p_none"><input  type="hidden" name="valor2[]" value="' + valor2 + '"></td>' +
+				 		'</tr>';
+
+				 		cont++;
+				 		detalles = detalles + 1;
+						$('#detalles').append(fila);
+
+						var pro= [idproducto];
+						for (var i = 0; i <pro.length; i++) {
+							 valores=pro[i];
+						}
+						contains.push(valores);
+
+				 		$(function() {
+					 		$(document).on('click', 'input[type=number]', function() {
+						 		this.select();
+					 		});
+				 		});
+
+				 		modificarSubototales();
+
+			 		} else {
+				 		alert("Error al ingresar el detalle, revisar los datos del producto");
+			 	}
+ 	  }
 }
 
 
@@ -606,9 +633,19 @@ function evaluar() {
 
 
 // TODO: FUNCION PARA ELIMINAR EL DETALLE DE LA TABLA
-function eliminarDetalle(indice) {
+function eliminarDetalle(indice,idproducto) {
 
 	$("#fila" + indice).remove();
+
+	Array.prototype.compacta = function(){
+		for(var i = 0; i < this.length; i++){
+			if(this[i] === idproducto){
+					this.splice(i , 1);
+			}
+		}
+	}
+	contains.compacta();
+
 	calcularTotalesImporte();
 	calcularTotalesPVenta();
 	calcularTotalesBeneficio();

@@ -341,10 +341,8 @@ function agregarDetalle(codigo,idproducto,producto,stock,idalmacen)
 				}).then(function (number) {
 					var cantidad=number;
               if ((Number(cantidad)>0)&&(Number(cantidad)!="")) {
-                if ((idproducto!="")&&(Number(stock)>=Number(cantidad)))
-               {
-               //  if (idproducto!="")
-               // {
+                if ((idproducto!="")&&(Number(stock)>=Number(cantidad))) {
+
                  var subtotal=cantidad;
                  var fila='<tr class="filas" id="fila'+cont+'">'+
                  '<td><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
