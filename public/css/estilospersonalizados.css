@@ -235,3 +235,9 @@ input[type=number]::selection {
     color: black;
     text-shadow: 1px 1px #fff;
 }
+
+#codinp {
+	color: #dd4b39;
+	font-size: 13.5px;
+	font-family: fantasy;
+}

@@ -75,7 +75,7 @@ if ($_SESSION['compras']==1)
                           <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Proovedor(*):</label>
                             <input type="hidden" name="idingreso" id="idingreso">
-                            <select id="idproveedor" name="idproveedor" class="form-control selectpicker" data-live-search="true" required>
+                            <select id="idproveedor" name="idproveedor" class="form-control selectpicker" data-live-search="true" title="Selecciona un Proveedor" required>
                             </select>
                           </div>
 

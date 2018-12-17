@@ -86,12 +86,15 @@ function limpiar() {
 	$("#idingreso").val("");
 	$("#serie_comprobante").val("");
 	$("#num_comprobante").val("");
+	$('#idalmacen').selectpicker('val', "");
 	// $("#impuesto").val("0");
 	$("#total_importe").val("");
 	$("#total_venta_estimada").val("");
 	$("#total_beneficio").val("");
 	$(".filas").remove();
-	$("#total").html("0");
+	$("#total_imp").html("S/. 0.00");
+	$("#total_v").html("S/. 0.00");
+	$("#total_ben").html("S/. 0.00");
 }
 
 
@@ -268,6 +271,8 @@ function mostrar(idingreso) {
 		data = JSON.parse(data);
 		mostrarform(true);
 
+		$("#idalmacen").val(data.idalmacen);
+		$("#idalmacen").selectpicker('refresh');
 		$("#idproveedor").val(data.idproveedor);
 		$("#idproveedor").selectpicker('refresh');
 		$("#tipo_comprobante").val(data.tipo_comprobante);
@@ -277,8 +282,7 @@ function mostrar(idingreso) {
 		$("#fecha_hora").val(data.fecha);
 		$("#impuesto").val(data.impuesto);
 		$("#idingreso").val(data.idingreso);
-
-		//Ocultar y mostrar los botones
+ 		//Ocultar y mostrar los botones
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").hide();
@@ -318,6 +322,7 @@ function anular(idingreso) {
 	})
 }
 
+
 // TODO: DECRALACION DE VARIABLES PARA TRABAJAR MODULO INGRESO Y DETALLE INGRESO
 var impuesto = 18;
 var cont = 0;
@@ -338,7 +343,7 @@ function marcarImpuesto() {
 
 
 // TODO: FUNCION AGREGAR DETALLE DE UN MODAL - LISTA DE PRODUCTOS A REPONER
-function agregarDetalle(idproducto, producto) {
+function agregarDetalle(idproducto, producto, codigo) {
 
 	var idproducto_ubicacion = "";
 	var cantidad = 1;
@@ -353,8 +358,8 @@ function agregarDetalle(idproducto, producto) {
 		var subtotal;
 
 		var fila = '<tr class="filas" id="fila' + cont + '">' +
-			'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ')">X</button></td>' +
-			'<td><input class="form-control" type="hidden" name="" value=""></td>' +
+			'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
+			'<td id="codinp"><input class="form-control" type="hidden">' + codigo + '</td>' +
 			'<td><input class="form-control" type="hidden" name="idproducto[]" value="' + idproducto + '">' + producto + '</td>' +
 			'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
 			'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="' + importe + '"></span></td>' +
@@ -442,18 +447,13 @@ function calculaimporte() {
 					return decimalAdjust('round', value, exp);
 				};
 			}
-
 		//Calculo de operacion para SUBTOTAL
 		inpIx.value=Math.round10((inpCx.value * inpPx.value), -1);
-
-
 		// parseFloat(Math.round((inpCx.value * inpPx.value) * 100) / 100).toFixed(2);
-
-
 	}
 
 	calcularTotalesImporte();
-	calcularTotalesVenta();
+	calcularTotalesPVenta();
 	calcularTotalesBeneficio();
 }
 
@@ -477,7 +477,7 @@ function calculacompraunitaria() {
 	}
 
 	calcularTotalesImporte();
-	calcularTotalesVenta();
+	calcularTotalesPVenta();
 	calcularTotalesBeneficio();
 }
 
@@ -525,13 +525,8 @@ function modificarSubototales() {
 	calculacompraunitaria();
 	calculaimporte();
 	calculaganancia();
-
-		// inpS.value = inpC.value * inpPc.value;
-		// document.getElementsByName("subtotal")[i].innerHTML = "S/. " + parseFloat(Math.round(inpS.value * 100) / 100).toFixed(2);
-
-
 	calcularTotalesImporte();
-	calcularTotalesVenta();
+	calcularTotalesPVenta();
 	calcularTotalesBeneficio();
 }
 
@@ -546,9 +541,9 @@ function calcularTotalesImporte() {
 		if (inpIm.value == "") {
 			inpIm.value = 0;
 		}
-		total_importe += parseInt(inpIm.value);
+		total_importe += parseFloat(inpIm.value);
 	}
-	total_importe = parseFloat(Math.round(total_importe * 100) / 100).toFixed(2);
+	total_importe = (Math.round(total_importe * 100) / 100).toFixed(2);
 	$("#total_imp").html("S/. " + total_importe);
 	$("#total_importe").val(total_importe);
 	evaluar();
@@ -556,7 +551,7 @@ function calcularTotalesImporte() {
 
 
 // TODO: FUNCION CALCULAR TOTALES DE COMPRA o IMPORTE LOTE
-function calcularTotalesVenta() {
+function calcularTotalesPVenta() {
 	var pvent = document.getElementsByName("precio_venta[]");
 	var total_venta_estimada = 0.0;
 
@@ -565,9 +560,9 @@ function calcularTotalesVenta() {
 		if (inpV.value == "") {
 			inpV.value = 5;
 		}
-		total_venta_estimada += parseInt(inpV.value);
+		total_venta_estimada += parseFloat(inpV.value);
 	}
-	total_venta_estimada = parseFloat(Math.round(total_venta_estimada * 100) / 100).toFixed(2);
+	total_venta_estimada = (Math.round(total_venta_estimada*100)/100).toFixed(2);
 	$("#total_v").html("S/. " + total_venta_estimada);
 	$("#total_venta_estimada").val(total_venta_estimada);
 	evaluar();
@@ -584,9 +579,9 @@ function calcularTotalesBeneficio() {
 		if (inpGn.value == "") {
 			inpGn.value = 0;
 		}
-		total_beneficio += parseInt(inpGn.value);
+		total_beneficio += parseFloat(inpGn.value);
 	}
-	total_beneficio = parseFloat(Math.round(total_beneficio * 100) / 100).toFixed(2);
+	total_beneficio = (Math.round(total_beneficio * 100) / 100).toFixed(2);
 	$("#total_ben").html("S/. " + total_beneficio);
 	$("#total_beneficio").val(total_beneficio);
 	evaluar();
@@ -609,7 +604,7 @@ function eliminarDetalle(indice) {
 
 	$("#fila" + indice).remove();
 	calcularTotalesImporte();
-	calcularTotalesVenta();
+	calcularTotalesPVenta();
 	calcularTotalesBeneficio();
 	detalles = detalles - 1;
 	evaluar();

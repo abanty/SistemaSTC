@@ -14,7 +14,7 @@ Class Ingreso
 	public function insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$total_venta_sugerido,$total_beneficio,$idalmacen,$idproducto,$cantidad,$importe,$precio_compra,$precio_venta,$ganancia,$ganancianeta)
 	{
 		$sql="INSERT INTO ingreso (idproveedor,idusuario,tipo_comprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_compra,total_venta_sugerido,total_beneficio,estado)
-  VALUES ('$idproveedor','$idusuario','$tipo_comprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_compra','Aceptado')";
+  VALUES ('$idproveedor','$idusuario','$tipo_comprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_compra','$total_venta_sugerido','$total_beneficio','Aceptado')";
 		// return ejecutarConsulta($sql);
 		$idingresonew=ejecutarConsulta_retornarID($sql);
 
@@ -52,18 +52,21 @@ Class Ingreso
 	//Implementar un metodo para mostrar los datos de un registro a modificar
 	public function mostrar ($idingreso)
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,
-    u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,
-    i.total_compra,i.impuesto,i.estado
-    FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u
-    ON i.idusuario=u.idusuario WHERE idingreso='$idingreso'";
+		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
+		u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,
+		i.total_compra,i.impuesto,i.estado
+		FROM ingreso i INNER JOIN detalle_ingreso di ON i.idingreso = di.idingreso INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u
+		ON i.idusuario=u.idusuario INNER JOIN almacen al ON al.idalmacen = di.idalmacen
+		WHERE i.idingreso='$idingreso'
+		GROUP BY i.idingreso desc";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
 	public function listarDetalle($idingreso)
 	{
-		$sql="SELECT di.idingreso,di.idproducto,a.nombre,di.cantidad,di.precio_compra,di.precio_venta,di.gananciaporcentaje,di.ganancianeta
+		$sql="SELECT di.idingreso,di.idproducto,a.nombre,a.codigo,di.cantidad,di.importe,di.precio_compra,di.precio_venta,di.gananciaporcentaje,di.ganancianeta,i.total_compra,i.total_venta_sugerido,i.total_beneficio
 		FROM detalle_ingreso di INNER JOIN producto a ON di.idproducto=a.idproducto
+		INNER JOIN ingreso i ON di.idingreso = i.idingreso
 		WHERE di.idingreso='$idingreso'";
 		return ejecutarConsulta($sql);
 	}
