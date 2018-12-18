@@ -322,7 +322,8 @@ function anular(idingreso) {
 				'Satisfactoriamente!',
 				'success'
 			)
-			tabla.ajax.reload(null, false);
+			 $('#tbllistado').DataTable().ajax.reload();
+			// tabla.ajax.reload(null, false);
 
 		});
 	})
