@@ -14,7 +14,9 @@ if (strlen(session_id()) < 1)
     <!-- BOOTSTRAP 3.3.5 -->
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- FONT AWESOME -->
+
     <link rel="stylesheet" href="../public/css/font-awesome.css">
+      <link rel="stylesheet" type="text/css" href="../public/fonts/fuentesgoogle.css">
     <!-- TEMA DE LA PLANTILLA -->
     <link rel="stylesheet" href="../public/css/AdminLTE.min.css">
     <!-- SKINS ADMIN TLE PARA CARGAR. -->
@@ -35,7 +37,8 @@ if (strlen(session_id()) < 1)
     <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css"> -->
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../public/datatables/select.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/datatables/buttons.dataTables.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"> -->
 
     <!-- <link rel="stylesheet" type="text/css" href="../public/datatables/rowGroup.dataTables.min.css"> -->
 
