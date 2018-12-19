@@ -79,9 +79,9 @@ switch ($_GET["op"]){
  		$data= Array();
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>(($reg->estado=='Aceptado')?'<button class="btn btn-success" onclick="mostrar('.$reg->idtransferencia.')"><i class="fa fa-eye"></i></button>'.
- 					' <button class="btn btn-danger" onclick="anular('.$reg->idtransferencia.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->idtransferencia.')"><i class="fa fa-eye"></i></button>'),
+ 				"0"=>(($reg->estado=='Aceptado')?'<button class="btn btn-success btn-sm" onclick="mostrar('.$reg->idtransferencia.')"><i class="fa fa-eye"></i></button>'.
+ 					' <button class="btn btn-danger btn-sm" onclick="anular('.$reg->idtransferencia.')"><i class="fa fa-close"></i></button>':
+ 					'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idtransferencia.')"><i class="fa fa-eye"></i></button>'),
  				"1"=>$reg->fecha,
  				"2"=>'<span style="font-variant-caps: all-small-caps; letter-spacing: 0.5px; font-weight: bold; color:#222d32; font-size:15px;">'.$reg->origen.'</span>',
     		"3"=>'<span style="font-variant-caps: all-small-caps; letter-spacing: 0.5px; font-weight: bold; color:#dd4b39; font-size:15px;">'.$reg->destino.'</span>',

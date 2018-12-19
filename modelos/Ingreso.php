@@ -26,7 +26,7 @@ Class Ingreso
 			$sqllist= "SELECT * FROM producto_ubicacion WHERE idproducto = '$idproducto[$num_elementos]' AND idalmacen = '$idalmacen'";
 			$sqllist_result = ejecutarConsultaSimpleFila($sqllist);
 
-			if (count($sqllist_result)>0) {
+			if (!empty($sqllist_result)) {
 
 			}else {
 				$sqlproducto_ubicacacion="INSERT INTO producto_ubicacion (idproducto,idalmacen)
@@ -52,7 +52,7 @@ Class Ingreso
 	//Implementar un metodo para mostrar los datos de un registro a modificar
 	public function mostrar ($idingreso)
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
+		$sql="SELECT i.idingreso,DATE_FORMAT(i.fecha_hora,'%Y-%m-%dT%h:%i') as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
 		u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,
 		i.total_compra,i.impuesto,i.estado
 		FROM ingreso i INNER JOIN detalle_ingreso di ON i.idingreso = di.idingreso INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u
@@ -75,7 +75,7 @@ Class Ingreso
 	//Implementar un metodo para listar los registros
 	public function listar()
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
+		$sql="SELECT i.idingreso,lower(DATE_FORMAT(i.fecha_hora,'%e/%c/%Y - %h:%i %p')) as fecha,i.idproveedor,p.nombre as proveedor,di.idalmacen,al.nombre as almacen,
     u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,
     i.total_compra,i.impuesto,i.estado
     FROM ingreso i INNER JOIN detalle_ingreso di ON i.idingreso = di.idingreso INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u

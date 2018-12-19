@@ -1,5 +1,5 @@
 var tabla;
-
+var t;
 // TODO: FUNCION QUE SE EJECUTA AL INICIO
 function init() {
 
@@ -27,6 +27,7 @@ function init() {
 
 	mostrarform(false);
 
+	fechanow();
 
 	listar();
 
@@ -119,8 +120,9 @@ function openproductoalmacen() {
 
 // TODO: FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag) {
+	contains = [];
 	var_extras();
-	fechanow();
+
 	if (flag) {
 		$(document).ready(function() {
 			$('#serie_comprobante').focus();
@@ -146,8 +148,10 @@ function mostrarform(flag) {
 
 // TODO: FUNCION PARA CANCELAR FORMULARIO
 function cancelarform() {
+	clearTimeout(t);
 	limpiar();
 	mostrarform(false);
+	fechanow();
 }
 
 
@@ -276,7 +280,7 @@ function mostrar(idingreso) {
 	}, function(data, status) {
 		data = JSON.parse(data);
 		mostrarform(true);
-
+		clearTimeout(t);
 		$("#idalmacen").val(data.idalmacen);
 		$("#idalmacen").selectpicker('refresh');
 		$("#idproveedor").val(data.idproveedor);
@@ -326,7 +330,7 @@ function anular(idingreso) {
 			// tabla.ajax.reload(null, false);
 
 		});
-	})
+	}).catch(swal.noop);
 }
 
 

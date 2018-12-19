@@ -21,6 +21,7 @@ $total_beneficio=isset($_POST["total_beneficio"])? limpiarCadena($_POST["total_b
 $idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
 
 switch ($_GET["op"]){
+
 	case 'guardaryeditar':
 		if (empty($idingreso)){
 			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,
@@ -32,6 +33,7 @@ switch ($_GET["op"]){
 		else {
 		}
 	break;
+
 
 	case 'anular':
 		$rspta=$ingreso->anular($idingreso);

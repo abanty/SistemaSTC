@@ -88,10 +88,10 @@ switch ($_GET["op"]){
  				$url='../reportes/exFactura.php?id=';
  			}
  			$data[]=array(
- 				"0"=>(($reg->estado=='Aceptado')?'<button class="btn btn-success" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>'.
- 					' <button class="btn btn-danger" onclick="anular('.$reg->idventa.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>').
- 					'<a target="_blank" href="'.$url.$reg->idventa.'"> <button class="btn btn-personal"><i class="fa fa-file"></i></button></a>',
+ 				"0"=>(($reg->estado=='Aceptado')?'<button class="btn btn-success btn-sm" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>'.
+ 					' <button class="btn btn-danger btn-sm" onclick="anular('.$reg->idventa.')"><i class="fa fa-close"></i></button>':
+ 					'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>').
+ 					'<a target="_blank" href="'.$url.$reg->idventa.'"> <button class="btn btn-personal btn-sm"><i class="fa fa-file"></i></button></a>',
  				"1"=>$reg->fecha,
  				"2"=>$reg->cliente,
  				"3"=>$reg->usuario,

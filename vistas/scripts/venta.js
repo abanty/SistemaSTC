@@ -65,7 +65,6 @@ function openproductofilter()
 // TODO:   FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag)
 {
-	limpiar();
 	if (flag)
 	{
 			$('#idcliente').val('Publico General');
@@ -235,12 +234,10 @@ function anular(idventa)
   		(e),
   		'Satisfactoriamente!',
   		'success'
-
-)    			//tabla.ajax.reload(null,false);
-
-listar();
+		)
+		 $('#tbllistado').DataTable().ajax.reload();
 		});
-	})
+	}).catch(swal.noop);
 }
 
 

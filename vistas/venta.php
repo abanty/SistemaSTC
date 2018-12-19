@@ -32,7 +32,7 @@ if ($_SESSION['ventas']==1)
                         <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
-                            <th>Fecha</th>
+                            <th>Fecha de operacion</th>
                             <th>Cliente</th>
                             <th>Usuario</th>
                             <th>Documento</th>
@@ -44,7 +44,7 @@ if ($_SESSION['ventas']==1)
                           </tbody>
                           <tfoot>
                             <th>Opciones</th>
-                            <th>Fecha</th>
+                            <th>Fecha de operacion</th>
                             <th>Proveedor</th>
                             <th>Usuario</th>
                             <th>Documento</th>
