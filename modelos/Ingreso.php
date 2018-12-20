@@ -23,16 +23,10 @@ Class Ingreso
 
 		while ($num_elementos < count($idproducto))
 		{
-			$sqllist= "SELECT * FROM producto_ubicacion WHERE idproducto = '$idproducto[$num_elementos]' AND idalmacen = '$idalmacen'";
-			$sqllist_result = ejecutarConsultaSimpleFila($sqllist);
 
-			if (!empty($sqllist_result)) {
-
-			}else {
-				$sqlproducto_ubicacacion="INSERT INTO producto_ubicacion (idproducto,idalmacen)
-				 VALUES ('$idproducto[$num_elementos]','$idalmacen')";
+				$sqlproducto_ubicacacion="INSERT INTO producto_ubicacion (idlote,idproducto,idalmacen,precio_compra,precio_venta_sugerido,fecha_ingreso,fecha_registro)
+				 VALUES ('$idingresonew','$idproducto[$num_elementos]','$idalmacen','$precio_compra[$num_elementos]','$precio_venta[$num_elementos]','$fecha_hora',CURRENT_TIMESTAMP)";
 				 ejecutarConsulta($sqlproducto_ubicacacion);
-			}
 
 			$sql_detalle = "INSERT INTO detalle_ingreso(idingreso,idproducto,idalmacen,cantidad,importe,precio_compra,precio_venta,gananciaporcentaje,ganancianeta)
 			VALUES ('$idingresonew', '$idproducto[$num_elementos]','$idalmacen','$cantidad[$num_elementos]','$importe[$num_elementos]','$precio_compra[$num_elementos]','$precio_venta[$num_elementos]','$ganancia[$num_elementos]','$ganancianeta[$num_elementos]')";

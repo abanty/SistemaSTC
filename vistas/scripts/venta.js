@@ -3,6 +3,8 @@ var tabla;
 // TODO:  FUNCION INICIO
 function init(){
 
+	fechanow();
+
 	mostrarform(false);
 
 	listar();
@@ -32,15 +34,19 @@ function limpiar()
 	$("#total_venta").val("");
 	$(".filas").remove();
 	$("#total").html("0");
+
+    //Marcamos el primer tipo_documento
+  $("#tipo_comprobante").val("Informacion de Salida");
+	$("#tipo_comprobante").selectpicker('refresh');
+}
+
+function fechanow(){
 	//Obtenemos la fecha actual
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#fecha_hora').val(today);
-    //Marcamos el primer tipo_documento
-  $("#tipo_comprobante").val("Informacion de Salida");
-	$("#tipo_comprobante").selectpicker('refresh');
+		$('#fecha_hora').val(today);
 }
 
 
@@ -133,7 +139,7 @@ tabla=$('#tblproductos2').dataTable(
 	{
 			"aProcessing": true,
 	    "aServerSide": true,
-	    dom: 'Brtip',
+	    dom: 'Bfrtip',
 	    buttons: [
 	        ],
 		"ajax":
@@ -265,7 +271,7 @@ function marcarImpuesto()
 
 	// TODO: FUNCION PARA AGREGAR DETALLE DE PRODUCTOS
 	// var contains = [];
-	function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalmacen) {
+	function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalmacen, idlote) {
 
 		// Array.prototype.contains = function ( needle ) {
 		// 	 for (i in this) {
@@ -304,6 +310,7 @@ function marcarImpuesto()
 										'<td><span name="subtotal" id="subtotal' + cont + '">' + subtotal + '</span></td>' +
 										'<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
 										'<td><input type="hidden" name="idalmacen[]" value="' + idalmacen + '" required=""></td>' +
+										'<td><input type="hidden" name="idlote[]" value="' + idlote + '" required=""></td>' +
 										'</tr>';
 									cont++;
 									detalles = detalles + 1;

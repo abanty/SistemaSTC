@@ -12,7 +12,7 @@ Class Venta
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($idcliente,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$idproducto,$idalmacen,$cantidad,$precio_venta,$descuento)
+	public function insertar($idcliente,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$idproducto,$idalmacen,$idlote,$cantidad,$precio_venta,$descuento)
 	{
 		$sql="INSERT INTO venta (idcliente,idusuario,tipo_comprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_venta,estado)
 		VALUES ('$idcliente','$idusuario','$tipo_comprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_venta','Aceptado')";
@@ -24,7 +24,7 @@ Class Venta
 
 		while ($num_elementos < count($idproducto))
 		{
-			$sql_detalle = "INSERT INTO detalle_venta(idventa,idproducto,idalmacen,cantidad,precio_venta,descuento) VALUES ('$idventanew','$idproducto[$num_elementos]','$idalmacen[$num_elementos]','$cantidad[$num_elementos]','$precio_venta[$num_elementos]','$descuento[$num_elementos]')";
+			$sql_detalle = "INSERT INTO detalle_venta(idventa,idproducto,idalmacen,idlote,cantidad,precio_venta,descuento) VALUES ('$idventanew','$idproducto[$num_elementos]','$idalmacen[$num_elementos]','$idlote[$num_elementos]','$cantidad[$num_elementos]','$precio_venta[$num_elementos]','$descuento[$num_elementos]')";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}

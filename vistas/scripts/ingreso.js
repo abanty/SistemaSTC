@@ -18,7 +18,7 @@ function init() {
 				mostrarform(true);
 			}
 		} else if ($('#formulario').is(":visible")) {
-			if (keycode == '32') {
+			if (keycode == '13') {
 				$("#btnAgregarArt").click();
 			}
 		}
@@ -264,7 +264,7 @@ function guardaryeditar(e) {
 				(datos),
 				'Satisfactoriamente!',
 				'success'
-			);
+			).catch(swal.noop);
 			mostrarform(false);
 			listar();
 		}

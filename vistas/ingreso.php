@@ -99,7 +99,7 @@ if ($_SESSION['compras']==1)
                                <option data-icon="fa fa-file-archive-o" value="Boleta">Boleta</option>
                                <option data-icon="fa fa-clipboard" value="Factura">Factura</option>
                                <option data-icon="fa fa-files-o" value="Ticket">Ticket</option>
-                               <option data-icon="fa fa-file-text-o" value="Informacion de Salida">Otros</option>
+                               <option data-icon="fa fa-file-text-o" value="Otros">Otros</option>
                             </select>
                           </div>
 
