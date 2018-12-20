@@ -108,7 +108,7 @@ Class Producto
 		INNER JOIN categoria ca ON ca.idcategoria = p.idcategoria
 		INNER JOIN marca ma ON ma.idmarca = p.idmarca
 		INNER JOIN unidadmedida u ON u.idunidadmedida = p.idunidadmedida
-		WHERE  p.condicion = '1' AND al.idalmacen = '$idalmacen'";
+		WHERE  p.condicion = '1' AND pu.idalmacen = '$idalmacen'";
 		return ejecutarConsulta($sql);
 	}
 
