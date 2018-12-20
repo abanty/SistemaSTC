@@ -3,6 +3,12 @@ var tabla;
 // TODO:  FUNCION INICIO
 function init() {
 
+// 	$('#myModal').on('shown.bs.modal', function () {
+//
+//
+// })
+
+
 	fechanow();
 
 	mostrarform(false);
@@ -160,7 +166,10 @@ function listarProductos(idalmacen) {
 				console.log(e.responseText);
 			}
 		},
-		 fixedHeader: true,
+		// "sScrollX": "100%",
+	  "sScrollXInner": "150%",
+	  // "sScrollX": "50%",
+	  // "autoWidth": false,
 		"bDestroy": true,
 		"scrollY":        '60vh',
 		"scrollCollapse": true,
@@ -174,6 +183,10 @@ function listarProductos(idalmacen) {
 				 dataSrc: 1
 		 }
 	}).DataTable();
+
+	$('#myModal').on('shown.bs.modal', function (e) {
+  $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+	});
 }
 
 
