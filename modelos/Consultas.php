@@ -11,6 +11,24 @@ Class Consultas
 
 	}
 
+	public function costo_total_almaceng(){
+		$sql="SELECT IFNULL(SUM((pu.stock * pu.precio_compra)),0) as total_costo_alm_gen
+			FROM producto_ubicacion pu
+			inner join producto p on p.idproducto = pu.idproducto
+			inner join almacen al on al.idalmacen = pu.idalmacen
+			where pu.idalmacen = '1'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function costo_total_puntov(){
+		$sql="SELECT IFNULL(SUM((pu.stock * pu.precio_compra)),0) as total_costo_pun_ven
+			FROM producto_ubicacion pu
+			inner join producto p on p.idproducto = pu.idproducto
+			inner join almacen al on al.idalmacen = pu.idalmacen
+			where pu.idalmacen = '2'";
+		return ejecutarConsulta($sql);
+	}
+
   public function comprasfecha($fecha_inicio,$fecha_fin)
   {
     $sql="SELECT DATE(i.fecha_hora) as fecha,u.nombre as usuario, p.nombre as proveedor,

@@ -17,10 +17,11 @@ switch ($_GET["op"]){
 		while ($reg=$rspta->fetch_object()){
 			$data[]=array(
         "0"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' onclick='mostrarclick(this.src)'>",
-				"1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
-        "2"=>$reg->descripcion,
-				"3"=>$reg->almacen,
-        "4"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
+      	"1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->fecha_ingreso.'</span>',
+				"2"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
+        "3"=>$reg->descripcion,
+				"4"=>$reg->almacen,
+        "5"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
 				);
 		}
 		$results = array(
@@ -32,18 +33,21 @@ switch ($_GET["op"]){
 
 	break;
 
-  case 'listar_pu_pv':
-  $rspta=$puntov->listar_productos_ubicacion_puntov();
+
+  case 'listar_pu_ag_val':
+  $rspta=$puntov->listar_productos_ubicacion_almacen_valorizado();
   //Vamos a declarar un Array
 
   $data= Array();
+  // $imagentest=(empty($reg->imagen))?"<img src='../files/productos/defaultpro.png' height='55px' width='65px'>":'<img src="../files/productos/'.$reg->imagen.'" height="55px" width="70px" onclick="mostrarclick(this.src)">';
   while ($reg=$rspta->fetch_object()){
     $data[]=array(
       "0"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' onclick='mostrarclick(this.src)'>",
-      "1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
-      "2"=>$reg->descripcion,
-      "3"=>$reg->almacen,
-      "4"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
+      "1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->fecha_ingreso.'</span>',
+      "2"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
+      "3"=>$reg->descripcion,
+      "4"=>$reg->almacen,
+      "5"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
       );
   }
   $results = array(
@@ -52,6 +56,55 @@ switch ($_GET["op"]){
     "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
     "aaData"=>$data);
   echo json_encode($results);
+
+break;
+
+  case 'listar_pu_pv':
+  $rspta=$puntov->listar_productos_ubicacion_puntov();
+  //Vamos a declarar un Array
+
+  $data= Array();
+  while ($reg=$rspta->fetch_object()){
+    $data[]=array(
+      "0"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' onclick='mostrarclick(this.src)'>",
+      "1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->fecha_ingreso.'</span>',
+      "2"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
+      "3"=>$reg->descripcion,
+      "4"=>$reg->almacen,
+      "5"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
+      );
+  }
+  $results = array(
+    "sEcho"=>1, //Información para el datatables
+    "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+    "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+    "aaData"=>$data);
+  echo json_encode($results);
+
+break;
+
+
+case 'listar_pu_pv_val':
+$rspta=$puntov->listar_productos_ubicacion_puntov_valorizado();
+//Vamos a declarar un Array
+
+$data= Array();
+while ($reg=$rspta->fetch_object()){
+  $data[]=array(
+    "0"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' onclick='mostrarclick(this.src)'>",
+    "1"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->fecha_ingreso.'</span>',
+    "2"=>'<span style="letter-spacing: 0.5px; font-weight: bold;">'.$reg->producto.'</span>',
+    "3"=>$reg->descripcion,
+    "4"=>$reg->almacen,
+    "5"=>'<span style="letter-spacing: 0.5px; font-weight: bold; color:#337ab7; font-size:17px;">'.$reg->stock.'</span>'
+    );
+}
+$results = array(
+  "sEcho"=>1, //Información para el datatables
+  "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+  "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+  "aaData"=>$data);
+echo json_encode($results);
 
 break;
 

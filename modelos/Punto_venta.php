@@ -13,7 +13,19 @@ Class Punto_venta
 	//Listar #1
 	public function listar_productos_ubicacion_almacen()
 	{
-		$sql="SELECT pu.idproducto, pu.idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
+		$sql="SELECT lower(DATE_FORMAT(pu.fecha_ingreso,'%e/%c/%Y - %h:%i %p')) as fecha_ingreso,pu.fecha_registro ,pu.idproducto, pu.idalmacen, SUM(pu.stock) as stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
+    FROM producto_ubicacion pu
+    INNER JOIN almacen al ON pu.idalmacen = al.idalmacen
+    INNER JOIN producto p ON p.idproducto = pu.idproducto
+    WHERE al.idalmacen = '1'
+GROUP BY `pu`.`idproducto` ASC";
+		return ejecutarConsulta($sql);
+	}
+
+	//Listar #1.5
+	public function listar_productos_ubicacion_almacen_valorizado()
+	{
+		$sql="SELECT lower(DATE_FORMAT(pu.fecha_ingreso,'%e/%c/%Y - %h:%i %p')) as fecha_ingreso,pu.fecha_registro ,pu.idproducto, pu.idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
     FROM producto_ubicacion pu
     INNER JOIN almacen al ON pu.idalmacen = al.idalmacen
     INNER JOIN producto p ON p.idproducto = pu.idproducto
@@ -24,7 +36,19 @@ Class Punto_venta
   //Lista #2
 	public function listar_productos_ubicacion_puntov()
 	{
-		$sql="SELECT pu.idproducto, pu.idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
+		$sql="SELECT lower(DATE_FORMAT(pu.fecha_ingreso,'%e/%c/%Y - %h:%i %p')) as fecha_ingreso,pu.fecha_registro ,pu.idproducto, pu.idalmacen, SUM(pu.stock) as stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
+    FROM producto_ubicacion pu
+    INNER JOIN almacen al ON pu.idalmacen = al.idalmacen
+    INNER JOIN producto p ON p.idproducto = pu.idproducto
+    WHERE al.idalmacen = '2'
+GROUP BY `pu`.`idproducto` ASC";
+		return ejecutarConsulta($sql);
+	}
+
+	//Lista #2
+	public function listar_productos_ubicacion_puntov_valorizado()
+	{
+		$sql="SELECT lower(DATE_FORMAT(pu.fecha_ingreso,'%e/%c/%Y - %h:%i %p')) as fecha_ingreso,pu.fecha_registro ,pu.idproducto, pu.idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,p.descripcion, al.nombre as almacen
     FROM producto_ubicacion pu
     INNER JOIN almacen al ON pu.idalmacen = al.idalmacen
     INNER JOIN producto p ON p.idproducto = pu.idproducto

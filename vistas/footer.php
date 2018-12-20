@@ -16,7 +16,7 @@
 <!-- Bootstrap 3.3.5 -->
 <script type="text/javascript"  src="../public/js/bootstrap.min.js"></script>
 <!-- Inputmask -->
-<script type="text/javascript" src="../public/js/jquery.inputmask.bundle.js"></script>
+<!-- <script type="text/javascript" src="../public/js/jquery.inputmask.bundle.js"></script> -->
 <!-- AdminLTE App -->
 <!-- <script type="text/javascript" src="../public/dist/js/adminlte.min.js"></script> -->
 <script type="text/javascript"  src="../public/js/app.min.js"></script>
@@ -39,9 +39,11 @@ $.widget.bridge('uibutton', $.ui.button);
 <!--     DATATABLES -->
 <script type="text/javascript" src="../public/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../public/datatables/dataTables.select.min.js"></script>
+<!-- <script type="text/javascript" src="../public/datatables/dataTables.buttons.min.js"></script> -->
 <script type="text/javascript" src="../public/datatables/buttons.html5.min.js"></script>
-<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script> -->
-<script type="text/javascript" src="../public/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="../public/datatables/dataTables.min.js"></script>
+<script type="text/javascript" src="../public/datatables/dataTables.rowGroup.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <!-- <script type="text/javascript" src="../public/jquery-ui/jquery-ui.min.js"></script> -->
 <!-- <script src = "../public/js/jquery-ui.min.js"> </script> -->

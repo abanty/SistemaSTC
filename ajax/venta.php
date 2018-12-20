@@ -24,7 +24,7 @@ switch ($_GET["op"]){
   # CASE PARA GUARDAR LAS VENTAS Y SU DETALLE
   case 'guardaryeditar':
 		if (empty($idventa)){
-			$rspta=$venta->insertar($idcliente,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$_POST["idproducto"],$_POST["idalmacen"],$_POST["cantidad"],$_POST["precio_venta"],$_POST["descuento"]);
+			$rspta=$venta->insertar($idcliente,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$_POST["idproducto"],$_POST["idalmacen"],$_POST["idlote"],$_POST["cantidad"],$_POST["precio_venta"],$_POST["descuento"]);
 			echo $rspta ? "Venta registrada" : "No se pudieron registrar todos los datos de la venta";
 		}
 		else {
@@ -145,7 +145,7 @@ switch ($_GET["op"]){
    		$data= Array();
    		while ($reg=$rspta->fetch_object()){
    			$data[]=array(
-   		  "0"=>'<button class="btn btn-personal" id="adddetalle" onclick="agregarDetalle(\''.$reg->codigo.'\',\''.$reg->idproducto.'\',\''.$reg->producto.'\',\''.$reg->precio_venta.'\',\''.$reg->stock.'\',\''.$reg->idalmacen.'\')"><span class="fa fa-plus"></span></button>',
+   		  "0"=>'<button class="btn btn-personal" id="adddetalle" onclick="agregarDetalle(\''.$reg->codigo.'\',\''.$reg->idproducto.'\',\''.$reg->producto.'\',\''.$reg->precio_venta.'\',\''.$reg->stock.'\',\''.$reg->idalmacen.'\',\''.$reg->idlote.'\')"><span class="fa fa-plus"></span></button>',
         "1"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
         "2"=>$reg->producto,
         "3"=>$reg->descripcion,
