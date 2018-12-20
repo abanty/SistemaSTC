@@ -216,16 +216,17 @@ switch ($_GET["op"]){
        		$data= Array();
        		while ($reg=$rspta->fetch_object()){
        			$data[]=array(
-            "0"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
-            "1"=>$reg->producto,
-            "2"=>$reg->descripcion,
-            "3"=>'<span class="label bg-olive">'.$reg->categoria.'</span>',
-            "4"=>'<span style="color:#f39c12; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
-       	 	  "5"=>($reg->stock=='0')?'<span style="color:#fb1c00; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>':
+            "0"=>$reg->fecha_ingreso,
+            "1"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
+            "2"=>$reg->producto,
+            "3"=>$reg->descripcion,
+            "4"=>'<span class="label bg-olive">'.$reg->categoria.'</span>',
+            "5"=>'<span style="color:#f39c12; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
+       	 	  "6"=>($reg->stock=='0')?'<span style="color:#fb1c00; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>':
             '<span style="color:#000000; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>',
-       		  "6"=>'<span style="color:#17609e; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_venta.'</span>',
-            "7"=>'<span style="color:#bd0000; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_compra.'</span>',
-       		  "8"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
+       		  "7"=>'<span style="color:#17609e; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_venta.'</span>',
+            "8"=>'<span style="color:#bd0000; font-size:14.5px; font-weight:bold; font-family: fantasy;" class="">S/.'.$reg->precio_compra.'</span>',
+       		  "9"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
        			);
        		}
        		$results = array(

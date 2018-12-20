@@ -272,7 +272,9 @@ div.dt-buttons {
     float: right !important;
 }
 
-
-#tblproductos2 thead th {
-      padding-left: -10px !important;
+table.dataTable tr.group td {
+  text-align: center !important;
+    font-weight: bold !important;
+    background-color: #5c6367 !important;
+    color: white !important;
 }

@@ -182,7 +182,7 @@ if ($_SESSION['ventas']==1)
                         <tbody>
 
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                           <th>Opciones</th>
                           <th>Fecha</th>
                           <th>Codigo</th>
@@ -193,7 +193,7 @@ if ($_SESSION['ventas']==1)
                           <th>Stock</th>
                           <th>P.V. Sugerido</th>
                           <th>Imagen</th>
-                        </tfoot>
+                        </tfoot> -->
                       </table>
                 </div>
             </div>

@@ -152,8 +152,8 @@ switch ($_GET["op"]){
         "4"=>$reg->descripcion,
         "5"=>$reg->categoria,
         "6"=>'<span style="color:#337ab7; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
-   	 	  "7"=>($reg->stock=='0')?'<span style="color:#f10808; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>':
-        '<span style="color:#02bb66; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>',
+   	 	  "7"=>($reg->stock=='0')?'<span style="color:#f10808; font-family: monospace; font-size:19px; font-weight:bold;" class="">'.$reg->stock.'</span>':
+        '<span style="color:#02bb66; font-family: monospace; font-size:19px; font-weight:bold;" class="">'.$reg->stock.'</span>',
    		  "8"=>$reg->precio_venta,
    		  "9"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
    			);

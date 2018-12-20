@@ -176,13 +176,13 @@ function listarProductos(idalmacen) {
 		},
 
 	  "bDestroy": true,
-		scrollY:        500,
+		scrollY:        300,
     deferRender:    true,
     scroller:       true,
 		"scrollCollapse": true,
 		"paging":         false,
 		// "iDisplayLength": 5,
-		"order": [[0, "desc"]],
+		"order": [[1, "desc"]],
 		rowGroup: {
 					startRender: function ( rows, group ) {
 							return 'Fecha y Hora de Lote -' + group + ' ('+rows.count()+' productos)';

@@ -231,6 +231,7 @@ if ($_SESSION['compras']==1)
           <div class="modal-body">
             <table style="width:99% !important;"id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover">
               <thead>
+                <th>Fecha</th>
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
@@ -244,6 +245,7 @@ if ($_SESSION['compras']==1)
               <tbody>
               </tbody>
               <tfoot>
+                <th>Fecha</th>
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>

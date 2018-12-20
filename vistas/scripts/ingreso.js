@@ -236,10 +236,14 @@ function listarProductos_x_almacen(idalmacen) {
 			}
 		},
 		"bDestroy": true,
-		"iDisplayLength": 5,
-		"order": [
-			[0, "desc"]
-		]
+		// "iDisplayLength": 5,
+		"order": [[0, "desc"]],
+		rowGroup: {
+					startRender: function ( rows, group ) {
+							return 'Fecha y Hora de Lote -' + group + ' ('+rows.count()+' productos)';
+					},
+				 dataSrc: 0
+		 }
 	}).DataTable();
 
 	$('#myModal2').on('shown.bs.modal', function() {
