@@ -146,13 +146,14 @@ switch ($_GET["op"]){
    		while ($reg=$rspta->fetch_object()){
    			$data[]=array(
    		  "0"=>'<button class="btn btn-personal" id="adddetalle" onclick="agregarDetalle(\''.$reg->codigo.'\',\''.$reg->idproducto.'\',\''.$reg->producto.'\',\''.$reg->precio_venta.'\',\''.$reg->stock.'\',\''.$reg->idalmacen.'\',\''.$reg->idlote.'\')"><span class="fa fa-plus"></span></button>',
-        "1"=>'<span style="color:#0e0d0d; font-weight:bold;" class="">'.$reg->fecha_ingreso.'</span>',
+        "1"=>$reg->fecha_ingreso,
         "2"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
-        "3"=>$reg->producto,
+        "3"=>'<span style="color:#000000; font-weight:bold;" class="">'.$reg->producto.'</span>',
         "4"=>$reg->descripcion,
         "5"=>$reg->categoria,
         "6"=>'<span style="color:#337ab7; font-size:16px; font-weight:bold;" class="">'.$reg->abreviatura.'</span>',
-   	 	  "7"=>$reg->stock,
+   	 	  "7"=>($reg->stock=='0')?'<span style="color:#f10808; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>':
+        '<span style="color:#02bb66; font-size:16px; font-weight:bold;" class="">'.$reg->stock.'</span>',
    		  "8"=>$reg->precio_venta,
    		  "9"=>"<img src='../files/productos/".$reg->imagen."' height='50px' width='50px' >"
    			);

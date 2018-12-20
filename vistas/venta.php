@@ -91,7 +91,7 @@ if ($_SESSION['ventas']==1)
                           </div>
 
                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <label>Selecciona un Almacen para salidas(*):</label>
+                            <label>Selecciona Almacen para salidas:</label>
                             <input type="hidden" name="idventa" id="idventa">
                             <select id="idalmacen" name="idalmacen" class="form-control selectpicker" title="Selecciona un Almacen de salida" required >
                             </select>
@@ -159,42 +159,44 @@ if ($_SESSION['ventas']==1)
   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background:#616263; color:white;">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Seleccione un Producto</h4>
+          <h4 class="modal-title"><i class="fa fa-list-ol" aria-hidden="true"></i> Seleccione un Producto del Almacen marcado: </h4>
         </div>
-        <div class="modal-body">
-          <!-- FILTROS PARA BUSCAR EN MODAL -->
+          <div class="modal-body">
+            <div class="row table-responsive">
+                <div class="col-sm-12">
+                      <table id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover" style="width:100%;">
+                        <thead>
+                          <th>Opciones</th>
+                          <th>Fecha</th>
+                          <th>Codigo</th>
+                          <th>Nombre</th>
+                          <th>Descripcion</th>
+                          <th>Categoria</th>
+                          <th>Talla</th>
+                          <th>Stock</th>
+                          <th>P.V. Sugerido</th>
+                          <th>Imagen</th>
+                        </thead>
+                        <tbody>
 
-          <table id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover">
-            <thead>
-              <th>Opciones</th>
-              <th>Fecha de Ingreso de Lote</th>
-              <th>Codigo</th>
-              <th>Nombre</th>
-              <th>Descripcion</th>
-              <th>Categoria</th>
-              <th>Talla</th>
-              <th>Stock</th>
-              <th>P.V. Sugerido</th>
-              <th>Imagen</th>
-            </thead>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-              <th>Opciones</th>
-              <th>Fecha de Ingreso de Lote</th>
-              <th>Codigo</th>
-              <th>Nombre</th>
-              <th>Descripcion</th>
-              <th>Categoria</th>
-              <th>Talla</th>
-              <th>Stock</th>
-              <th>P.V. Sugerido</th>
-              <th>Imagen</th>
-            </tfoot>
-          </table>
+                        </tbody>
+                        <tfoot>
+                          <th>Opciones</th>
+                          <th>Fecha</th>
+                          <th>Codigo</th>
+                          <th>Nombre</th>
+                          <th>Descripcion</th>
+                          <th>Categoria</th>
+                          <th>Talla</th>
+                          <th>Stock</th>
+                          <th>P.V. Sugerido</th>
+                          <th>Imagen</th>
+                        </tfoot>
+                      </table>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default"  onclick="refresh_selectalm();" data-dismiss="modal">Cerrar</button>
@@ -203,7 +205,16 @@ if ($_SESSION['ventas']==1)
       </div>
     </div>
   </div>
-  <!-- Fin modal -->
+
+
+
+
+
+
+
+
+
+
 <?php
 }
 else
