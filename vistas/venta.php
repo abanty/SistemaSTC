@@ -125,6 +125,9 @@ if ($_SESSION['ventas']==1)
                                     <th >Descuento</th>
                                     <th>SUBTOTAL</th>
                                 </thead>
+                                <tbody>
+
+                                </tbody>
                                 <tfoot>
 
                                     <th></th>
@@ -134,9 +137,7 @@ if ($_SESSION['ventas']==1)
                                     <th id="TOT">TOTAL:</th>
                                     <th style="width: 90.7px"><h3 class="total_style_venta" id="total">S/. 0.00</h3><input type="hidden" name="total_venta" id="total_venta"></th>
                                 </tfoot>
-                                <tbody>
 
-                                </tbody>
                             </table>
                           </div>
                             </div>
@@ -199,21 +200,12 @@ if ($_SESSION['ventas']==1)
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"  onclick="refresh_selectalm();" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
-        <!-- onclick="refresh_selectalm()" -->
+
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
 
 <?php
 }

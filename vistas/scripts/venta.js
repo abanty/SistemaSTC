@@ -100,7 +100,7 @@ function openproductofilter() {
 
 // TODO:   FUNCION PARA MOSTRAR FORMULARIO
 function mostrarform(flag) {
-
+	contains = [];
 	var_extras();
 
 	if (flag) {
@@ -303,25 +303,25 @@ function marcarImpuesto() {
 
 
 // TODO: FUNCION PARA AGREGAR DETALLE DE PRODUCTOS
-// var contains = [];
+var contains = [];
 function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalmacen, idlote) {
 
-	// Array.prototype.contains = function ( needle ) {
-	// 	 for (i in this) {
-	// 			 if (this[i] == needle) return true;
-	// 	 }
-	// 	 return false;
-	//  }
+	Array.prototype.contains = function ( needle ) {
+		 for (i in this) {
+				 if (this[i] == needle) return true;
+		 }
+		 return false;
+	 }
 
-	// if (contains.contains(idproducto)) {
-	//
-	// 		 swal({
-	// 				 type: 'warning',
-	// 				 title: 'Este Producto ya fue Ingresado',
-	// 				 text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
-	// 		 }).catch(swal.noop);
-	//
-	//  }else{
+	if (contains.contains(idproducto)) {
+
+			 swal({
+					 type: 'warning',
+					 title: 'Este Producto ya fue Ingresado',
+					 text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
+			 }).catch(swal.noop);
+
+	 }else{
 	if (stock != 0) {
 		swal({
 			title: 'Ingresa Cantidad:',
@@ -349,11 +349,11 @@ function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalm
 					detalles = detalles + 1;
 					$('#detalles').append(fila);
 
-					// var pro= [idproducto];
-					// for (var i = 0; i <pro.length; i++) {
-					// 	 valores=pro[i];
-					// }
-					// contains.push(valores);
+					var pro= [idproducto];
+					for (var i = 0; i <pro.length; i++) {
+						 valores=pro[i];
+					}
+					contains.push(valores);
 
 					$(function() {
 						$(document).on('click', 'input[type=number]', function() {
@@ -385,7 +385,7 @@ function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalm
 			text: 'Insuficiente Stock disponible',
 		}).catch(swal.noop);
 	}
-	// }
+	}
 }
 
 
@@ -439,17 +439,17 @@ function evaluar() {
 
 // TODO: FUNCION PARA ELIMINAR DETALLE
 function eliminarDetalle(indice, idproducto) {
-	// alert(idproducto);
+
 	$("#fila" + indice).remove();
 
-	// Array.prototype.compacta = function(){
-	// 	for(var i = 0; i < this.length; i++){
-	// 		if(this[i] === idproducto){
-	// 				this.splice(i , 1);
-	// 		}
-	// 	}
-	// }
-	// contains.compacta();
+	Array.prototype.compacta = function(){
+		for(var i = 0; i < this.length; i++){
+			if(this[i] === idproducto){
+					this.splice(i , 1);
+			}
+		}
+	}
+	contains.compacta();
 
 	calcularTotales();
 	detalles = detalles - 1;

@@ -3,7 +3,6 @@ var t;
 // TODO: FUNCION QUE SE EJECUTA AL INICIO
 function init() {
 
-
 	$(document).ready(function() {
 		$(".dataTables_filter input").focus();
 		$('[data-toggle="tooltip"]').tooltip();
@@ -361,13 +360,14 @@ function marcarImpuesto() {
 var contains = [];
 function agregarDetalle(idproducto, producto, codigo) {
 
+
 	Array.prototype.contains = function ( needle ) {
 		 for (i in this) {
 				 if (this[i] == needle) return true;
 		 }
 		 return false;
 	 }
-
+	 alert(contains);
 	 if (contains.contains(idproducto)) {
 
 		 		 swal({
@@ -404,9 +404,11 @@ function agregarDetalle(idproducto, producto, codigo) {
 				 		'<td id="p_none"><input  type="hidden" name="valor2[]" value="' + valor2 + '"></td>' +
 				 		'</tr>';
 
+						$('#detalles').append(fila);
+
 				 		cont++;
 				 		detalles = detalles + 1;
-						$('#detalles').append(fila);
+
 
 						var pro= [idproducto];
 						for (var i = 0; i <pro.length; i++) {
@@ -654,6 +656,8 @@ function eliminarDetalle(indice,idproducto) {
 		}
 	}
 	contains.compacta();
+
+alert(contains);
 
 	calcularTotalesImporte();
 	calcularTotalesPVenta();
