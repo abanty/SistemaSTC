@@ -54,13 +54,10 @@ if ($_SESSION['ventas']==1)
                           </tfoot>
                         </table>
                     </div>
-                    <div class="panel-body" id="formularioregistros">
-                              <li style="list-style:none; margin-top:-20px; padding-bottom:15px; font-size: 25px;font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;" class="treeview">
 
-                                      <i class="fa fa-shopping-cart"></i>
-                                       &nbsp;
-                                      <span>Ventas</span>
-                              </li>
+                    <div class="panel-heading">VENTAS</div>
+                    <div class="panel-body" id="formularioregistros">
+
 
                         <form name="formulario" id="formulario" method="POST">
 
@@ -73,7 +70,7 @@ if ($_SESSION['ventas']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <label>Fecha(*):</label>
-                            <input type="date" class="form-control" name="fecha_hora" id="fecha_hora" style="width: 91.4%;"required="">
+                            <input type="datetime-local" class="form-control" name="fecha_hora" id="fecha_hora" style="width: 91.4%;"required="">
                           </div>
 
                           <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -82,15 +79,22 @@ if ($_SESSION['ventas']==1)
                               <option data-icon="fa fa-file-archive-o" value="Boleta">Boleta</option>
                               <option data-icon="fa fa-clipboard" value="Factura">Factura</option>
                               <option data-icon="fa fa-files-o" value="Ticket">Ticket</option>
-                              <option data-icon="fa fa-file-text-o" value="Informacion Salida">Otros</option>
+                              <option data-icon="fa fa-file-text-o" value="Otros">Otros</option>
                             </select>
                           </div>
 
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <br>
                             <a>
                               <button id="btnAgregarArt" type="button" onclick="openproductofilter()" class="btn btn-warning"> <span class="fa fa-plus"></span> Seleccionar Productos</button>
                               </a>
+                          </div>
+
+                          <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <label>Selecciona un Almacen para salidas(*):</label>
+                            <input type="hidden" name="idventa" id="idventa">
+                            <select id="idalmacen" name="idalmacen" class="form-control selectpicker" title="Selecciona un Almacen de salida" required >
+                            </select>
                           </div>
 
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
@@ -151,37 +155,9 @@ if ($_SESSION['ventas']==1)
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
 
-
-<!-- PEQUEÑO MODAL PARA SELECCIONAR ALMACENES -->
-  <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-header" style="background: #00a65a; color: white;">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                  <h4 class="modal-title">Selecciona un Almacen: </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <select id="idalmacen" name="idalmacen" class="form-control selectpicker" title="Selecciona un Almacen de salida" required >
-                      </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success pull-right"  data-dismiss="modal">Cerrar</button>
-
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-  </div>
-
-
-
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog" style="width: 1030px;">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -190,9 +166,10 @@ if ($_SESSION['ventas']==1)
         <div class="modal-body">
           <!-- FILTROS PARA BUSCAR EN MODAL -->
 
-          <table style="width:99% !important;"id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover">
+          <table id="tblproductos2" class="table table-striped table-bordered table-condensed table-hover">
             <thead>
               <th>Opciones</th>
+              <th>Fecha de Ingreso de Lote</th>
               <th>Codigo</th>
               <th>Nombre</th>
               <th>Descripcion</th>
@@ -207,6 +184,7 @@ if ($_SESSION['ventas']==1)
             </tbody>
             <tfoot>
               <th>Opciones</th>
+              <th>Fecha de Ingreso de Lote</th>
               <th>Codigo</th>
               <th>Nombre</th>
               <th>Descripcion</th>

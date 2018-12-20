@@ -94,7 +94,7 @@ Class Producto
 //  MÉTODO PARA LISTAR ACTIVOS DE VENTA
 	public function listarActivosAlmacen($idalmacen)
 	{
-		$sql="SELECT pu.idlote, pu.idproducto, pu.idalmacen as idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,
+		$sql="SELECT lower(DATE_FORMAT(pu.fecha_ingreso,'%e/%c/%Y - %h:%i %p')) as fecha_ingreso,pu.idlote, pu.idproducto, pu.idalmacen as idalmacen, pu.stock, p.nombre as producto,p.imagen as imagen,
 		p.descripcion as descripcion,ca.nombre as categoria, u.abreviatura as abreviatura, p.codigo as codigo,p.idcategoria,p.idmarca,p.idunidadmedida,al.nombre as almacen,
 		(SELECT precio_venta FROM detalle_ingreso
 		WHERE idproducto=pu.idproducto

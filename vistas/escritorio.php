@@ -147,7 +147,7 @@ if ($_SESSION['escritorio']==1)
                         <div class="small-box bg-green">
                             <div class="inner">
                               <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $totalc; ?></strong>
+                                <strong>S/</strong>
                               </h4>
                               <p>Total Beneficio</p>
                             </div>
@@ -161,7 +161,7 @@ if ($_SESSION['escritorio']==1)
                         <div class="small-box bg-navy">
                             <div class="inner">
                               <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $totalv; ?></strong>
+                                <strong>S/</strong>
                               </h4>
                               <p>Crecimiento economico en porcentaje</p>
                             </div>
