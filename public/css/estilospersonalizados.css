@@ -267,3 +267,7 @@ input[type=number]::selection {
   font-size: 20px;
   text-align: -webkit-center;
 }
+
+div.dt-buttons {
+    float: right !important;
+}
