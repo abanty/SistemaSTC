@@ -36,6 +36,9 @@ if ($_SESSION['escritorio']==1)
   $regv=$rsptav->fetch_object();
   $totalv=$regv->total_venta;
 
+
+
+
   //Datos para mostrar el gráfico de barras de las compras
   $compras10 = $consulta->comprasultimos_10dias();
   $fechasc='';
@@ -68,6 +71,67 @@ if ($_SESSION['escritorio']==1)
       <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
+          <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-aqua"><i class="fa fa-balance-scale"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Historial de Ingresos de HOY</span>
+            <span class="info-box-number">S/ <?php echo $totalc; ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-red"><i class="fa fa-bar-chart"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Historial de Ventas de HOY</span>
+            <span class="info-box-number">S/ <?php echo $totalv; ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+      <div class="clearfix visible-sm-block"></div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="fa fa-dollar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Total Costo actual Almacen General</span>
+            <span class="info-box-number">S/ <?php echo $total_costo_alm_gen; ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Total Costo actual Punto venta</span>
+            <span class="info-box-number">S/ <?php echo $total_costo_pun_v; ?></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+    </div>
+
+
+
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
@@ -77,70 +141,7 @@ if ($_SESSION['escritorio']==1)
                         </div>
                     </div>
                     <!-- /.box-header -->
-                    <!-- centro -->
-                    <div class="panel-body">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="small-box bg-red">
-                            <div class="inner">
-                              <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $totalc; ?></strong>
-                              </h4>
-                              <p>Historial de Ingresos de HOY</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="ingreso.php" class="small-box-footer">Ingresos <i class="fa fa-arrow-circle-right"></i></a>
-                          </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="small-box bg-yellow">
-                            <div class="inner">
-                              <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $totalv; ?></strong>
-                              </h4>
-                              <p>Historial de Ventas de HOY</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="venta.php" class="small-box-footer">Ventas <i class="fa fa-arrow-circle-right"></i></a>
-                          </div>
-                      </div>
 
-                    </div>
-
-                    <div class="panel-body">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="small-box bg-olive">
-                            <div class="inner">
-                              <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $total_costo_alm_gen; ?></strong>
-                              </h4>
-                              <p>Total Costo actual Almacen General</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="almacen_general.php" class="small-box-footer">Almacen General <i class="fa fa-arrow-circle-right"></i></a>
-                          </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="small-box bg-orange">
-                            <div class="inner">
-                              <h4 style="font-size:17px;">
-                                <strong>S/ <?php echo $total_costo_pun_v; ?></strong>
-                              </h4>
-                              <p>Total Costo actual Punto venta</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="punto_venta.php" class="small-box-footer">Punto de Venta <i class="fa fa-arrow-circle-right"></i></a>
-                          </div>
-                      </div>
-
-                    </div>
 
                     <div class="panel-body">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">

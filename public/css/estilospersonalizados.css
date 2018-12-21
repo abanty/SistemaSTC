@@ -210,10 +210,6 @@ left: 5px;
 	text-align: center;
 }
 
-.info-box {
-    background: #8a90924d !important;
-    box-shadow: 0 1px 1px rgba(162, 158, 158, 0.85) !important;
-}
 
 .btn-app:hover {
     background: #e09012;
