@@ -65,7 +65,7 @@ if ($_SESSION['inventarios']==1)
                           <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <label>Nombre(*):</label>
                             <input type="hidden" name="idproducto" id="idproducto">
-                            <input type="text" class="form-control" name="nombre" id="nombre" maxlength="100" placeholder="Nombre" autocomplete="off" required>
+                            <input type="text" class="form-control" name="nombre" id="nombre" maxlength="100" placeholder="Nombre" autocomplete="on" required>
                           </div>
 
                           <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
