@@ -39,27 +39,37 @@ Class Venta
 		return ejecutarConsulta($sql);
 	}
 
+	//Implementamos un método para anular el detalle de venta
+	public function anulardetalle($iddetalle_venta)
+	{
+		$sql="UPDATE detalle_venta SET estado=0 WHERE iddetalle_venta='$iddetalle_venta'";
+		return ejecutarConsulta($sql);
+	}
+
 
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idventa)
 	{
-		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,v.tipo_comprobante,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.estado FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario WHERE v.idventa='$idventa'";
+		$sql="SELECT v.idventa,DATE_FORMAT(v.fecha_hora,'%Y-%m-%dT%h:%i') as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,v.tipo_comprobante,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.estado FROM venta v
+		INNER JOIN persona p ON v.idcliente=p.idpersona
+		INNER JOIN usuario u ON v.idusuario=u.idusuario
+		WHERE v.idventa='$idventa'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
 	public function listarDetalle($idventa)
 	{
-		$sql="SELECT dv.idventa,dv.idproducto,a.nombre,dv.cantidad,dv.precio_venta,dv.descuento,
-    (dv.cantidad*dv.precio_venta-dv.descuento) as subtotal
+		$sql="SELECT dv.iddetalle_venta,dv.idventa,dv.idproducto,a.nombre,dv.cantidad,dv.precio_venta,dv.descuento,
+    (dv.cantidad*dv.precio_venta-dv.descuento) as subtotal,dv.estado
     FROM detalle_venta dv inner join producto a on dv.idproducto=a.idproducto
-    where dv.idventa='$idventa'";
+    where dv.idventa='$idventa' AND dv.estado = '1'";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre
+		$sql="SELECT v.idventa, lower(DATE_FORMAT(v.fecha_hora,'%e/%c/%Y - %h:%i %p')) as fecha ,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre
     as usuario,v.tipo_comprobante,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.estado
     FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u
     ON v.idusuario=u.idusuario ORDER by v.idventa desc";

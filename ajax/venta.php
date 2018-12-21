@@ -18,6 +18,8 @@ $total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):
 
 
 $idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
+$iddetalle_venta=isset($_GET["iddetalle_venta"])? limpiarCadena($_GET["iddetalle_venta"]):"";
+
 
 switch ($_GET["op"]){
 
@@ -36,6 +38,13 @@ switch ($_GET["op"]){
 		$rspta=$venta->anular($idventa);
  		echo $rspta ? "Venta anulada" : "Venta no se puede anular";
 	break;
+
+
+  # CASE PARA ANULAR LOS DETALLE DE VENTA EN CASO EMERGENCIA
+  	case 'anulardetalle':
+  		$rspta=$venta->anulardetalle($iddetalle_venta);
+   		echo $rspta ? "Detalle anulada" : "Detalle no se puede anular";
+  	break;
 
 # CASE PARA MOSTRAR LAS VENTAS
 	case 'mostrar':
@@ -62,7 +71,7 @@ switch ($_GET["op"]){
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->precio_venta.'</td><td>'.$reg->descuento.'</td><td>'.$reg->subtotal.'</td></tr>';
+					echo '<tr class="filas"><td style="text-align:center;"><button type="button" class="btn btn-danger btn-sm" onclick="anulardetalle('.$reg->iddetalle_venta.')"><i class="fa fa-close"></i></button></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->precio_venta.'</td><td>'.$reg->descuento.'</td><td>'.$reg->subtotal.'</td></tr>';
 					$total=$total+($reg->precio_venta*$reg->cantidad-$reg->descuento);
 				}
 		echo '<tfoot>

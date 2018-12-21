@@ -367,7 +367,7 @@ function agregarDetalle(idproducto, producto, codigo) {
 		 }
 		 return false;
 	 }
-	 alert(contains);
+
 	 if (contains.contains(idproducto)) {
 
 		 		 swal({
@@ -657,7 +657,7 @@ function eliminarDetalle(indice,idproducto) {
 	}
 	contains.compacta();
 
-alert(contains);
+
 
 	calcularTotalesImporte();
 	calcularTotalesPVenta();

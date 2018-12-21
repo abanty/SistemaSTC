@@ -21,6 +21,7 @@ function init() {
 
 
 	$("#formulario").on("submit", function(e) {
+		e.preventDefault();
 		guardaryeditar(e);
 	});
 
@@ -88,12 +89,15 @@ function var_extras() {
 
 // TODO: FUNCION PARA ABRIR MODAL CON LISTA DE PRODUCTO POR Almacen
 function openproductofilter() {
+	var keytext = $("#idalmacen option:selected").text();
 	var key = $("#idalmacen option:selected").val();
 	if (key == "") {
 		alert('Selecciona un Almacen');
 	} else {
 		listarProductos(key);
+		$("#myModal .modal-title").html('<i class="fa fa-list-ol" aria-hidden="true"></i> Seleccione un Producto del ' + keytext);
 		$('#myModal').modal('show');
+		// $("#myModal .modal-header").text('pass your text here');
 	}
 }
 
@@ -123,8 +127,10 @@ function mostrarform(flag) {
 
 // TODO:  FUNCION PARA CANCELAR  LAS VENTAS
 function cancelarform() {
+	clearTimeout(t);
 	limpiar();
 	mostrarform(false);
+	fechanow();
 }
 
 
@@ -231,7 +237,7 @@ function mostrar(idventa) {
 	}, function(data, status) {
 		data = JSON.parse(data);
 		mostrarform(true);
-
+		clearTimeout(t);
 		$("#idcliente").val(data.idcliente);
 		$("#idcliente").selectpicker('refresh');
 		$("#tipo_comprobante").val(data.tipo_comprobante);
@@ -279,6 +285,38 @@ function anular(idventa) {
 				'success'
 			)
 			$('#tbllistado').DataTable().ajax.reload();
+		});
+	}).catch(swal.noop);
+}
+
+
+// TODO: FUNCION PARA ANULAR REGISTROS
+function anulardetalle(iddetalle_venta) {
+		// iddetalle_venta.preventDefault();
+	swal({
+		title: '¿Está seguro de anular el detalle de esta venta?',
+		//text: "You won't be able to revert this!",
+		//type: 'question',
+		imageUrl: '../public/img/swal-duda.jpg',
+		imageWidth: 250,
+		imageHeight: 250,
+		animation: false,
+		showCancelButton: true,
+		confirmButtonColor: '#f39c12',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Aceptar',
+		cancelButtonText: 'Cancelar'
+	}).then(function(e) {
+
+		$.post("../ajax/venta.php?op=anulardetalle", {
+			iddetalle_venta: iddetalle_venta
+		}, function(e) {
+			swal(
+				(e),
+				'Satisfactoriamente!',
+				'success'
+			)
+			// $('#tbllistado').DataTable().ajax.reload();
 		});
 	}).catch(swal.noop);
 }
