@@ -119,7 +119,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-green"><i class="fa fa-dollar"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Capital Actual Almacen<span><br>General</span> </span></span>
+            <span class="info-box-text">Capital Actual <br> Almacen General </span>
             <span class="info-box-number">S/ <?php echo $total_costo_alm_gen; ?></span>
           </div>
           <!-- /.info-box-content -->
@@ -132,7 +132,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Capital Actual Punto <br>de Venta</span</span>
+            <span class="info-box-text">Capital Actual <br> Punto de Venta</span</span>
             <span class="info-box-number">S/ <?php echo $total_costo_pun_v; ?></span>
           </div>
           <!-- /.info-box-content -->
