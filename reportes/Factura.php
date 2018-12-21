@@ -147,7 +147,7 @@ function addSociete( $nom, $adresse,$logo,$ext_logo )
 	$this->SetXY( $x1, $y1 + 4 );
 	$this->SetFont('Arial','',10);
 	$length = $this->GetStringWidth( $adresse );
-	//Coordonnées de la société
+	//Coordonnï¿½es de la sociï¿½tï¿½
 	$lignes = $this->sizeOfText( $adresse, $length) ;
 	$this->MultiCell($length, 4, $adresse);
 }
@@ -160,11 +160,11 @@ function fact_dev( $libelle, $num )
     $y1  = 6;
     $y2  = $y1 + 2;
     $mid = ($r1 + $r2 ) / 2;
-    
-    $texte  = $libelle  . $num;    
+
+    $texte  = $libelle  . $num;
     $szfont = 12;
     $loop   = 0;
-    
+
     while ( $loop == 0 )
     {
        $this->SetFont( "Arial", "B", $szfont );
@@ -176,7 +176,7 @@ function fact_dev( $libelle, $num )
     }
 
     $this->SetLineWidth(0.1);
-    $this->SetFillColor(72,209,204);
+    $this->SetFillColor(255,215,0);
     $this->RoundedRect($r1, $y1, ($r2 - $r1), $y2, 2.5, 'DF');
     $this->SetXY( $r1+1, $y1+2);
     $this->Cell($r2-$r1 -1,5, $texte, 0, 0, "C" );
@@ -320,7 +320,7 @@ function addNumTVA($tva)
 	$this->RoundedRect($r1, $y1, ($r2 - $r1), ($y2-$y1), 2.5, 'D');
 	$this->Line( $r1, $mid, $r2, $mid);
 	$this->SetXY( $r1 + 16 , $y1+1 );
-	$this->Cell(40, 4, "DIRECCIÓN", '', '', "C");
+	$this->Cell(40, 4, "DIRECCIï¿½N", '', '', "C");
 	$this->SetFont( "Arial", "", 10);
 	$this->SetXY( $r1 + 16 , $y1+5 );
 	$this->Cell(40, 5, $tva, '', '', "C");
@@ -329,41 +329,46 @@ function addNumTVA($tva)
 function addReference($ref)
 {
 	$this->SetFont( "Arial", "", 10);
-	$length = $this->GetStringWidth( "Références : " . $ref );
+	$length = $this->GetStringWidth( "Rï¿½fï¿½rences : " . $ref );
 	$r1  = 10;
 	$r2  = $r1 + $length;
 	$y1  = 92;
 	$y2  = $y1+5;
 	$this->SetXY( $r1 , $y1 );
-	$this->Cell($length,4, "Références : " . $ref);
+	$this->Cell($length,4, "Rï¿½fï¿½rences : " . $ref);
 }
 
 function addCols( $tab )
 {
 	global $colonnes;
-	
+
 	$r1  = 10;
 	$r2  = $this->w - ($r1 * 2) ;
 	$y1  = 79;
 	$y2  = $this->h - 50 - $y1;
+
 	$this->SetXY( $r1, $y1 );
 	$this->Rect( $r1, $y1, $r2, $y2, "D");
 	$this->Line( $r1, $y1+6, $r1+$r2, $y1+6);
 	$colX = $r1;
 	$colonnes = $tab;
+	// $this->SetTextColor(255,255,255);
+	$this->SetFont( "Arial", "B", 10);
 	while ( list( $lib, $pos ) = each ($tab) )
 	{
-		$this->SetXY( $colX, $y1+2 );
-		$this->Cell( $pos, 1, $lib, 0, 0, "C");
+		$this->SetXY( $colX+0.2, $y1+0.3 );
+		$this->Cell( $pos, 5.5, $lib, 0, 1, "C",true);
 		$colX += $pos;
 		$this->Line( $colX, $y1, $colX, $y1+$y2);
 	}
+	$this->SetTextColor(10,10,10);
+	$this->SetFont( "Arial", "", 10);
 }
 
 function addLineFormat( $tab )
 {
 	global $format, $colonnes;
-	
+
 	while ( list( $lib, $pos ) = each ($colonnes) )
 	{
 		if ( isset( $tab["$lib"] ) )
@@ -527,7 +532,7 @@ function addTVAs( $igv, $total,$moneda )
 	$this->Cell( 17,4, $moneda.sprintf("%0.2F", ($total*$igv/($igv+100))), '', '', 'R');
 	$this->SetXY( $re, $y1+14.8 );
 	$this->Cell( 17,4, $moneda.sprintf("%0.2F", $total), '', '', 'R');
-	
+
 }
 
 // add a watermark (temporary estimate, DUPLICATA...)
