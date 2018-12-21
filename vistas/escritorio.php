@@ -85,7 +85,7 @@ if ($_SESSION['escritorio']==1)
                               <h4 style="font-size:17px;">
                                 <strong>S/ <?php echo $totalc; ?></strong>
                               </h4>
-                              <p>Historial de Ingresos</p>
+                              <p>Historial de Ingresos de HOY</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
@@ -99,7 +99,7 @@ if ($_SESSION['escritorio']==1)
                               <h4 style="font-size:17px;">
                                 <strong>S/ <?php echo $totalv; ?></strong>
                               </h4>
-                              <p>Historial de Ventas</p>
+                              <p>Historial de Ventas de HOY</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
@@ -163,7 +163,7 @@ if ($_SESSION['escritorio']==1)
                               <h4 style="font-size:17px;">
                                 <strong>S/</strong>
                               </h4>
-                              <p>Crecimiento economico en porcentaje</p>
+                              <p>Total Historial Utilidades</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
