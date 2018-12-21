@@ -46,7 +46,6 @@ function limpiar() {
 	$("#idventa").val("");
 	$("#serie_comprobante").val("");
 	$("#num_comprobante").val("");
-	$("#impuesto").val("0");
 	$("#total_venta").val("");
 	$(".filas").remove();
 	$("#total").html("0");
@@ -82,6 +81,7 @@ function checkTime(i) {
 
 // TODO: FUNCION EXTRAS
 function var_extras() {
+	$("#impuesto").val("0");
 	$("#tipo_comprobante").val("Otros");
 	$("#tipo_comprobante").selectpicker('refresh');
 }
