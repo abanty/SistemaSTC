@@ -130,8 +130,6 @@ if ($_SESSION['escritorio']==1)
       <!-- /.col -->
     </div>
 
-
-
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
@@ -150,7 +148,7 @@ if ($_SESSION['escritorio']==1)
                               <h4 style="font-size:17px;">
                                 <strong>S/</strong>
                               </h4>
-                              <p>Total Beneficio</p>
+                              <p>Total Beneficio de HOY</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
@@ -164,7 +162,7 @@ if ($_SESSION['escritorio']==1)
                               <h4 style="font-size:17px;">
                                 <strong>S/</strong>
                               </h4>
-                              <p>Total Historial Utilidades</p>
+                              <p>Capital Total Actual de Almacenes</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
