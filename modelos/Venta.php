@@ -90,7 +90,7 @@ Class Venta
 		$sql="SELECT a.nombre as producto,a.codigo,d.cantidad,d.precio_venta,
 		d.descuento,(d.cantidad*d.precio_venta-d.descuento) as subtotal
 		FROM detalle_venta d INNER JOIN producto a ON d.idproducto=a.idproducto
-		WHERE d.idventa='$idventa'";
+		WHERE d.idventa='$idventa' AND d.estado = 'valido'";
 		return ejecutarConsulta($sql);
 	}
 
