@@ -186,18 +186,44 @@ if ($_SESSION['ventas']==1)
                         <tbody>
 
                         </tbody>
-                        <!-- <tfoot>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal_detalles" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background:#616263; color:white;">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><i class="fa fa-list-ol" aria-hidden="true"></i> Detalle de venta: </h4>
+        </div>
+          <div class="modal-body">
+            <div class="row table-responsive">
+                <div class="col-sm-12">
+                      <table id="tblproductos_detalle" class="table table-striped table-bordered table-condensed table-hover" style="width:100%;">
+                        <thead>
                           <th>Opciones</th>
-                          <th>Fecha</th>
-                          <th>Codigo</th>
+                          <th>N°</th>
                           <th>Nombre</th>
-                          <th>Descripcion</th>
-                          <th>Categoria</th>
-                          <th>Talla</th>
-                          <th>Stock</th>
-                          <th>P.V. Sugerido</th>
-                          <th>Imagen</th>
-                        </tfoot> -->
+                          <th>Cantidad</th>
+                          <th>Precio Venta</th>
+                          <th>Descuento</th>
+                          <th>Subtotal</th>                        
+                        </thead>
+                        <tbody>
+
+                        </tbody>
                       </table>
                 </div>
             </div>

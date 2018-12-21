@@ -222,7 +222,7 @@ function guardaryeditar(e) {
 				'success'
 			);
 			mostrarform(false);
-			listar();
+			$('#tbllistado').DataTable().ajax.reload();
 		}
 	});
 
@@ -260,10 +260,71 @@ function mostrar(idventa) {
 }
 
 
+function listar_detalle_modal(idventa)
+{
+	tabla=$('#tblproductos_detalle').dataTable(
+	{
+		"aProcessing": true,
+	    "aServerSide": true,
+	    dom: 'Brtip',
+	    buttons: [
+
+		        ],
+		  columnDefs:[
+		  	{"visible": false, "targets":1}
+		  ],
+		"ajax":
+				{
+					url: "../ajax/venta.php?op=listadetalle_poridventa",
+					type : "get",
+					data: {
+						idventadet: idventa,
+					},
+					dataType : "json",
+					error: function(e){
+						console.log(e.responseText);
+					}
+				},
+		"bDestroy": true,
+		"iDisplayLength": 10,//Paginación
+	    "order": [[ 1, "desc" ]],
+			rowGroup: {
+							startRender: function ( rows, group ) {
+									return 'Detalle de Salida 00' + group + ' ('+rows.count()+' productos)';
+							},
+	            endRender: function ( rows, group ) {
+	                var avg = rows
+	                    .data()
+	                    .pluck(6)
+	                    .reduce( function (a, b) {
+	                        return a + b *1;
+	                    }, 0);
+
+	                return 'TOTAL DE VENTA EN EL DETALLE  00'+group+' : '  +
+	                    $.fn.dataTable.render.number(',', '.', 0, '  S/ ').display( avg );
+	            },
+	            dataSrc: 1
+	        }
+
+
+	}).DataTable();
+}
+
+
+// TODO: FUNCION PARA MOSTRAR LOS REGISTROS
+function verdetalle(idventa_d) {
+	// alert(idventa);
+	listar_detalle_modal(idventa_d)
+	$("#myModal_detalles .modal-title").html('<i class="fa fa-list-ol" aria-hidden="true"></i> Detalle de Venta  00'+idventa_d);
+	$('#myModal_detalles').modal('show');
+
+}
+
+
 // TODO: FUNCION PARA ANULAR REGISTROS
 function anular(idventa) {
 	swal({
-		title: '¿Está seguro de anular el ingreso?',
+		title: '¿Está seguro de anular la venta?',
 		//text: "You won't be able to revert this!",
 		//type: 'question',
 		imageUrl: '../public/img/swal-duda.jpg',
@@ -292,9 +353,9 @@ function anular(idventa) {
 
 // TODO: FUNCION PARA ANULAR REGISTROS
 function anulardetalle(iddetalle_venta) {
-		// iddetalle_venta.preventDefault();
+
 	swal({
-		title: '¿Está seguro de anular el detalle de esta venta?',
+		title: '¿Está seguro de anular el detalle_venta?',
 		//text: "You won't be able to revert this!",
 		//type: 'question',
 		imageUrl: '../public/img/swal-duda.jpg',
@@ -307,8 +368,7 @@ function anulardetalle(iddetalle_venta) {
 		confirmButtonText: 'Aceptar',
 		cancelButtonText: 'Cancelar'
 	}).then(function(e) {
-
-		$.post("../ajax/venta.php?op=anulardetalle", {
+		$.post("../ajax/venta.php?op=anulardetalle_v", {
 			iddetalle_venta: iddetalle_venta
 		}, function(e) {
 			swal(
@@ -316,7 +376,8 @@ function anulardetalle(iddetalle_venta) {
 				'Satisfactoriamente!',
 				'success'
 			)
-			// $('#tbllistado').DataTable().ajax.reload();
+			$('#tblproductos_detalle').DataTable().ajax.reload();
+			$('#tbllistado').DataTable().ajax.reload();
 		});
 	}).catch(swal.noop);
 }

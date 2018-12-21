@@ -223,6 +223,9 @@ function listarProductos_x_almacen(idalmacen) {
 			text: 'Reportes en archivo PDF',
 			download: 'open'
 		}, ],
+		columnDefs:[
+			{"visible": false, "targets":0}
+		],
 		"ajax": {
 			url: '../ajax/ingreso.php?op=listarproductosalmacenes',
 			type: "get",
@@ -269,7 +272,7 @@ function guardaryeditar(e) {
 				'success'
 			).catch(swal.noop);
 			mostrarform(false);
-			listar();
+			$('#tbllistado').DataTable().ajax.reload();
 		}
 	});
 	limpiar();

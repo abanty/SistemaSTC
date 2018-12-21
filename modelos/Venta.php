@@ -42,7 +42,7 @@ Class Venta
 	//Implementamos un método para anular el detalle de venta
 	public function anulardetalle($iddetalle_venta)
 	{
-		$sql="UPDATE detalle_venta SET estado=0 WHERE iddetalle_venta='$iddetalle_venta'";
+		$sql="UPDATE detalle_venta SET estado='anulado' WHERE iddetalle_venta='$iddetalle_venta'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -62,7 +62,7 @@ Class Venta
 		$sql="SELECT dv.iddetalle_venta,dv.idventa,dv.idproducto,a.nombre,dv.cantidad,dv.precio_venta,dv.descuento,
     (dv.cantidad*dv.precio_venta-dv.descuento) as subtotal,dv.estado
     FROM detalle_venta dv inner join producto a on dv.idproducto=a.idproducto
-    where dv.idventa='$idventa' AND dv.estado = '1'";
+    where dv.idventa='$idventa' AND dv.estado = 'valido'";
 		return ejecutarConsulta($sql);
 	}
 

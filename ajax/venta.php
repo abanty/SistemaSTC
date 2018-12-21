@@ -18,8 +18,10 @@ $total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):
 
 
 $idalmacen=isset($_GET["idalmacen"])? limpiarCadena($_GET["idalmacen"]):"";
-$iddetalle_venta=isset($_GET["iddetalle_venta"])? limpiarCadena($_GET["iddetalle_venta"]):"";
 
+$idventa_det=isset($_GET["idventadet"])? limpiarCadena($_GET["idventadet"]):"";
+
+$iddetalle_venta=isset($_POST["iddetalle_venta"])? limpiarCadena($_POST["iddetalle_venta"]):"";
 
 switch ($_GET["op"]){
 
@@ -41,9 +43,10 @@ switch ($_GET["op"]){
 
 
   # CASE PARA ANULAR LOS DETALLE DE VENTA EN CASO EMERGENCIA
-  	case 'anulardetalle':
+  	case 'anulardetalle_v':
+
   		$rspta=$venta->anulardetalle($iddetalle_venta);
-   		echo $rspta ? "Detalle anulada" : "Detalle no se puede anular";
+   		echo $rspta ? "Detalle anulado" : "Detalle no se puede anular";
   	break;
 
 # CASE PARA MOSTRAR LAS VENTAS
@@ -98,7 +101,7 @@ switch ($_GET["op"]){
  			}
  			$data[]=array(
  				"0"=>(($reg->estado=='Aceptado')?'<button class="btn btn-success btn-sm" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>'.
- 					' <button class="btn btn-danger btn-sm" onclick="anular('.$reg->idventa.')"><i class="fa fa-close"></i></button>':
+ 					' <button class="btn btn-danger btn-sm" onclick="anular('.$reg->idventa.')"><i class="fa fa-close"></i></button>'.' <button class="btn btn-warning btn-sm" onclick="verdetalle('.$reg->idventa.')"><i class="fa fa-list"></i></button>':
  					'<button class="btn btn-warning btn-sm" onclick="mostrar('.$reg->idventa.')"><i class="fa fa-eye"></i></button>').
  					'<a target="_blank" href="'.$url.$reg->idventa.'"> <button class="btn btn-personal btn-sm"><i class="fa fa-file"></i></button></a>',
  				"1"=>$reg->fecha,
@@ -174,5 +177,31 @@ switch ($_GET["op"]){
    			"aaData"=>$data);
    		echo json_encode($results);
   	break;
+
+
+    # CASE PARA LISTAR LOS PRODUCTOS DEL MODAL VENTA
+      	case 'listadetalle_poridventa':
+
+      		$rspta=$venta->listarDetalle($idventa_det);
+       		$data= Array();
+       		while ($reg=$rspta->fetch_object()){
+
+       			$data[]=array(
+       		  "0"=>'<button class="btn btn-danger btn-sm" onclick="anulardetalle('.$reg->iddetalle_venta.')"><span class="fa fa-close"></span> Anular</button>',
+            "1"=>$reg->idventa,
+            "2"=>'<span style="color:#122450; font-weight:bold;" class="">'.$reg->nombre.'</span>',
+            "3"=>'<span style="color:#000000; font-weight:bold;" class="">'.$reg->cantidad.'</span>',
+            "4"=>$reg->precio_venta,
+            "5"=>$reg->descuento,
+            "6"=>$reg->subtotal
+       			);
+       		}
+       		$results = array(
+       			"sEcho"=>1, //Información para el datatables
+       			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+       			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+       			"aaData"=>$data);
+       		echo json_encode($results);
+      	break;
 }
 ?>
