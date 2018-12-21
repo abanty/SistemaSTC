@@ -288,9 +288,9 @@ function anular(idventa) {
 var impuesto = 18;
 var cont = 0;
 var detalles = 0;
-//$("#guardar").hide();
 $("#btnGuardar").hide();
 $("#tipo_comprobante").change(marcarImpuesto);
+
 
 function marcarImpuesto() {
 	var tipo_comprobante = $("#tipo_comprobante option:selected").text();
@@ -301,90 +301,100 @@ function marcarImpuesto() {
 	}
 }
 
+function concatenate(a, b, base) {
+        return a * Math.pow(base, Math.floor(Math.log(b) / Math.log(base)) + 1) + b;
+    }
+
 
 // TODO: FUNCION PARA AGREGAR DETALLE DE PRODUCTOS
 var contains = [];
 function agregarDetalle(codigo, idproducto, producto, precio_venta, stock, idalmacen, idlote) {
 
-	Array.prototype.contains = function ( needle ) {
-		 for (i in this) {
-				 if (this[i] == needle) return true;
-		 }
-		 return false;
-	 }
 
-	if (contains.contains(idproducto)) {
+	Array.prototype.contains = function(needle) {
+		for (i in this) {
+			if (this[i] == needle) return true;
+		}
+		return false;
+	}
+	var datadetalle = concatenate(idproducto, idlote, 10);
+	if (contains.contains(datadetalle)) {
 
-			 swal({
-					 type: 'warning',
-					 title: 'Este Producto ya fue Ingresado',
-					 text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
-			 }).catch(swal.noop);
-
-	 }else{
-	if (stock != 0) {
 		swal({
-			title: 'Ingresa Cantidad:',
-			input: 'number',
-			inputPlaceholder: ''
-		}).then(function(number) {
+			type: 'warning',
+			title: 'Este Producto ya fue Ingresado',
+			text: 'Para ingresar el producto debe retirar el mismo producto del detalle...',
+		}).catch(swal.noop);
 
-			var cantidad = number;
-			var descuento = 0;
-			if ((Number(cantidad) > 0) && (Number(cantidad) != "")) {
-				if ((idproducto != "") && (Number(stock) >= Number(cantidad))) {
-					var subtotal = cantidad * precio_venta;
-					var fila = '<tr class="filas" id="fila' + cont + '">' +
-						'<td style="text-align:center;"><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
-						'<td><input type="hidden" name="idproducto[]" value="' + idproducto + '" required="">' + producto + '</td>' +
-						'<td style><input type="number" class="form-control"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="' + cantidad + '" required=""></td>' +
-						'<td><input type="number" class="form-control" name="precio_venta[]"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" id="precio_venta[]" value="' + precio_venta + '" required=""></td>' +
-						'<td><input type="number" class="form-control" name="descuento[]" onchange="modificarSubototales()" onkeyup="modificarSubototales()" value="' + descuento + '" required=""></td>' +
-						'<td><span name="subtotal" id="subtotal' + cont + '">' + subtotal + '</span></td>' +
-						'<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
-						'<td><input type="hidden" name="idalmacen[]" value="' + idalmacen + '" required=""></td>' +
-						'<td><input type="hidden" name="idlote[]" value="' + idlote + '" required=""></td>' +
-						'</tr>';
-					cont++;
-					detalles = detalles + 1;
-					$('#detalles').append(fila);
+	} else {
+		if (stock != 0) {
+			swal({
+				title: 'Ingresa Cantidad:',
+				input: 'number',
+				inputPlaceholder: ''
+			}).then(function(number) {
 
-					var pro= [idproducto];
-					for (var i = 0; i <pro.length; i++) {
-						 valores=pro[i];
-					}
-					contains.push(valores);
+				var cantidad = number;
+				var descuento = 0;
+				if ((Number(cantidad) > 0) && (Number(cantidad) != "")) {
+					if ((idproducto != "") && (Number(stock) >= Number(cantidad))) {
+						var subtotal = cantidad * precio_venta;
+						var fila = '<tr class="filas" id="fila' + cont + '">' +
+							'<td style="text-align:center;"><button type="button" id="elim" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ',' + idlote + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
+							'<td><input type="hidden" value="' + codigo + '" required>' + codigo + '</td>' +
+							'<td><input type="hidden" value="' + idlote + '" required>' + idlote + '</td>' +
+							'<td><input type="hidden" name="idproducto[]" value="' + idproducto + '" required="">' + producto + '</td>' +
+							'<td style><input type="number" class="form-control"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
+							'<td><input type="number" class="form-control" name="precio_venta[]"  onchange="modificarSubototales()" onkeyup="modificarSubototales()" id="precio_venta[]" value="' + precio_venta + '" required=""></td>' +
+							'<td><input type="number" class="form-control" name="descuento[]" onchange="modificarSubototales()" onkeyup="modificarSubototales()" value="' + descuento + '" required=""></td>' +
+							'<td><span name="subtotal" id="subtotal' + cont + '">' + subtotal + '</span></td>' +
+							'<td><button type="button" onclick="modificarSubototales()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
+							'<td><input type="hidden" name="idalmacen[]" value="' + idalmacen + '" required=""></td>' +
+							'<td><input type="hidden" name="idlote[]" value="' + idlote + '" required=""></td>' +
+							'</tr>';
+						cont++;
+						detalles = detalles + 1;
+						$('#detalles').append(fila);
 
-					$(function() {
-						$(document).on('click', 'input[type=number]', function() {
-							this.select();
+						var pro = [idproducto];
+						var lote = [idlote];
+						for (var i = 0; i < pro.length; i++) {
+							valores = pro[i];
+							valoreslote = lote[i]
+						}
+						var concatenatedNumber = concatenate(valores, valoreslote, 10);
+						contains.push(concatenatedNumber);
+
+						$(function() {
+							$(document).on('click', 'input[type=number]', function() {
+								this.select();
+							});
 						});
-					});
 
-					modificarSubototales();
+						modificarSubototales();
 
+					} else {
+						swal({
+							type: 'error',
+							title: 'Oops...',
+							text: 'Stock Superado',
+						}).catch(swal.noop);
+					}
 				} else {
 					swal({
 						type: 'error',
 						title: 'Oops...',
-						text: 'Stock Superado',
+						text: 'Ingresa una cantidad correcta! ',
 					}).catch(swal.noop);
 				}
-			} else {
-				swal({
-					type: 'error',
-					title: 'Oops...',
-					text: 'Ingresa una cantidad correcta! ',
-				}).catch(swal.noop);
-			}
-		}).catch(swal.noop);
-	} else {
-		swal({
-			type: 'error',
-			title: 'Oops...',
-			text: 'Insuficiente Stock disponible',
-		}).catch(swal.noop);
-	}
+			}).catch(swal.noop);
+		} else {
+			swal({
+				type: 'error',
+				title: 'Oops...',
+				text: 'Insuficiente Stock disponible',
+			}).catch(swal.noop);
+		}
 	}
 }
 
@@ -438,13 +448,15 @@ function evaluar() {
 
 
 // TODO: FUNCION PARA ELIMINAR DETALLE
-function eliminarDetalle(indice, idproducto) {
+function eliminarDetalle(indice, idproducto, idlote) {
+
+	var datadetalledelete = concatenate(idproducto, idlote, 10);
 
 	$("#fila" + indice).remove();
 
 	Array.prototype.compacta = function(){
 		for(var i = 0; i < this.length; i++){
-			if(this[i] === idproducto){
+			if(this[i] === datadetalledelete){
 					this.splice(i , 1);
 			}
 		}

@@ -119,6 +119,8 @@ if ($_SESSION['ventas']==1)
                             <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
                               <thead style="background-color:#222d3287; color: white;">
                                     <th >Opciones</th>
+                                    <th >Codigo</th>
+                                    <th >Lote</th>
                                     <th >Producto</th>
                                     <th >Cantidad</th>
                                     <th >Precio Venta Sugerido</th>
@@ -129,7 +131,8 @@ if ($_SESSION['ventas']==1)
 
                                 </tbody>
                                 <tfoot>
-
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
