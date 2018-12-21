@@ -120,7 +120,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Capital Actual Punto venta</span>
+            <span class="info-box-text">Capital Actual Punto <br>de Venta</span</span>
             <span class="info-box-number">S/ <?php echo $total_costo_pun_v; ?></span>
           </div>
           <!-- /.info-box-content -->
