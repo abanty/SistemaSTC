@@ -77,7 +77,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-aqua"><i class="fa fa-balance-scale"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Historial de Ingresos de HOY</span>
+            <span class="info-box-text">Ingresos de HOY</span>
             <span class="info-box-number">S/ <?php echo $totalc; ?></span>
           </div>
           <!-- /.info-box-content -->
@@ -90,7 +90,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-red"><i class="fa fa-bar-chart"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Historial de Ventas de HOY</span>
+            <span class="info-box-text">Ventas de HOY</span>
             <span class="info-box-number">S/ <?php echo $totalv; ?></span>
           </div>
           <!-- /.info-box-content -->
@@ -107,7 +107,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-green"><i class="fa fa-dollar"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Total Costo actual Almacen General</span>
+            <span class="info-box-text">Capital Actual Almacen General</span>
             <span class="info-box-number">S/ <?php echo $total_costo_alm_gen; ?></span>
           </div>
           <!-- /.info-box-content -->
@@ -120,7 +120,7 @@ if ($_SESSION['escritorio']==1)
           <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Total Costo actual Punto venta</span>
+            <span class="info-box-text">Capital Actual Punto venta</span>
             <span class="info-box-number">S/ <?php echo $total_costo_pun_v; ?></span>
           </div>
           <!-- /.info-box-content -->
