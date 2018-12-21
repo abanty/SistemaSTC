@@ -16,6 +16,18 @@ if ($_SESSION['escritorio']==1)
   require_once "../modelos/Consultas.php";
   $consulta = new Consultas();
 
+
+  $rspta_ben_hoy = $consulta->totalbeneficiohoy();
+  $reg_ben_hoy=$rspta_ben_hoy->fetch_object();
+  $total_ben_hoy=$reg_ben_hoy->total_beneficio_hoy;
+
+  // SUMAS DE COSTOS ALMACENES ACTUAL
+
+  $rspta_costo_tot_act_alm = $consulta->costo_total_almacenes();
+  $reg_costo_tot_act_alm=$rspta_costo_tot_act_alm->fetch_object();
+  $total_costo_act_alm=$reg_costo_tot_act_alm->total_costo_almacenes;
+
+
 // ACTUALES
 
   $rspta_costo_alm_g = $consulta->costo_total_almaceng();
@@ -139,16 +151,14 @@ if ($_SESSION['escritorio']==1)
                         </div>
                     </div>
                     <!-- /.box-header -->
-
-
-                    <div class="panel-body">
+                  <div class="panel-body">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <div class="small-box bg-green">
                             <div class="inner">
                               <h4 style="font-size:17px;">
-                                <strong>S/</strong>
+                                <strong>S/ <?php echo $total_ben_hoy; ?></strong>
                               </h4>
-                              <p>Total Beneficio de HOY</p>
+                              <p>Total Beneficio HOY</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>
@@ -160,9 +170,9 @@ if ($_SESSION['escritorio']==1)
                         <div class="small-box bg-navy">
                             <div class="inner">
                               <h4 style="font-size:17px;">
-                                <strong>S/</strong>
+                                <strong>S/ <?php echo $total_costo_act_alm; ?></strong>
                               </h4>
-                              <p>Capital Total Actual de Almacenes</p>
+                              <p>Total Capital Actual Almacenes</p>
                             </div>
                             <div class="icon">
                               <i class="ion ion-bag"></i>

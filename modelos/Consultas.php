@@ -56,6 +56,26 @@ Class Consultas
 		return ejecutarConsulta($sql);
 	}
 
+
+	public function totalbeneficiohoy()
+	{
+		$sql="SELECT IFNULL(SUM(dv.cantidad*dv.precio_venta-dv.descuento) - SUM(dv.cantidad * (SELECT precio_compra FROM detalle_ingreso WHERE idlote = dv.idlote and idproducto = dv.idproducto order by iddetalle_ingreso desc limit 0,1)),0) as total_beneficio_hoy
+		 FROM detalle_venta dv inner join producto a on dv.idproducto=a.idproducto
+		 inner join venta v on v.idventa = dv.idventa
+		 where dv.estado = 'valido' AND DATE(v.fecha_hora)=curdate()";
+		return ejecutarConsulta($sql);
+	}
+
+
+	public function costo_total_almacenes()
+	{
+		$sql="SELECT IFNULL(SUM((pu.stock * pu.precio_compra)),0) as total_costo_almacenes
+			FROM producto_ubicacion pu
+			inner join producto p on p.idproducto = pu.idproducto
+			inner join almacen al on al.idalmacen = pu.idalmacen";
+		return ejecutarConsulta($sql);
+	}
+
 	public function totalventahoy()
 	{
 		$sql="SELECT IFNULL(SUM(total_venta),0) as total_venta
