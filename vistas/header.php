@@ -14,8 +14,11 @@ if (strlen(session_id()) < 1)
     <!-- BOOTSTRAP 3.3.5 -->
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../public/css/font-awesome.css">
+    <link rel="stylesheet" href="../public/fonts/font-awesome.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
       <link rel="stylesheet" type="text/css" href="../public/fonts/fuentesgoogle.css">
     <!-- TEMA DE LA PLANTILLA -->
     <link rel="stylesheet" href="../public/css/AdminLTE.min.css">

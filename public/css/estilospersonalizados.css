@@ -274,3 +274,11 @@ table.dataTable tr.group td {
     background-color: #5c6367 !important;
     color: white !important;
 }
+
+
+#span_cod{
+  font-size: 15px;
+    font-weight: bold;
+    font-family: monospace;
+    text-transform: uppercase;
+}

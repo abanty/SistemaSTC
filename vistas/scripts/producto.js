@@ -1,7 +1,8 @@
 var tabla;
 
-//Función que se ejecuta al inicio
+// TODO:  FUNCION QUE SE EJECUTA AL INICIO
 function init(){
+
 
 	$(document).ready(function(){
 		$(".dataTables_filter input").focus();
@@ -64,19 +65,24 @@ function init(){
 
 // TODO: FUNCION CARGAR IMAGENES
 function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+	// if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+	// 	 return alert(file.name + " is not an image");
+	//  }
 
-            reader.onload = function (e) {
-                $('#imagenmuestra')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(120);
-            };
+		if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+				reader.onload = function (e) {
+						$('#imagenmuestra')
+								.attr('src', e.target.result)
+								.width(150)
+								.height(120);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+		}
+}
+
 
 
 // TODO: FUNCION LIMPIAR
@@ -120,12 +126,14 @@ function mostrarform(flag)
 
 		$('#idcategoria').selectpicker('val', "");
 		$("#listadoregistros").hide();
+		$("#serchfilter").hide();
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
 	}
 	else
 	{
+		$("#serchfilter").show()
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
 		$("#btnagregar").show();
@@ -148,7 +156,7 @@ function listar()
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
 				"aServerSide": true, //Paginacion y filtrado realizados por el servidor
-				dom: 'Bfrtip',         //Definimos los elementos del control de tabla
+				dom: 'Brtip',         //Definimos los elementos del control de tabla
 				buttons: [
 					'copyHtml5',
 					'excelHtml5',
