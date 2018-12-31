@@ -92,7 +92,12 @@ function openproductofilter() {
 	var keytext = $("#idalmacen option:selected").text();
 	var key = $("#idalmacen option:selected").val();
 	if (key == "") {
-		alert('Selecciona un Almacen');
+		// alert('Selecciona un Almacen');
+		$.notify.defaults({ className: "success" });
+		$.notify.defaults({ autoHideDelay: 5000 });
+		$.notify.defaults({ style: 'bootstrap' });
+		$("#idalmacen").notify('Selecciona un Almacen',{ position:"bottom center" });
+
 	} else {
 		listarProductos(key);
 		$("#myModal .modal-title").html('<i class="fa fa-list-ol" aria-hidden="true"></i> Seleccione un Producto del ' + keytext);
