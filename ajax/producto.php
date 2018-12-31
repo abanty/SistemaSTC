@@ -19,39 +19,49 @@ switch ($_GET["op"]){
 
 // 	for($x=0; $x<count($_FILES["imagen"]["name"]); $x++)
 //  {
-// 		if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name']))
-// 		{
-// 			// $imagen=$_POST["imagenactual"];
-// 		}
-// 		else
-// 		{
-// 			$ext = explode(".", $_FILES["imagen"]["name"]);
-// 			if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
-// 			{
-// 				$imagen = round(microtime(true)) . '.' . end($ext);
-// 				move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/productos/" . $imagen);
-// 			}
-// 		}
+
+
+
+
+		if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name']))
+		{
+			 $imagen=$_POST["imagenactual"];
+		}
+		else
+		{
+			$ext = explode(".", $_FILES["imagen"]["name"]);
+			if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
+			{
+				$imagen = round(microtime(true)) . '.' . end($ext);
+				move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/productos/" . $imagen);
+			}
+		}
+
+
+
+
+
+
 // }
 
 
-		extract($_POST);
-		    $error=array();
-		    $extension=array("jpeg","jpg","png","gif");
-		    foreach($_FILES["imagen"]["tmp_name"] as $key=>$tmp_name)
-		            {
-		                $file_name=$_FILES["imagen"]["name"][$key];
-		                $file_tmp=$_FILES["imagen"]["tmp_name"][$key];
-		                $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-		                if(in_array($ext,$extension))
-		                {
-		                    if(!file_exists("../files/productos/".$file_name))
-		                    {
-													$imagen=$_POST["imagenactual"];
-		                        // move_uploaded_file($file_tmp=$_FILES["imagen"]["tmp_name"][$key],"../files/productos/".$file_name);
-		                    }
-		                    else
-		                    {
+		// extract($_POST);
+		//     $error=array();
+		//     $extension=array("jpeg","jpg","png","gif");
+		//     foreach($_FILES["imagen"]["tmp_name"] as $key=>$tmp_name)
+		//             {
+		//                 $file_name=$_FILES["imagen"]["name"][$key];
+		//                 $file_tmp=$_FILES["imagen"]["tmp_name"][$key];
+		//                 $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+		//                 if(in_array($ext,$extension))
+		//                 {
+		//                     if(!file_exists("../files/productos/".$file_name))
+		//                     {
+		// 											$imagen=$_POST["imagenactual"];
+		//                         // move_uploaded_file($file_tmp=$_FILES["imagen"]["tmp_name"][$key],"../files/productos/".$file_name);
+		//                     }
+		//                     else
+		//                     {
 
 													// $ext = explode(".", $_FILES["imagen"]["name"]);
 																// if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
@@ -62,17 +72,17 @@ switch ($_GET["op"]){
 
 													// $imagen = round(microtime(true)) . '.' . end($ext);
 													// 		move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/productos/" . $imagen);
-
-		                        $filename=basename($file_name,$ext);
-		                        $imagen=$filename.time().".".$ext;
-		                        move_uploaded_file($file_tmp=$_FILES["imagen"]["tmp_name"][$key],"../files/productos/".$imagen);
-		                    }
-		                }
-		                else
-		                {
-		                    array_push($error,"$file_name, ");
-		                }
-		            }
+								//
+		            //             $filename=basename($file_name,$ext);
+		            //             $imagen=$filename.time().".".$ext;
+		            //             move_uploaded_file($file_tmp=$_FILES["imagen"]["tmp_name"][$key],"../files/productos/".$imagen);
+		            //         }
+		            //     }
+		            //     else
+		            //     {
+		            //         array_push($error,"$file_name, ");
+		            //     }
+		            // }
 
 // 		if (isset($_FILES["imagen"]))
 // 		{
@@ -140,7 +150,7 @@ switch ($_GET["op"]){
 			echo $rspta ? "Producto registrado" : "Producto no se pudo registrar";
 		}
 		else {
-			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$idunidadmedida,$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
+			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
 			echo $rspta ? "Producto actualizado" : "Producto no se pudo actualizar";
 		}
 	break;

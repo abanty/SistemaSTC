@@ -39,10 +39,18 @@ Class Producto
 	//-----------------------------
 	public function editar($idproducto,$idcategoria,$idmarca,$idunidadmedida,$idtipoproducto,$codigo,$nombre,$descripcion,$imagen)
 	{
-		$sql = "UPDATE producto SET idcategoria='$idcategoria',idmarca='$idmarca',idunidadmedida='$idunidadmedida',idtipoproducto='$idtipoproducto',
-		codigo ='$codigo',nombre='$nombre',descripcion='$descripcion',imagen ='$imagen'
-		WHERE idproducto='$idproducto'";
-		return ejecutarConsulta($sql);
+		$num_elementos=0;
+			$sw=true;
+
+			while ($num_elementos < count($idunidadmedida))
+			{
+				$sql_detalle_edit = "UPDATE producto SET idcategoria='$idcategoria',idmarca='$idmarca',idunidadmedida='$idunidadmedida[$num_elementos]',idtipoproducto='$idtipoproducto',
+				codigo ='$codigo',nombre='$nombre',descripcion='$descripcion',imagen ='$imagen'
+				WHERE idproducto='$idproducto'";
+				ejecutarConsulta($sql_detalle_edit) or $sw = false;
+				$num_elementos=$num_elementos + 1;
+			}
+			return $sw;
 	}
 	//---------------------------------
 	//MÉTODO PARA DESACTIVAR PRODUCTOS |

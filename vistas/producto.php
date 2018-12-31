@@ -157,7 +157,7 @@ if ($_SESSION['inventarios']==1)
 
                                   <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label>Imagen:</label>
-                                    <input type="file" onchange="readURL(this);" class="form-control" name="imagen[]" id="imagen" multiple>
+                                    <input type="file" onchange="readURL(this);" class="form-control" name="imagen" id="imagen" multiple>
                                     <input type="hidden" name="imagenactual" id="imagenactual">
                                     <img class="pop" src="" width="150px" height="120px" id="imagenmuestra" style="margin: 0 auto; margin-top: 20px;">
 
