@@ -394,8 +394,8 @@ function agregarDetalle(idproducto, producto, talla) {
 
 				 		var fila = '<tr class="filas" id="fila' + cont + '">' +
 				 		'<td style="text-align:center;"><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
-				 		'<td id="codinp"><input class="form-control" type="hidden">' + talla + '</td>' +
 				 		'<td><input class="form-control" type="hidden" name="idproducto[]" value="' + idproducto + '">' + producto + '</td>' +
+						'<td id="codinp"><input class="form-control" type="hidden">' + talla + '</td>' +
 				 		'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
 				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="' + importe + '"></span></td>' +
 				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="' + precio_compra + '"></span></td>' +
@@ -600,14 +600,18 @@ function calcularTotalesImporte() {
 // TODO: FUNCION CALCULAR TOTALES DE COMPRA o IMPORTE LOTE
 function calcularTotalesPVenta() {
 	var pvent = document.getElementsByName("precio_venta[]");
+	var cant_totalesv = document.getElementsByName("cantidad[]");
 	var total_venta_estimada = 0.0;
 
 	for (var i = 0; i < pvent.length; i++) {
 		var inpV = pvent[i];
+		var inpCa = cant_totalesv[i];
+
 		if (inpV.value == "") {
-			inpV.value = 5;
+			inpV.value = 0;
 		}
-		total_venta_estimada += parseFloat(inpV.value);
+
+		total_venta_estimada += parseFloat(inpV.value)*inpCa.value;
 	}
 	total_venta_estimada = (Math.round(total_venta_estimada*100)/100).toFixed(2);
 	$("#total_v").html("S/. " + total_venta_estimada);
