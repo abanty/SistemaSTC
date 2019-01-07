@@ -131,7 +131,7 @@ if ($_SESSION['compras']==1)
                                 <table id="detalles" class="table table-bordered">
                                   <thead style="background-color:#222d3287; color:white;">
                                         <th>Opciones</th>
-                                        <th>Codigo</th>
+                                        <th>Talla</th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Importe Lote</th>

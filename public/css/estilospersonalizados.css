@@ -239,9 +239,11 @@ input[type=number]::selection {
 }
 
 #codinp {
-	color: #dd4b39;
-	font-size: 13.5px;
-	font-family: fantasy;
+  color: #337ab7;
+font-weight: bold;
+text-align: center;
+font-size: 14px;
+font-family: inherit;
 }
 
 /* CONTROLANDO BACKGROUND TABLE Y BORDER */

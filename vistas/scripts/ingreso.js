@@ -361,7 +361,7 @@ function marcarImpuesto() {
 
 // TODO: FUNCION AGREGAR DETALLE DE UN MODAL - LISTA DE PRODUCTOS A REPONER
 var contains = [];
-function agregarDetalle(idproducto, producto, codigo) {
+function agregarDetalle(idproducto, producto, talla) {
 
 
 	Array.prototype.contains = function ( needle ) {
@@ -394,13 +394,13 @@ function agregarDetalle(idproducto, producto, codigo) {
 
 				 		var fila = '<tr class="filas" id="fila' + cont + '">' +
 				 		'<td style="text-align:center;"><button type="button" class="btn btn-danger" onclick="eliminarDetalle(' + cont + ',' + idproducto + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
-				 		'<td id="codinp"><input class="form-control" type="hidden">' + codigo + '</td>' +
+				 		'<td id="codinp"><input class="form-control" type="hidden">' + talla + '</td>' +
 				 		'<td><input class="form-control" type="hidden" name="idproducto[]" value="' + idproducto + '">' + producto + '</td>' +
 				 		'<td style="width: 10%;"><input class="form-control" type="number" name="cantidad[]" id="cantidad" onchange="modificarSubototales()" onkeyup="modificarSubototales()" onblur="onBlur(this)" onfocus="onFocus(this)"  oninput="validaLength(this)" maxlength="4" min="1" max="10000" value="' + cantidad + '" required=""></td>' +
 				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculacompraunitaria()" onblur="onBlur(this)" onfocus="onFocus(this)" id="importe" name="importe[]" placeholder="0.00" value="' + importe + '"></span></td>' +
 				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" step=".01" min="1" max="100000" onchange="calculaimporte()" onkeyup="calculaimporte()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_compra" name="precio_compra[]" value="' + precio_compra + '"></span></td>' +
 				 		'<td><span class="input-symbol-euro"><input class="form-control" type="number" onchange="modificarSubototales()" step=".01" min="0.00" max="10000" onchange="calculaganancia()" onblur="onBlur(this)" onfocus="onFocus(this)" id="precio_venta" name="precio_venta[]" value="' + precio_venta + '"></span></td>' +
-				 		'<td><span class="input-symbol-porcent"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="1000" name="gananciaporcentaje[]" value="' + ganancia + '"  readonly></span></td>' +
+				 		'<td><span><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="1" max="1000" name="gananciaporcentaje[]" value="' + ganancia + '"  readonly></span></td>' +
 				 		'<td style="width: 10%;"><span class="input-symbol-euro"><input class="form-control" type="number" onblur="onBlur(this)" onfocus="onFocus(this)" step=".01" min="0" max="100000" name="ganancianeta[]" value="' + ganancianeta + '"></span></td>' +
 				 		'<td><button type="button" onclick="calculaimporte()" class="btn btn-warning"><i class="fa fa-refresh"></i></button></td>' +
 				 		'<td id="p_none"><input  type="hidden" name="valor1[]" value="' + valor1 + '"></td>' +

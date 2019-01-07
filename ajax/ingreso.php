@@ -190,7 +190,7 @@ switch ($_GET["op"]){
         while ($reg=$rspta->fetch_object()){
           	// $imagentest=(empty($reg->imagen))?"<img src='../files/productos/defaultpro.png' height='55px' width='65px'>":'<img src="../files/productos/'.$reg->imagen.'" height="55px" width="70px" onclick="mostrarclick(this.src)">';
           $data[]=array(
-            "0"=>'<button class="btn btn-personal" onclick="agregarDetalle('.$reg->idproducto.',\''.limpiarCadena($reg->nombre).'\',\''.$reg->codigo.'\')"><span class="fa fa-plus"></span></button>',
+            "0"=>'<button class="btn btn-personal" onclick="agregarDetalle('.$reg->idproducto.',\''.limpiarCadena($reg->nombre).'\',\''.$reg->abreviatura.'\')"><span class="fa fa-plus"></span></button>',
             "1"=>'<span style="color:#bd0000; font-weight:bold;" class="">'.$reg->codigo.'</span>',
             "2"=>$reg->nombre,
             "3"=>$reg->descripcion,
