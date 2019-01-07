@@ -59,7 +59,7 @@ if ($_SESSION['inventarios']==1)
                                         <label for="text">Buscar en : </label>
                                         <select class="form-control" id="ddlSearch">
                                           <option value="1">CODIGO</option>
-                                          <option value="2">NOMBRE</option>
+                                          <option value="2" selected>NOMBRE</option>
                                           <option value="3">MARCA</option>
                                           <option value="4">DESCRIPCION</option>
                                           <option value="5">CATEGORIA</option>

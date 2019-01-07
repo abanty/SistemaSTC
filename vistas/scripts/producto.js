@@ -152,15 +152,27 @@ function cancelarform()
 // TODO: FUNCION LISTAR
 function listar()
 {
+
+	column_no = 2;
+	$('#ddlSearch').on('change', function() {
+		column_no = Number($(this).val());
+	});
+
+	$('#txtSearch').on('input', function() {
+		if (tabla.columns([column_no]).search() !== $('#txtSearch').val()) {
+			tabla.columns([column_no]).search($('#txtSearch').val()).draw();
+		}
+	});
+
 	tabla=$('#tbllistado').dataTable(
 		{
 				"aProcessing": true, //Activamos el procesamiento del datatables
 				"aServerSide": true, //Paginacion y filtrado realizados por el servidor
 				dom: 'Brtip',         //Definimos los elementos del control de tabla
 				buttons: [
-					'copyHtml5',
-					'excelHtml5',
-					'pdf',
+					// 'copyHtml5',
+					// 'excelHtml5',
+					// 'pdf',
 			],
 	"ajax":
 			{
@@ -175,6 +187,24 @@ function listar()
 		"iDisplayLength": 7, //Paginación
 	    "order": [[ 8, "asc" ]] //Ordenar (columna,orden)
 	}).DataTable();
+
+	var buttons = new $.fn.dataTable.Buttons(tabla, {
+    buttons: [
+      {
+          extend: 'excelHtml5',
+          text: 'Reportes EXCEL'
+      },
+      {
+          extend: 'pdfHtml5',
+          text: 'Reportes PDF'
+      },
+			{
+          extend: 'copyHtml5',
+          text: 'Copiar Informacion'
+      },	
+   ]
+}).container().appendTo($('#buttons'));
+
 }
 
 

@@ -62,7 +62,7 @@ Class Ingreso
 		FROM detalle_ingreso di INNER JOIN producto a ON di.idproducto=a.idproducto
 		INNER JOIN ingreso i ON di.idingreso = i.idingreso
 		WHERE di.idingreso='$idingreso'";
-		return ejecutarConsulta($sql);
+		return ejecutarConsulta($sql);		
 	}
 
 
