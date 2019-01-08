@@ -71,6 +71,56 @@ function showcode(){
 	CodProducto();
 }
 
+// TODO: FUNCION PARA REGISTRAR CATEGORIA
+function registrar_categoria_modal(){
+
+  $.confirm({
+      title: '<i class="fa fa-pencil-square-o"></i> Registra una Categoria',
+      content: '' +
+      '<form name="formulario_categoria" id="formulario_categoria" method="POST">'+
+      '<div class="form-group">' +
+      '<label>Nombre Categoria</label>' +
+      // '<input type="hidden" name="idcategoria" id="idcategoria"/>' +
+      '<input type="text" name="nombre" id="nombre" placeholder="Ingresa nombre de la Categoria" class="name form-control" autofocus required />' +
+      '</div>' +
+      '</form>',
+		  type: 'dark',
+      buttons: {
+          formSubmit: {
+              text: 'Registrar',
+              btnClass: 'btn-dark',
+              action: function () {
+
+                var nombre = this.$content.find('#nombre').val();
+                if(!nombre){
+                $.alert('Ingresa campos requeridos');
+                return false;
+                }else {
+                  guardaryeditar_categoria();
+									$.post("../ajax/producto.php?op=selectCategoria", function(r){
+												$("#idcategoria").html(r);
+												$('#idcategoria').selectpicker('refresh');
+									});
+                }
+              }
+          },
+          cancel: function () {
+              //close
+          },
+      },
+      onContentReady: function () {
+          // bind to events
+
+          var jc = this;
+          this.$content.find('#formulario_categoria').on('submit', function (e) {
+              // if the user submits the form by pressing enter in the field.
+              // e.preventDefault();
+              jc.$$formSubmit.trigger('click'); // reference the button and click it
+          });
+      }
+  });
+
+}
 
 // TODO: FUNCION CARGAR IMAGENES
 function readURL(input) {
@@ -238,6 +288,31 @@ function guardaryeditar(e)
 			mostrarform(false);
 			// tabla.ajax.reload();
 			$('#tbllistado').DataTable().ajax.reload(null, false);
+		}
+	});
+}
+
+
+// TODO: FUNCION PARA GUARDAR Y EDITAR
+function guardaryeditar_categoria(e)
+{
+	// e.preventDefault(); //No se activara la accion predeterminada del evento
+	var formData = new FormData($("#formulario_categoria")[0]);
+
+	$.ajax({
+		url: "../ajax/categoria.php?op=guardaryeditar",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function(datos)
+		{
+			swal(
+		(datos),
+		'Satisfactoriamente!',
+		'success'
+		);
 		}
 	});
 }

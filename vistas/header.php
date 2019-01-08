@@ -35,7 +35,7 @@ if (strlen(session_id()) < 1)
     <link rel="stylesheet" type="text/css" href="../public/css/sweetalert2.css">
     <!-- LIBRERIA DE BOOSTRAP PARA COMBOBOX (SeleckPicker) -->
     <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
-
+    <!-- <link rel="stylesheet" href="../public/css/buttons.css"> -->
     <!-- DATATABLES-->
     <link rel="stylesheet" type="text/css" href="../public/datatables/responsive.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">

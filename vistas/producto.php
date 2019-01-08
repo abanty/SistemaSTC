@@ -121,7 +121,10 @@ if ($_SESSION['inventarios']==1)
 
                                   <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <label>Categoria(*):</label>
-                                     <select id="idcategoria" name="idcategoria" class="form-control selectpicker" data-live-search="true" title="Selecciona Categoria" required></select>
+                                    <div id="container_date">
+                                      <button type="button" onclick="registrar_categoria_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <select id="idcategoria" name="idcategoria" class="form-control selectpicker" data-live-search="true" title="Selecciona Categoria" required></select>
+                                    </div>
                                   </div>
 
                                   <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
@@ -139,17 +142,26 @@ if ($_SESSION['inventarios']==1)
 
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Marca(*):</label>
-                                    <select id="idmarca" name="idmarca" class="form-control selectpicker" data-live-search="true" title="Selecciona Marca" required></select>
+                                   <div id="container_date">
+                                      <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <select id="idmarca" name="idmarca" class="form-control selectpicker" data-live-search="true" title="Selecciona Marca" required></select>
+                                    </div>
                                  </div>
 
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Unidad Medida - Talla(*):</label>
-                                    <select id="idunidadmedida" name="idunidadmedida[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Talla" multiple required></select>
+                                   <div id="container_date">
+                                      <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <select id="idunidadmedida" name="idunidadmedida[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Talla" multiple required></select>
+                                    </div>
                                  </div>
 
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Tipo producto(*):</label>
-                                    <select id="idtipoproducto" name="idtipoproducto" class="form-control selectpicker" data-live-search="true" title="Selecciona Tipo de producto" required></select>
+                                    <div id="container_date">
+                                        <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                        <select id="idtipoproducto" name="idtipoproducto" class="form-control selectpicker" data-live-search="true" title="Selecciona Tipo de producto" required></select>
+                                    </div>
                                  </div>
 
                                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
