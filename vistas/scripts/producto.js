@@ -3,6 +3,9 @@ var tabla;
 // TODO:  FUNCION QUE SE EJECUTA AL INICIO
 function init(){
 
+	$(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+  });
 
 	$(document).ready(function(){
 		$(".dataTables_filter input").focus();
@@ -62,6 +65,12 @@ function init(){
   $("#imagenmuestra").hide();
 
 } //FIN INIT
+
+// TODO: FUNCION PARA GENERAR CODIGO ALEATORIAMENTE
+function showcode(){
+	CodProducto();
+}
+
 
 // TODO: FUNCION CARGAR IMAGENES
 function readURL(input) {
@@ -166,13 +175,10 @@ function listar()
 
 	tabla=$('#tbllistado').dataTable(
 		{
-				"aProcessing": true, //Activamos el procesamiento del datatables
-				"aServerSide": true, //Paginacion y filtrado realizados por el servidor
-				dom: 'Brtip',         //Definimos los elementos del control de tabla
+				"aProcessing": true,
+				"aServerSide": true,
+				dom: 'Brtip',
 				buttons: [
-					// 'copyHtml5',
-					// 'excelHtml5',
-					// 'pdf',
 			],
 	"ajax":
 			{
@@ -201,7 +207,7 @@ function listar()
 			{
           extend: 'copyHtml5',
           text: 'Copiar Informacion'
-      },	
+      },
    ]
 }).container().appendTo($('#buttons'));
 
@@ -326,6 +332,20 @@ function activar(idproducto)
 			tabla.ajax.reload();
 		});
 	}).catch(swal.noop)
+}
+
+/*---------------------------------------*
+| FUNCION PARA GENERAR CODIGO AUTOMATICO |
+.---------------------------------------*/
+function CodProducto() {
+  $.ajax({
+    url: "../ajax/producto.php?op=codigoaleatorio",
+    type: "get",
+    dataType: 'json',
+    success: function(data) {
+      $("#codigo").val("PR-" + data);
+    }
+  });
 }
 
 init();

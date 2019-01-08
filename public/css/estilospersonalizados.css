@@ -285,3 +285,7 @@ table.dataTable tr.group td {
     font-family: monospace;
     text-transform: uppercase;
 }
+
+#container_date{
+	display: flex;
+}

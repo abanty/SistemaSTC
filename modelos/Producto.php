@@ -160,5 +160,21 @@ Class Producto
 		$sql="SELECT idproducto,nombre,stock FROM producto WHERE nombre like '%$nombre%' ORDER BY nombre desc limit 10";
 		return ejecutarConsulta($sql);
 	}
+
+	/*-------------------------------------------------------*
+	|FUNCION PARA GENERAR CODIGOS DE PRODUCTOS ALEATORIAMENTE|
+	.-------------------------------------------------------*/
+	public function generarCodigo($longitud, $tipo=0)
+	{
+		$codigo = "";
+		$caracteres="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		$max=strlen($caracteres)-1;
+		for($i=0;$i < $longitud;$i++)
+			{
+				$codigo.=$caracteres[rand(0,$max)];
+			}
+		return $codigo;
+	}
+
 }
  ?>

@@ -44,10 +44,15 @@ switch ($_GET["op"]){
 		}
 	break;
 
-	case 'desactivar':
+		case 'desactivar':
 		$rspta=$producto->desactivar($idproducto);
 		echo $rspta ? "Producto desactivado" : "Producto no se puede desactivar";
     break;
+
+		case 'codigoaleatorio':
+		$rspta=$producto->generarCodigo(4);
+		echo json_encode($rspta);
+		break;
 
     case 'activar':
 		$rspta=$producto->activar($idproducto);
