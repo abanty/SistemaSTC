@@ -143,7 +143,7 @@ if ($_SESSION['inventarios']==1)
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Marca(*):</label>
                                    <div id="container_date">
-                                      <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <button type="button" onclick="registrar_marca_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
                                       <select id="idmarca" name="idmarca" class="form-control selectpicker" data-live-search="true" title="Selecciona Marca" required></select>
                                     </div>
                                  </div>
@@ -151,7 +151,7 @@ if ($_SESSION['inventarios']==1)
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Unidad Medida - Talla(*):</label>
                                    <div id="container_date">
-                                      <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <button type="button" onclick="registrar_talla_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
                                       <select id="idunidadmedida" name="idunidadmedida[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Talla" multiple required></select>
                                     </div>
                                  </div>
@@ -159,7 +159,7 @@ if ($_SESSION['inventarios']==1)
                                  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                    <label>Tipo producto(*):</label>
                                     <div id="container_date">
-                                        <button type="button" onclick="" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                        <button type="button" onclick="registrar_tipopro_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
                                         <select id="idtipoproducto" name="idtipoproducto" class="form-control selectpicker" data-live-search="true" title="Selecciona Tipo de producto" required></select>
                                     </div>
                                  </div>

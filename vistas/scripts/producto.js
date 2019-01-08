@@ -60,11 +60,12 @@ function init(){
 				$('#idtipoproducto').selectpicker('refresh');
 	});
 
-
-
   $("#imagenmuestra").hide();
 
 } //FIN INIT
+
+
+
 
 // TODO: FUNCION PARA GENERAR CODIGO ALEATORIAMENTE
 function showcode(){
@@ -73,15 +74,148 @@ function showcode(){
 
 // TODO: FUNCION PARA REGISTRAR CATEGORIA
 function registrar_categoria_modal(){
-
   $.confirm({
+		  backgroundDismiss: true,
       title: '<i class="fa fa-pencil-square-o"></i> Registra una Categoria',
       content: '' +
       '<form name="formulario_categoria" id="formulario_categoria" method="POST">'+
       '<div class="form-group">' +
       '<label>Nombre Categoria</label>' +
-      // '<input type="hidden" name="idcategoria" id="idcategoria"/>' +
       '<input type="text" name="nombre" id="nombre" placeholder="Ingresa nombre de la Categoria" class="name form-control" autofocus required />' +
+      '</div>' +
+      '</form>',
+		  type: 'dark',
+      buttons: {
+          formSubmit: {
+              text: 'Registrar',
+              btnClass: 'btn-dark',
+              action: function () {
+                var nombre = this.$content.find('#nombre').val();
+                if(!nombre){
+                $.alert('Ingresa campos requeridos');
+                return false;
+                }else {
+                  guardaryeditar_categoria();
+                }
+              }
+          },
+          cancel: function () {
+              //close
+          },
+      },
+      onContentReady: function () {
+          // bind to events
+          var jc = this;
+          this.$content.find('#formulario_categoria').on('submit', function (e) {
+              // if the user submits the form by pressing enter in the field.
+              e.preventDefault();
+              jc.$$formSubmit.trigger('click'); // reference the button and click it
+          });
+      }
+  });
+}
+
+// TODO: FUNCION PARA REGISTRAR MARCA
+function registrar_marca_modal(){
+  $.confirm({
+		  backgroundDismiss: true,
+      title: '<i class="fa fa-pencil-square-o"></i> Registra una Marca',
+      content: '' +
+      '<form name="formulario_marca" id="formulario_marca" method="POST">'+
+      '<div class="form-group">' +
+      '<label>Nombre Marca</label>' +
+      '<input type="text" name="nombre" id="nombre" placeholder="Ingresa nombre de la Marca" class="name form-control" autofocus required />' +
+      '</div>' +
+      '</form>',
+		  type: 'dark',
+      buttons: {
+          formSubmit: {
+              text: 'Registrar',
+              btnClass: 'btn-dark',
+              action: function () {
+                var nombre = this.$content.find('#nombre').val();
+                if(!nombre){
+                $.alert('Ingresa campos requeridos');
+                return false;
+                }else {
+                  guardaryeditar_marca();
+                }
+              }
+          },
+          cancel: function () {
+              //close
+          },
+      },
+      onContentReady: function () {
+          // bind to events
+          var jc = this;
+          this.$content.find('#formulario_marca').on('submit', function (e) {
+              // if the user submits the form by pressing enter in the field.
+              e.preventDefault();
+              jc.$$formSubmit.trigger('click'); // reference the button and click it
+          });
+      }
+  });
+}
+
+// TODO: FUNCION PARA REGISTRAR CATEGORIA
+function registrar_talla_modal(){
+
+  $.confirm({
+		  backgroundDismiss: true,
+      title: '<i class="fa fa-pencil-square-o"></i> Registra una Talla',
+      content: '' +
+      '<form name="formulario_talla" id="formulario_talla" method="POST">'+
+      '<div class="form-group">' +
+      '<label>Nombre Talla</label>' +
+      '<input type="text" name="abreviatura" id="abreviatura" placeholder="Ingresa nombre de la Talla" class="name form-control" autofocus required />' +
+      '</div>' +
+      '</form>',
+		  type: 'dark',
+      buttons: {
+          formSubmit: {
+              text: 'Registrar',
+              btnClass: 'btn-dark',
+              action: function () {
+
+                var nombre = this.$content.find('#abreviatura').val();
+                if(!nombre){
+                $.alert('Ingresa campos requeridos');
+                return false;
+                }else {
+                  guardaryeditar_talla();
+                }
+              }
+          },
+          cancel: function () {
+              //close
+          },
+      },
+      onContentReady: function () {
+          // bind to events
+
+          var jc = this;
+          this.$content.find('#formulario_talla').on('submit', function (e) {
+              // if the user submits the form by pressing enter in the field.
+              e.preventDefault();
+              jc.$$formSubmit.trigger('click'); // reference the button and click it
+          });
+      }
+  });
+
+}
+
+// TODO: FUNCION PARA REGISTRAR CATEGORIA
+function registrar_tipopro_modal(){
+
+  $.confirm({
+		  backgroundDismiss: true,
+      title: '<i class="fa fa-pencil-square-o"></i> Registra una Talla',
+      content: '' +
+      '<form name="formulario_tipopro" id="formulario_tipopro" method="POST">'+
+      '<div class="form-group">' +
+      '<label>Nombre Talla</label>' +
+      '<input type="text" name="nombre" id="nombre" placeholder="Ingresa nombre de la Talla" class="name form-control" autofocus required />' +
       '</div>' +
       '</form>',
 		  type: 'dark',
@@ -96,11 +230,7 @@ function registrar_categoria_modal(){
                 $.alert('Ingresa campos requeridos');
                 return false;
                 }else {
-                  guardaryeditar_categoria();
-									$.post("../ajax/producto.php?op=selectCategoria", function(r){
-												$("#idcategoria").html(r);
-												$('#idcategoria').selectpicker('refresh');
-									});
+                  guardaryeditar_tipopro();
                 }
               }
           },
@@ -112,9 +242,9 @@ function registrar_categoria_modal(){
           // bind to events
 
           var jc = this;
-          this.$content.find('#formulario_categoria').on('submit', function (e) {
+          this.$content.find('#formulario_tipopro').on('submit', function (e) {
               // if the user submits the form by pressing enter in the field.
-              // e.preventDefault();
+              e.preventDefault();
               jc.$$formSubmit.trigger('click'); // reference the button and click it
           });
       }
@@ -293,7 +423,7 @@ function guardaryeditar(e)
 }
 
 
-// TODO: FUNCION PARA GUARDAR Y EDITAR
+// TODO: FUNCION PARA GUARDAR Y EDITAR CATEGORIA
 function guardaryeditar_categoria(e)
 {
 	// e.preventDefault(); //No se activara la accion predeterminada del evento
@@ -308,11 +438,108 @@ function guardaryeditar_categoria(e)
 
 		success: function(datos)
 		{
-			swal(
-		(datos),
-		'Satisfactoriamente!',
-		'success'
-		);
+
+			tabla.ajax.reload(null, false);
+      $.notify.defaults({ className: "success" });
+      $.notify.defaults({ autoHideDelay: 5000 });
+      $.notify.defaults({ style: 'bootstrap' });
+      $("#show_notify_alert").notify(datos,{ position:"left top" });
+
+		$.post("../ajax/producto.php?op=selectCategoria", function(r){
+					$("#idcategoria").html(r);
+					$('#idcategoria').selectpicker('refresh');
+		});
+		}
+	});
+}
+
+// TODO: FUNCION PARA GUARDAR Y EDITAR CATEGORIA
+function guardaryeditar_marca(e)
+{
+	// e.preventDefault(); //No se activara la accion predeterminada del evento
+	var formData = new FormData($("#formulario_marca")[0]);
+
+	$.ajax({
+		url: "../ajax/marca.php?op=guardaryeditar",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function(datos)
+		{
+
+			tabla.ajax.reload(null, false);
+      $.notify.defaults({ className: "success" });
+      $.notify.defaults({ autoHideDelay: 5000 });
+      $.notify.defaults({ style: 'bootstrap' });
+      $("#show_notify_alert").notify(datos,{ position:"left top" });
+
+		$.post("../ajax/producto.php?op=selectMarca", function(r){
+					$("#idmarca").html(r);
+					$('#idmarca').selectpicker('refresh');
+		});
+		}
+	});
+}
+
+// TODO: FUNCION PARA GUARDAR Y EDITAR CATEGORIA
+function guardaryeditar_talla(e)
+{
+	// e.preventDefault(); //No se activara la accion predeterminada del evento
+	var formData = new FormData($("#formulario_talla")[0]);
+
+	$.ajax({
+		url: "../ajax/unidadmedida.php?op=guardaryeditar",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function(datos)
+		{
+
+			tabla.ajax.reload(null, false);
+      $.notify.defaults({ className: "success" });
+      $.notify.defaults({ autoHideDelay: 5000 });
+      $.notify.defaults({ style: 'bootstrap' });
+      $("#show_notify_alert").notify(datos,{ position:"left top" });
+
+		$.post("../ajax/producto.php?op=selectUnidad", function(r){
+					$("#idunidadmedida").html(r);
+					$('#idunidadmedida').selectpicker('refresh');
+		});
+		}
+	});
+}
+
+
+// TODO: FUNCION PARA GUARDAR Y EDITAR CATEGORIA
+function guardaryeditar_tipopro(e)
+{
+	// e.preventDefault(); //No se activara la accion predeterminada del evento
+	var formData = new FormData($("#formulario_tipopro")[0]);
+
+	$.ajax({
+		url: "../ajax/tipoproducto.php?op=guardaryeditar",
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function(datos)
+		{
+
+			tabla.ajax.reload(null, false);
+      $.notify.defaults({ className: "success" });
+      $.notify.defaults({ autoHideDelay: 5000 });
+      $.notify.defaults({ style: 'bootstrap' });
+      $("#show_notify_alert").notify(datos,{ position:"left top" });
+
+		$.post("../ajax/producto.php?op=selectTipoproducto", function(r){
+					$("#idtipoproducto").html(r);
+					$('#idtipoproducto').selectpicker('refresh');
+		});
 		}
 	});
 }
