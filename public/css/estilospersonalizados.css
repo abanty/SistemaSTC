@@ -239,6 +239,7 @@ input[type=number]::selection {
 }
 
 #codinp {
+  /* AQUI HUBO UN CAMBIO */
   color: #337ab7;
 font-weight: bold;
 text-align: center;
