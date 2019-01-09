@@ -364,7 +364,7 @@ function listar()
 				dom: 'Brtip',
 				buttons: [],
 				columnDefs:[
-					{"visible": false, "targets":1}
+					{"visible": false, "targets":2}
 				],
 	"ajax":
 			{
@@ -377,12 +377,13 @@ function listar()
 			},
 		"bDestroy": true,
 		"iDisplayLength": 7, //Paginación
-	    "order": [[ 1, "asc" ]], //Ordenar (columna,orden)
+	    "order": [[ 2, "asc" ]], //Ordenar (columna,orden)
 			rowGroup: {
  					 startRender: function ( rows, group ) {
- 							 return 'CODIGO:  <span style="color:#f39c12; padding-left: 10px;">'+group+'</span> <span style="color:#f39c12;font-size: 12px;">('+rows.count()+' productos)</span>';
+
+ 							 return '<span style="font-size: 12px;color: #f39c12; font-style: italic;">Nombre Producto: </span><span style="padding-left:10px; text-transform:uppercase; margin-right: 50%;">'+group+'</span> ('+rows.count()+' productos)';
  					 },
- 					dataSrc: 1
+ 					dataSrc: 2
  			}
 	}).DataTable();
 
@@ -663,7 +664,7 @@ function CodProducto() {
 			var medida_categoria = $('#idcategoria').find(":selected").text();
 			var medcat = medida_categoria.slice(0,3);
 
-			var group_var = medcat + "-" + medmar + "-" + medida_talla;
+			var group_var = medcat + "-" + medmar;
 
 			var finalvar = group_var.toUpperCase();
 

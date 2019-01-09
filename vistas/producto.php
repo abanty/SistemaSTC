@@ -130,7 +130,7 @@ if ($_SESSION['inventarios']==1)
                                     <label>Codigo:</label>
                                     <div id="container_date">
                                       <button id="btnrefreshtime" type="button" onclick="showcode()" class="btn btn-personal"><span class="fa fa-refresh"></span></button>
-                                      <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Codigo">
+                                      <input type="text" class="form-control" name="codigo[]" id="codigo" placeholder="Codigo">
                                     </div>
                                   </div>
 
