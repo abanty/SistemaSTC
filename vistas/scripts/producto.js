@@ -3,6 +3,10 @@ var tabla;
 // TODO:  FUNCION QUE SE EJECUTA AL INICIO
 function init(){
 
+	if(document.getElementById('idcategoria').selected==true){
+        alert('very good');
+    }
+
 	$(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
   });
@@ -653,7 +657,17 @@ function CodProducto() {
     type: "get",
     dataType: 'json',
     success: function(data) {
-      $("#codigo").val("PR-" + data);
+			var medida_talla = $('#idunidadmedida').find(":selected").text();
+			var medida_marca = $('#idmarca').find(":selected").text();
+			var medmar = medida_marca.slice(0,3);
+			var medida_categoria = $('#idcategoria').find(":selected").text();
+			var medcat = medida_categoria.slice(0,3);
+
+			var group_var = medcat + "-" + medmar + "-" + medida_talla;
+
+			var finalvar = group_var.toUpperCase();
+
+      $("#codigo").val(finalvar);
     }
   });
 }

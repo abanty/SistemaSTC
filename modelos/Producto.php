@@ -22,9 +22,7 @@ Class Producto
 		$sw=true;
 
 		while ($num_elementos < count($idunidadmedida))
-		{
-			// $sql="INSERT INTO producto (idcategoria,idmarca,idunidadmedida,idtipoproducto,codigo,nombre,descripcion,imagen,condicion)
-			// VALUES ('$idcategoria','$idmarca','$idunidadmedida','$idtipoproducto','$codigo','$nombre','$descripcion','$imagen','1')";
+		{			
 			$sql_detalle = "INSERT INTO producto(idcategoria,idmarca,idunidadmedida,idtipoproducto,codigo,nombre,descripcion,imagen,condicion)
 			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo','$nombre',
 			'$descripcion','$imagen','1')";
