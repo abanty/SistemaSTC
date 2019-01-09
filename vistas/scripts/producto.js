@@ -358,8 +358,10 @@ function listar()
 				"aProcessing": true,
 				"aServerSide": true,
 				dom: 'Brtip',
-				buttons: [
-			],
+				buttons: [],
+				columnDefs:[
+					{"visible": false, "targets":1}
+				],
 	"ajax":
 			{
 				url: '../ajax/producto.php?op=listar',
@@ -371,7 +373,13 @@ function listar()
 			},
 		"bDestroy": true,
 		"iDisplayLength": 7, //Paginación
-	    "order": [[ 8, "asc" ]] //Ordenar (columna,orden)
+	    "order": [[ 1, "asc" ]], //Ordenar (columna,orden)
+			rowGroup: {
+ 					 startRender: function ( rows, group ) {
+ 							 return 'CODIGO:  <span style="color:#f39c12; padding-left: 10px;">'+group+'</span> <span style="color:#f39c12;font-size: 12px;">('+rows.count()+' productos)</span>';
+ 					 },
+ 					dataSrc: 1
+ 			}
 	}).DataTable();
 
 	var buttons = new $.fn.dataTable.Buttons(tabla, {

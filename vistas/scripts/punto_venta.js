@@ -151,7 +151,7 @@ function listar_punto_stock_valorizado()
 	   "order": [[ 1, "asc" ]],
 		 rowGroup: {
 					 startRender: function ( rows, group ) {
-							 return 'Fecha y Hora de Lote -' + group + ' ('+rows.count()+' productos)';
+							 return '-' + group + ' ('+rows.count()+' productos)';
 					 },
 					dataSrc: 1
 			}
