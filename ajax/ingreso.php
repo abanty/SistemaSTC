@@ -54,8 +54,8 @@ switch ($_GET["op"]){
       $total=0;
       echo '<thead style="background-color:#222d3287; color:white;">
                                       <th>Opciones</th>
-                                      <th>Codigo</th>
                                       <th>Producto</th>
+                                      <th>Talla</th>
                                       <th>Cantidad</th>
                                       <th>Importe Total</th>
                                       <th>Precio Compra (u)</th>
@@ -71,7 +71,7 @@ switch ($_GET["op"]){
 
       while ($reg = $rspta->fetch_object())
           {
-            echo '<tr class="filas"><td><i class="fa fa-check" aria-hidden="true"></i></td><td id="codinp">'.$reg->codigo.'</td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.' und</td><td>S/.'.$reg->importe.'</td><td>S/.'.$reg->precio_compra.'</td><td>S/.'.$reg->precio_venta.'</td><td>'.$reg->gananciaporcentaje.'%</td><td>S/.'.$reg->ganancianeta.'</td></tr>';
+            echo '<tr class="filas"><td><i class="fa fa-check" aria-hidden="true"></i></td><td id="codinp">'.$reg->nombre.'</td><td>'.$reg->abreviatura.'</td><td>'.$reg->cantidad.' und</td><td>S/.'.$reg->importe.'</td><td>S/.'.$reg->precio_compra.'</td><td>S/.'.$reg->precio_venta.'</td><td>'.$reg->gananciaporcentaje.'%</td><td>S/.'.$reg->ganancianeta.'</td></tr>';
             $total= $reg->total_compra;
             $total_pv = $reg->total_venta_sugerido;
             $total_ben = $reg->total_beneficio;

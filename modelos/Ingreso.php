@@ -58,11 +58,11 @@ Class Ingreso
 
 	public function listarDetalle($idingreso)
 	{
-		$sql="SELECT di.idingreso,di.idproducto,a.nombre,a.codigo,di.cantidad,di.importe,di.precio_compra,di.precio_venta,di.gananciaporcentaje,di.ganancianeta,i.total_compra,i.total_venta_sugerido,i.total_beneficio
+		$sql="SELECT un.nombre as abreviatura, a.idunidadmedida, di.idingreso,di.idproducto,a.nombre,a.codigo,di.cantidad,di.importe,di.precio_compra,di.precio_venta,di.gananciaporcentaje,di.ganancianeta,i.total_compra,i.total_venta_sugerido,i.total_beneficio
 		FROM detalle_ingreso di INNER JOIN producto a ON di.idproducto=a.idproducto
-		INNER JOIN ingreso i ON di.idingreso = i.idingreso
+		INNER JOIN ingreso i ON di.idingreso = i.idingreso INNER JOIN unidadmedida un ON un.idunidadmedida = a.idunidadmedida
 		WHERE di.idingreso='$idingreso'";
-		return ejecutarConsulta($sql);		
+		return ejecutarConsulta($sql);
 	}
 
 
