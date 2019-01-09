@@ -8,7 +8,7 @@ $idcategoria=isset($_POST["idcategoria"])? limpiarCadena($_POST["idcategoria"]):
 $idmarca=isset($_POST["idmarca"])? limpiarCadena($_POST["idmarca"]):"";
 // $idunidadmedida=isset($_POST["idunidadmedida"])? limpiarCadena($_POST["idunidadmedida"]):"";
 $idtipoproducto=isset($_POST["idtipoproducto"])? limpiarCadena($_POST["idtipoproducto"]):"";
-// $codigo=isset($_POST["codigo"])? limpiarCadena($_POST["codigo"]):"";
+$codigo=isset($_POST["codigo"])? limpiarCadena($_POST["codigo"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 $descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):"";
 
@@ -35,11 +35,11 @@ switch ($_GET["op"]){
 		}
 
 		if (empty($idproducto)){
-			$rspta=$producto->insertar($idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$_POST["codigo"],$nombre,$descripcion,$imagen);
+			$rspta=$producto->insertar($idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
 			echo $rspta ? "Producto registrado" : "Producto no se pudo registrar";
 		}
 		else {
-			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$_POST["codigo"],$nombre,$descripcion,$imagen);
+			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
 			echo $rspta ? "Producto actualizado" : "Producto no se pudo actualizar";
 		}
 	break;
