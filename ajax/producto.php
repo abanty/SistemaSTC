@@ -39,7 +39,7 @@ switch ($_GET["op"]){
 			echo $rspta ? "Producto registrado" : "Producto no se pudo registrar";
 		}
 		else {
-			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
+			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$_POST["codigo"],$nombre,$descripcion,$imagen);
 			echo $rspta ? "Producto actualizado" : "Producto no se pudo actualizar";
 		}
 	break;

@@ -24,7 +24,7 @@ Class Producto
 		while ($num_elementos < count($idunidadmedida))
 		{
 			$sql_detalle = "INSERT INTO producto(idcategoria,idmarca,idunidadmedida,idtipoproducto,codigo,nombre,descripcion,imagen,condicion)
-			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo[$idunidadmedida]','$nombre',
+			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo[$num_elementos]','$nombre',
 			'$descripcion','$imagen','1')";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;
