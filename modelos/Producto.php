@@ -17,14 +17,18 @@ Class Producto
 	public function insertar($idcategoria,$idmarca,$idunidadmedida,$idtipoproducto,$codigo,$nombre,$descripcion,$imagen)
 	{
 
-		// return ejecutarConsulta($sql);
 		$num_elementos=0;
 		$sw=true;
 
 		while ($num_elementos < count($idunidadmedida))
 		{
+
+			$sqlum="SELECT abreviatura FROM unidadmedida WHERE idunidadmedida = '$idunidadmedida[$num_elementos]'";
+			$contenido = ejecutarConsultaArray($sqlum);
+
+
 			$sql_detalle = "INSERT INTO producto(idcategoria,idmarca,idunidadmedida,idtipoproducto,codigo,nombre,descripcion,imagen,condicion)
-			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo-$idunidadmedida[$num_elementos]','$nombre',
+			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$contenido[$num_elementos]','$nombre',
 			'$descripcion','$imagen','1')";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;

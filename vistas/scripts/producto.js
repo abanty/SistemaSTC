@@ -3,6 +3,8 @@ var tabla;
 // TODO:  FUNCION QUE SE EJECUTA AL INICIO
 function init(){
 
+
+
 	if(document.getElementById('idcategoria').selected==true){
         alert('very good');
     }
@@ -67,8 +69,6 @@ function init(){
   $("#imagenmuestra").hide();
 
 } //FIN INIT
-
-
 
 
 // TODO: FUNCION PARA GENERAR CODIGO ALEATORIAMENTE

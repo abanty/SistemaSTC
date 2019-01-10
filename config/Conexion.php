@@ -23,12 +23,20 @@ if (!function_exists('ejecutarConsulta'))
 		$row = $query->fetch_assoc();
 		return $row;
 	}
+	function ejecutarConsultaArray($sql)
+	{
+		global $conexion;
+		$query = $conexion->query($sql);
+		$row = $query->fetch_array();
+		return $row;
+	}
 	function ejecutarConsulta_retornarID($sql)
 	{
 		global $conexion;
 		$query = $conexion->query($sql);
 		return $conexion->insert_id;
 	}
+
 	function limpiarCadena($str)
 	{
 		global $conexion;
