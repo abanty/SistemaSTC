@@ -623,14 +623,17 @@ function calcularTotalesPVenta() {
 // TODO: FUNCION CALCULAR TOTALES DE GANANCIA O BENEFICIO NETO
 function calcularTotalesBeneficio() {
 	var gann = document.getElementsByName("ganancianeta[]");
+	var cant_gann = document.getElementsByName("cantidad[]");
 	var total_beneficio = 0.0;
 
 	for (var i = 0; i < gann.length; i++) {
 		var inpGn = gann[i];
+		var inpCag = cant_gann[i];
+
 		if (inpGn.value == "") {
 			inpGn.value = 0;
 		}
-		total_beneficio += parseFloat(inpGn.value);
+		total_beneficio += parseFloat(inpGn.value)*inpCag.value;;
 	}
 	total_beneficio = (Math.round(total_beneficio * 100) / 100).toFixed(2);
 	$("#total_ben").html("S/. " + total_beneficio);
