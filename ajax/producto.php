@@ -14,6 +14,8 @@ $descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):
 
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 
+
+
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 
@@ -35,11 +37,11 @@ switch ($_GET["op"]){
 		}
 
 		if (empty($idproducto)){
-			$rspta=$producto->insertar($idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
+			$rspta=$producto->insertar($idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen,$_POST["ab"]);
 			echo $rspta ? "Producto registrado" : "Producto no se pudo registrar";
 		}
 		else {
-			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen);
+			$rspta=$producto->editar($idproducto,$idcategoria,$idmarca,$_POST["idunidadmedida"],$idtipoproducto,$codigo,$nombre,$descripcion,$imagen,$_POST["ab"]);
 			echo $rspta ? "Producto actualizado" : "Producto no se pudo actualizar";
 		}
 	break;

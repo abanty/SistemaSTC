@@ -151,6 +151,8 @@ if ($_SESSION['inventarios']==1)
                                    <label>Unidad Medida - Talla(*):</label>
                                    <div id="container_date">
                                       <button type="button" onclick="registrar_talla_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                                      <input type="hidden" name="ab[]" id="ab">
+
                                       <select id="idunidadmedida" name="idunidadmedida[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Talla" multiple required></select>
                                     </div>
                                  </div>

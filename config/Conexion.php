@@ -23,13 +23,15 @@ if (!function_exists('ejecutarConsulta'))
 		$row = $query->fetch_assoc();
 		return $row;
 	}
+
 	function ejecutarConsultaArray($sql)
 	{
 		global $conexion;
 		$query = $conexion->query($sql);
-		$row = $query->fetch_array();
+		$row = $query->fetch_Array();
 		return $row;
 	}
+
 	function ejecutarConsulta_retornarID($sql)
 	{
 		global $conexion;
@@ -43,5 +45,7 @@ if (!function_exists('ejecutarConsulta'))
 		$str = mysqli_real_escape_string($conexion, trim($str));
 		return htmlspecialchars($str);
 	}
+
+
 }
 ?>

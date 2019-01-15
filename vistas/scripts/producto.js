@@ -3,6 +3,18 @@ var tabla;
 // TODO:  FUNCION QUE SE EJECUTA AL INICIO
 function init(){
 
+	// $('#idunidadmedida').change(function(){
+	//     var meals = $(this).val();
+	//
+	//     var selectedmeals = meals.join(", "); // there is a break after comma
+	//
+	//     alert (selectedmeals); // just for testing what will be printed
+	//
+	// 		$("#ab").html(selectedmeals);
+	// });
+
+		$('#idunidadmedida').change(obtenertallaab);
+
 
 
 	if(document.getElementById('idcategoria').selected==true){
@@ -42,6 +54,10 @@ function init(){
 		guardaryeditar(e);
 	});
 
+
+// var ta = $('#idunidadmedida').find(":selected").text();
+
+
 	//Cargamos los items al select categoria
 	$.post("../ajax/producto.php?op=selectCategoria", function(r){
 				$("#idcategoria").html(r);
@@ -74,6 +90,11 @@ function init(){
 // TODO: FUNCION PARA GENERAR CODIGO ALEATORIAMENTE
 function showcode(){
 	CodProducto();
+}
+
+function obtenertallaab(){
+	var ta = $('#idunidadmedida').find(":selected").text();
+
 }
 
 // TODO: FUNCION PARA REGISTRAR CATEGORIA
