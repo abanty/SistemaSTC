@@ -151,8 +151,6 @@ if ($_SESSION['inventarios']==1)
                                    <label>Unidad Medida - Talla(*):</label>
                                    <div id="container_date">
                                       <button type="button" onclick="registrar_talla_modal();" class="btn btn-default"><span class="fa fa-plus"></span></button>
-                                      <input type="hidden" name="ab[]" id="ab">
-
                                       <select id="idunidadmedida" name="idunidadmedida[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Talla" multiple required></select>
                                     </div>
                                  </div>
@@ -181,8 +179,11 @@ if ($_SESSION['inventarios']==1)
 
 
                                   </div>
-
-
+<!-- style="display:none;" -->
+                                  <!-- NUEVO ELEMENTO PARA OBTENER LOS ID DE TALLAS -->
+                                  <div >
+                                      <select id="ab" name="ab[]" class="form-control selectpicker" data-live-search="true" title="Selecciona Clone" multiple></select>
+                                  </div>
 
 
                                   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

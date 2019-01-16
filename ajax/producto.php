@@ -137,6 +137,20 @@ switch ($_GET["op"]){
 
 	break;
 
+
+		case "selectUnidadClone":
+			require_once "../modelos/Unidadmedida.php";
+			$unidad = new Unidadmedida();
+
+			$rspta = $unidad->selectunidadmedida();
+
+		while ($reg = $rspta->fetch_object())
+			{
+				echo '<option value=' . $reg->abreviatura . '>' . $reg->idunidadmedida . '</option>';
+			}
+
+		break;
+
 	case "selectTipoproducto":
 		require_once "../modelos/Tipoproducto.php";
 		$tipopro = new Tipoproducto();

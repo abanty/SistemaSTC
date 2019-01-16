@@ -25,7 +25,7 @@ Class Producto
 		{
 
 			$sql_detalle = "INSERT INTO producto(idcategoria,idmarca,idunidadmedida,idtipoproducto,codigo,nombre,descripcion,imagen,condicion)
-			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo-$sql_talla[$num_elementos]','$nombre','$descripcion','$imagen','1')";
+			VALUES ('$idcategoria','$idmarca','$idunidadmedida[$num_elementos]','$idtipoproducto','$codigo-$abreviatura[$num_elementos]','$nombre','$descripcion','$imagen','1')";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}
@@ -35,7 +35,7 @@ Class Producto
 	//-----------------------------
 	//MÉTODO PARA EDITAR REGISTROS |
 	//-----------------------------
-	public function editar($idproducto,$idcategoria,$idmarca,$idunidadmedida,$idtipoproducto,$codigo,$nombre,$descripcion,$imagen)
+	public function editar($idproducto,$idcategoria,$idmarca,$idunidadmedida,$idtipoproducto,$codigo,$nombre,$descripcion,$imagen,$abreviatura)
 	{
 		$num_elementos=0;
 			$sw=true;
@@ -43,7 +43,7 @@ Class Producto
 			while ($num_elementos < count($idunidadmedida))
 			{
 				$sql_detalle_edit = "UPDATE producto SET idcategoria='$idcategoria',idmarca='$idmarca',idunidadmedida='$idunidadmedida[$num_elementos]',idtipoproducto='$idtipoproducto',
-				codigo ='$codigo',nombre='$nombre',descripcion='$descripcion',imagen ='$imagen'
+				codigo ='$codigo-$abreviatura[$num_elementos]',nombre='$nombre',descripcion='$descripcion',imagen ='$imagen'
 				WHERE idproducto='$idproducto'";
 				ejecutarConsulta($sql_detalle_edit) or $sw = false;
 				$num_elementos=$num_elementos + 1;
