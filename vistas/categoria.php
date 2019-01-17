@@ -79,6 +79,7 @@ if ($_SESSION['inventarios']==1)
                                   <table id="tbllistado" class="cell-border hover" style="width:100%;">
                                       <thead id="thead_entidad">
                                         <th>OPCIONES</th>
+                                        <th>ABREVIATURA</th>
                                         <th>NOMBRE</th>
                                         <th>DESCRIPCION</th>
                                         <th>ESTADO</th>
@@ -87,6 +88,7 @@ if ($_SESSION['inventarios']==1)
                                       </tbody>
                                       <tfoot id="thead_entidad">
                                         <th>OPCIONES</th>
+                                        <th>ABREVIATURA</th>
                                         <th>NOMBRE</th>
                                         <th>DESCRIPCION</th>
                                         <th>ESTADO</th>

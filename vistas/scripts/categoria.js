@@ -124,7 +124,7 @@ function mostrar(idcategoria) {
     idcategoria: idcategoria
   }, function(data, status) {
     data = JSON.parse(data);
-
+        var abv = data.abreviatura;
         var nom_cat = data.nombre;
         var idcat = data.idcategoria;
         var desc = data.descripcion;
@@ -138,15 +138,23 @@ function mostrar(idcategoria) {
         type: 'personal',
         content: '' +
         '<form name="formulario" id="formulario" method="POST">'+
+
+        '<div class="form-group">' +
+        '<label>Abreviatura</label>' +
+        '<input type="text" name="abreviatura" id="abreviatura" placeholder="Ingresa iniciales" value="'+abv+'" class="name form-control"/>' +
+        '</div>' +
+
         '<div class="form-group">' +
         '<label>Nombre Modulo</label>' +
         '<input type="hidden" name="idcategoria" id="idcategoria" value="'+idcat+'"/>' +
         '<input type="text" name="nombre" id="nombre" value="'+nom_cat+'" placeholder="Ingresa categoria" class="name form-control" required />' +
         '</div>' +
+
         '<div class="form-group">' +
         '<label>Descripcion</label>' +
         '<textarea style="resize: none;" rows="3" id="descripcion" placeholder="Ingresa una descripcion breve" name="descripcion" class="form-control col-md-7 col-xs-12" required="required">'+desc+'</textarea>' +
         '</div>' +
+
         '</form>',
         buttons: {
             formSubmit: {
@@ -188,15 +196,23 @@ function editreg_form(){
       title: ' REGISTRAR CATEGORIA',
       content: '' +
       '<form name="formulario" id="formulario" method="POST">'+
+
+      '<div class="form-group">' +
+      '<label>Abreviatura</label>' +
+      '<input type="text" name="abreviatura" id="abreviatura" placeholder="Ingresa iniciales" class="name form-control"/>' +
+      '</div>' +
+
       '<div class="form-group">' +
       '<label>Nombre categoria</label>' +
       '<input type="hidden" name="idcategoria" id="idcategoria"/>' +
       '<input type="text" name="nombre" id="nombre" placeholder="Ingresa categoria" class="name form-control" autofocus required />' +
       '</div>' +
+
       '<div class="form-group">' +
       '<label>Descripcion</label>' +
       '<textarea style="resize: none;" rows="3" cols="50" id="descripcion" placeholder="Ingresa una descripcion breve" name="descripcion" class="form-control col-md-7 col-xs-12" required="required"></textarea>' +
       '</div>' +
+
       '</form>',
       type: 'personal',
       buttons: {
@@ -253,7 +269,7 @@ function desactivar(idcategoria) {
                 $.post("../ajax/categoria.php?op=desactivar", {
                   idcategoria: idcategoria
                 }, function(e) {
-                  $('#tbllistado').DataTable().ajax.reload(null, false);              
+                  $('#tbllistado').DataTable().ajax.reload(null, false);
                   $.notify.defaults({ className: "error" });
                   $.notify.defaults({ autoHideDelay: 5000 });
                   $.notify.defaults({ style: 'bootstrap' });

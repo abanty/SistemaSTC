@@ -12,17 +12,17 @@ Class Categoria
 	}
 
 	//Implementamos un metodo para inserta registros
-	public function insertar($nombre, $descripcion)
+	public function insertar($abreviatura,$nombre,$descripcion)
 	{
-		$sql="INSERT INTO categoria (nombre,descripcion,condicion)
-		VALUES ('$nombre','$descripcion','1')";
+		$sql="INSERT INTO categoria (abreviatura,nombre,descripcion,condicion)
+		VALUES ('$abreviatura','$nombre','$descripcion','1')";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementar un metodo para editar registros
-	public function editar($idcategoria,$nombre,$descripcion)
+	public function editar($idcategoria,$abreviatura,$nombre,$descripcion)
 	{
-		$sql = "UPDATE categoria SET nombre='$nombre',descripcion='$descripcion'
+		$sql = "UPDATE categoria SET abreviatura='$abreviatura',nombre='$nombre',descripcion='$descripcion'
 		WHERE idcategoria='$idcategoria'";
 		return ejecutarConsulta($sql);
 	}

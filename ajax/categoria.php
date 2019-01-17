@@ -4,17 +4,19 @@ require_once "../modelos/Categoria.php";
 $categoria=new Categoria();
 
 $idcategoria=isset($_POST["idcategoria"])? limpiarCadena($_POST["idcategoria"]):"";
+$abreviatura=isset($_POST["abreviatura"])? limpiarCadena($_POST["abreviatura"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 $descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):"";
+
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idcategoria)){
-			$rspta=$categoria->insertar($nombre,$descripcion);
+			$rspta=$categoria->insertar($abreviatura,$nombre,$descripcion);
 			echo $rspta ? "Categoria registrada" : "Categoria no se pudo registrar";
 		}
 		else {
-			$rspta=$categoria->editar($idcategoria,$nombre,$descripcion);
+			$rspta=$categoria->editar($idcategoria,$abreviatura,$nombre,$descripcion);
 			echo $rspta ? "Categoria actualizada" : "Categoria no se pudo actualizar";
 		}
 	break;
@@ -45,9 +47,10 @@ switch ($_GET["op"]){
 				"0"=>($reg->condicion)?'<button class="btn btn-success btn-sm" onclick="mostrar('.$reg->idcategoria.')"><i class="fa fa-pencil"></i></button>'.
 				' <button class="btn btn-danger btn-sm" onclick="desactivar('.$reg->idcategoria.')"><i class="fa fa-close"></i></button>' :  '<button class="btn btn-success btn-sm" onclick="mostrar('.$reg->idcategoria.')"><i class="fa fa-pencil"></i></button>'.
 				' <button class="btn btn-warning btn-sm" onclick="activar('.$reg->idcategoria.')"><i class="fa fa-check"></i></button>',
-				"1"=>'<span style="letter-spacing: 0.5px; font-weight: bold; text-transform: uppercase;">'.$reg->nombre.'</span>',
-				"2"=>$reg->descripcion,
-				"3"=>($reg->condicion)?'<span class="label bg-olive">Activado</span>' :  '<span class="label bg-red">Desactivado</span>'
+				"1"=>'<span style="letter-spacing: 0.5px; font-weight: bold; text-transform: uppercase;">'.$reg->abreviatura.'</span>',
+				"2"=>'<span style="letter-spacing: 0.5px; font-weight: bold; text-transform: uppercase;">'.$reg->nombre.'</span>',
+				"3"=>$reg->descripcion,
+				"4"=>($reg->condicion)?'<span class="label bg-olive">Activado</span>' :  '<span class="label bg-red">Desactivado</span>'
 				);
 		}
 		$results = array(
